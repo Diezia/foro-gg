@@ -5,27 +5,31 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Home from './components/ui/Home';
-import { Game } from './components/ui/Game';
-import { Post } from './components/ui/Post';
+import HomePage from './components/ui/HomePage';
+import { GamePage } from './components/ui/GamePage';
+import { PostPage } from './components/ui/PostPage';
+import { Navbar } from './components/ui/Navbar';
 
 function App() {
   return (
+    <>
+    <Navbar />
     <BrowserRouter>
       <Routes>
         <Route path="/">
-          <Route index element={<Home />} />
+          <Route index element={<HomePage />} />
           <Route path="games">
             <Route path="gameId">
-            <Route index element={<Game />} />
+            <Route index element={<GamePage />} />
               <Route path="post">
-                <Route path="postId" element={<Post />} />
+                <Route path="postId" element={<PostPage />} />
               </Route>
             </Route>
           </Route>
         </Route>
       </Routes>
     </BrowserRouter>
+    </>
   );
 }
 

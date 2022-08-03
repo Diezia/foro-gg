@@ -2,7 +2,7 @@ import React from 'react'
 import { GameBlock } from './GameBlock'
 import { games } from '../../helpers/gameBlocks'
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div className="grid">
       {games.map(( game, i ) => {
@@ -16,4 +16,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomePage
