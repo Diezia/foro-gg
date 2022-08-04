@@ -1,4 +1,4 @@
-import './styles/App.scss';
+import './styles/styles.scss';
 import React from 'react';
 import {
   BrowserRouter,

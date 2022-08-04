@@ -4,7 +4,7 @@ import { games } from '../../helpers/gameBlocks'
 
 const HomePage = () => {
   return (
-    <div className="grid">
+    <div className="grid-container">
       {games.map(( game, i ) => {
         return <GameBlock
           imageSrc={game.imageSrc}

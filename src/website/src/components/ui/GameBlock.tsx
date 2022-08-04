@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 export const GameBlock = ({ imageSrc, gameUrl }: any) => {
   return (
-    <div className='img'>
+    <div className="grid-container__div-img">
       <Link to={gameUrl}>
-        <img src={imageSrc} alt="" />
+        <img className="grid-container__img" src={imageSrc} alt="" />
       </Link>
       
     </div>
