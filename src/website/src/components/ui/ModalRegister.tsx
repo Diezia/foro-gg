@@ -7,20 +7,10 @@ export const ModalRegister = ({register}: any) => {
     }
   }
   return (
-    <dialog ref={register} id="dialog_register" onClick={first} style={{
-      width: "100vw",
-      height: "100vh",
-      backgroundColor: '#0000008a',
-      backdropFilter: 'blur(2px)'
-    }}>
-      <div style={{
-        width: "300px",
-        height: "100px",
-        backgroundColor: 'white',
-
-      }}>
-        <h1>dialog_register</h1>
-        <button onClick={() => {register.current.close()}}>Close</button>
+    <dialog ref={register} id="dialog_register" onClick={first}>
+      <div id ="dialog_content">
+        <h1>Formulario de Registro</h1>
+       
       </div>
     </dialog>
   )
