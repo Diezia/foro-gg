@@ -1,4 +1,5 @@
 import React from 'react'
+import Register from './Register'
 
 export const ModalRegister = ({register}: any) => {
   const first = (e: any) => {
@@ -10,7 +11,7 @@ export const ModalRegister = ({register}: any) => {
     <dialog ref={register} id="dialog_register" onClick={first}>
       <div id ="dialog_content">
         <h1>Formulario de Registro</h1>
-       
+        <Register />
       </div>
     </dialog>
   )
