@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { ModalRegister } from "../../../auth/modals/ModalRegister";
 import { ModalLogin } from "../../../auth/modals/ModalLogin";
 import { Link } from "react-router-dom";
+import  "../../../../styles/components/_navbar.scss";
+
 
 export function Navbar() {
 	const register = useRef<HTMLDialogElement>(null);

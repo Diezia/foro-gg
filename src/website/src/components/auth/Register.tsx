@@ -37,32 +37,32 @@ export default function RegisterForm() {
 				<label>
 					{" "}
 					Name:
-					<input value={user.firstName} onChange={handleChange} type="text" name="firstName" id="register_form_firstName" />
+					<input value={user.firstName} onChange={handleChange} type="text" name="firstName" id="register_form_firstName" required />
 				</label>
 				<label>
 					{" "}
 					Last name:
-					<input value={user.lastName} onChange={handleChange} type="text" name="lastName" id="register_form_lastName" />
+					<input value={user.lastName} onChange={handleChange} type="text" name="lastName" id="register_form_lastName" required/>
 				</label>
 				<label>
 					{" "}
 					Username:
-					<input value={user.user_name} onChange={handleChange} type="text" name="user_name" id="register_form_user" />
+					<input value={user.user_name} onChange={handleChange} type="text" name="user_name" id="register_form_user" required/>
 				</label>
 				<label>
 					{" "}
 					Email:
-					<input value={user.email} onChange={handleChange} type="email" name="email" id="register_form_email" autoComplete="off" />
+					<input value={user.email} onChange={handleChange} type="email" name="email" id="register_form_email" autoComplete="off" required/>
 				</label>
 				<label>
 					{" "}
 					Password:
-					<input value={user.password} onChange={handleChange} type="password" name="password" id="register_form_password_1" className="register_form_password" />
+					<input value={user.password} onChange={handleChange} type="password" name="password" id="register_form_password_1" className="register_form_password" required/>
 				</label>
 				<label>
 					{" "}
 					Password:
-					<input value={user.repeatPassword} onChange={handleChange} type="password" name="repeatPassword" id="fregister_form_password_2" className="register_form_password" />
+					<input value={user.repeatPassword} onChange={handleChange} type="password" name="repeatPassword" id="fregister_form_password_2" className="register_form_password" required/>
 				</label>
 				{user.password != user.repeatPassword ? (
 					<p>Passowrds are not equal</p>
