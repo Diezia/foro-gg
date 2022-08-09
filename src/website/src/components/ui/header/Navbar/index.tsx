@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { ModalRegister } from "../../../auth/modals/ModalRegister";
 import { ModalLogin } from "../../../auth/modals/ModalLogin";
+import  "../../../../styles/components/_navbar.scss";
+
 
 export function Navbar() {
 	const register = useRef<HTMLDialogElement>(null);

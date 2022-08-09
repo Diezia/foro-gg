@@ -1,5 +1,6 @@
 import React, { RefObject, SyntheticEvent } from "react";
 import LoginForm from "../../Login";
+import "../../../../styles/components/_modals.scss"
 
 interface LoginType {
 	login: RefObject<HTMLDialogElement>

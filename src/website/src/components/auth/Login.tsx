@@ -26,12 +26,12 @@ export default function LoginForm() {
 				<label>
 					{" "}
 					<p>Username:</p>
-					<input value={user.username} onChange={handleChange} type="text" name="username" id="login_user" />
+					<input value={user.username} onChange={handleChange} type="text" name="username" id="login_user" required/>
 				</label>
 				<label>
 					{" "}
 					<p>Password:</p>
-					<input value={user.password} onChange={handleChange} type="password" name="password" id="login_password" />
+					<input value={user.password} onChange={handleChange} type="password" name="password" id="login_password" required/>
 				</label>
 				{user.password.length < 1 ? (
 					<p>The password is empty</p>

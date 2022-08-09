@@ -1,5 +1,7 @@
 import React, { RefObject, SyntheticEvent } from "react";
 import Register from "../../Register";
+import "../../../../styles/components/_modals.scss"
+
 
 interface RegisterType {
 	register: RefObject<HTMLDialogElement>
