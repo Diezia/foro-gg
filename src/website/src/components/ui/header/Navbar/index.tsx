@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { ModalRegister } from "../../../auth/modals/ModalRegister";
 import { ModalLogin } from "../../../auth/modals/ModalLogin";
+import { Link } from "react-router-dom";
 
 export function Navbar() {
 	const register = useRef<HTMLDialogElement>(null);
@@ -14,7 +15,9 @@ export function Navbar() {
 	};
 	return (
 		<nav>
-			<img src="/assets/logo.png" alt="logo" id="logo" />
+			<Link to="/">
+				<img src="/assets/logo.png" alt="logo" id="logo" />
+			</Link>
 			<div className="wrap">
 				<div className="search">
 					<input type="text" className="searchTerm" id="input_text"></input>
