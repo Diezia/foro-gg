@@ -5,6 +5,7 @@ import { GamePage } from "../components/ui/pages/GamePage";
 import { PostPage } from "../components/ui/pages/PostPage";
 import { CreatePostPage } from "../components/ui/pages/CreatePostPage";
 import { Navbar } from "../components/ui/header/Navbar";
+import TestCreatePostPage from "../components/ui/pages/TestCreatePostPage";
 
 export function AppRouter() {
 	return (

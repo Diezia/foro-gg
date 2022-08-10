@@ -11,10 +11,13 @@ export function CreatePostPage() {
 	);
 	// function somefunc() {
 
-		const updateTextDescription = async (state: any) => {
-			await setEditorState(state);
-			const data = convertToRaw(editorState.getCurrentContent());
-		};
+	/* const updateTextDescription = async (state: any) => {
+		await setEditorState(state);
+		const data = convertToRaw(editorState.getCurrentContent());
+	}; */
+	const updateTextDescription = (state: any) => {
+		setEditorState(state);
+	};
 	// }
 /* 	useEffect(() => {
 		somefunc()
@@ -25,10 +28,17 @@ export function CreatePostPage() {
   return (
 		<Editor
 			editorState={editorState}
-			toolbarClassName="toolbarClassName"
+			onEditorStateChange={updateTextDescription}
+			toolbar={{
+				options: ['inline', 'link', 'history'],
+				inline: {
+					options: ['bold', 'italic', 'underline', 'strikethrough' ]
+				}
+			}}
+			/* toolbarClassName="toolbarClassName"
 			wrapperClassName="wrapperClassName"
 			editorClassName="editorClassName"
-			onEditorStateChange={updateTextDescription}
+			*/
 		/>
 	)
 }
