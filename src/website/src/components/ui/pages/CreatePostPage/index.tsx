@@ -9,22 +9,16 @@ export function CreatePostPage() {
 	const [editorState, setEditorState] = useState(
 		() => EditorState.createEmpty()
 	);
-	// function somefunc() {
-
-	/* const updateTextDescription = async (state: any) => {
-		await setEditorState(state);
-		const data = convertToRaw(editorState.getCurrentContent());
-	}; */
+  
+	
 	const updateTextDescription = (state: any) => {
 		setEditorState(state);
+		const data = convertToRaw(editorState.getCurrentContent());
+		console.log(data)
+		console.log(convertFromRaw(data))
 	};
-	// }
-/* 	useEffect(() => {
-		somefunc()
-	}, []) */
-	
 
-// console.log(editorState)
+
   return (
 		<Editor
 			editorState={editorState}
