@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { ModalRegister } from "../../../auth/modals/ModalRegister";
 import { ModalLogin } from "../../../auth/modals/ModalLogin";
 import { Link } from "react-router-dom";
+import SearchBar from "../../../auth/SearchBar";
 import  "../../../../styles/components/_navbar.scss";
 
 
@@ -22,10 +23,7 @@ export function Navbar() {
 			</Link>
 			<div className="wrap">
 				<div className="search">
-					<input type="text" className="searchTerm" id="input_text"></input>
-					<button type="submit" className="searchButton">
-						!
-					</button>
+					<SearchBar />
 				</div>
 			</div>
 			<div className="btn">

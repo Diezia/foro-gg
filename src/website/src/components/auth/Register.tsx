@@ -24,7 +24,7 @@ export default function RegisterForm() {
 	});
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value;
+		const value = e.target.value;		
 		const selectedField = e.target.name;
 		setUsername({
 			...user,
