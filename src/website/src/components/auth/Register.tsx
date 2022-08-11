@@ -1,8 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 
-type Register = {
-	firstName: string;
-	lastName: string;
+type Register = {	
 	user_name: string;
 	email: string;
 	password: string;
@@ -15,8 +13,6 @@ type Submit = {
 
 export default function RegisterForm() {
 	const [user, setUsername] = useState<Register>({
-		firstName: "",
-		lastName: "",
 		user_name: "",
 		email: "",
 		password: "",
@@ -34,16 +30,7 @@ export default function RegisterForm() {
 	return (
 		<div>
 			<form id="register_form">
-				<label>
-					{" "}
-					Name:
-					<input value={user.firstName} onChange={handleChange} type="text" name="firstName" id="register_form_firstName" required />
-				</label>
-				<label>
-					{" "}
-					Last name:
-					<input value={user.lastName} onChange={handleChange} type="text" name="lastName" id="register_form_lastName" required/>
-				</label>
+				
 				<label>
 					{" "}
 					Username:

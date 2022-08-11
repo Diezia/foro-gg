@@ -1,5 +1,26 @@
-ul {
-    background-color: grey;
-    width: 90%;
-    margin: 100px 0px 0px 50px;
+.container-post{
+    display: flex;
+    flex-direction: column;
+}
+
+.gamepost{
+    background-color: rgb(76, 76, 76);
+    color: white;  
+    margin: 20px 300px 20px 100px;  
+    border-radius: 20px;   
+    display: flex;     
+    padding: 30px; 
+    font-size: 20px;
+    border-style: double;
+}
+
+.gp-title{
+    flex: 0 0 70%;
+}
+.gp-user_id{
+    flex: 0 1 auto; 
+}
+.gp-valoration{
+    flex: 1 0 auto;
+    text-align: end;
 }
