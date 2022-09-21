@@ -16,7 +16,7 @@ export function ModalRegister({ register }: RegisterType) {
 	return (
 		<dialog ref={register} id="dialog_register" onClick={handleDialogClick}>
 			<div id="dialog_content">
-				<h1>Formulario de Registro</h1>
+				<h1>Regristrate !</h1>
 				<Register />
 			</div>
 		</dialog>
