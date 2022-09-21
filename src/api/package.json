@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm i && tsc -p ./tsconfig.json && npm-run-all --parallel watch:typescript start:server", 
+    "dev": "npm i && tsc -p ./tsconfig.json && npm-run-all --parallel watch:typescript start:server",
     "watch:typescript": "tsc -p ./tsconfig.json --watch",
     "start:server": "nodemon ./build/index.js"
   },
@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@miracledevs/paradigm-express-webapi": "^1.2.0",
+    "@miracledevs/paradigm-web-di": "^1.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",

@@ -3,6 +3,7 @@ import { Configuration } from "./configuration";
 import express from 'express';
 import cors from 'cors';
 import { TestController } from "./controllers/test.controller";
+import { MySqlConnectionFilter } from "./filters/mysql.filter";
 // require('dotenv').config() utilizado antes de paradigm 
 
 export class Server extends ApiServer
@@ -24,6 +25,9 @@ export class Server extends ApiServer
         this.registerControllers([
             TestController
         ]);
+        this.routing.ignoreClosedResponseOnFilters();
+        this.routing.registerGlobalFilters([MySqlConnectionFilter]);
+
     }
 }
 

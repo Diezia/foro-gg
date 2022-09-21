@@ -9,6 +9,7 @@ const configuration_1 = require("./configuration");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const test_controller_1 = require("./controllers/test.controller");
+const mysql_filter_1 = require("./filters/mysql.filter");
 // require('dotenv').config() utilizado antes de paradigm 
 class Server extends paradigm_express_webapi_1.ApiServer {
     configureApplication() {
@@ -25,6 +26,8 @@ class Server extends paradigm_express_webapi_1.ApiServer {
         this.registerControllers([
             test_controller_1.TestController
         ]);
+        this.routing.ignoreClosedResponseOnFilters();
+        this.routing.registerGlobalFilters([mysql_filter_1.MySqlConnectionFilter]);
     }
 }
 exports.Server = Server;

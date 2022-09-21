@@ -18,51 +18,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EchoController = void 0;
-const paradigm_express_webapi_1 = require("@miracledevs/paradigm-express-webapi");
-let EchoController = class EchoController extends paradigm_express_webapi_1.ApiController {
-    constructor() {
-        super();
+exports.MySqlConnectionFilter = void 0;
+const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
+const mysql_connector_1 = require("../core/mysql/mysql.connector");
+const mysql_connection_1 = require("../core/mysql/mysql.connection");
+/**
+ * Requires a mysql connection from the connection pool for the ongoing request.
+ */
+let MySqlConnectionFilter = class MySqlConnectionFilter {
+    constructor(dependencyContainer, mysqlConnector) {
+        this.dependencyContainer = dependencyContainer;
+        this.mysqlConnector = mysqlConnector;
     }
-    get() {
+    beforeExecute(httpContext) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                this.httpContext.response.status(200).send("ta to okei");
-                return;
+                this.connection = this.dependencyContainer.resolve(mysql_connection_1.MySqlConnection);
+                yield this.mysqlConnector.createScopedConnection(this.connection);
             }
             catch (_a) {
-                this.httpContext.response.sendStatus(500);
-                return;
+                httpContext.response.sendStatus(500);
             }
         });
     }
-    post() {
+    afterExecute() {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                this.httpContext.response.status(200).send(this.httpContext.request.body);
-                return;
-            }
-            catch (_a) {
-                this.httpContext.response.sendStatus(500);
-                return;
-            }
+            this.mysqlConnector.releaseConnection(this.connection);
+        });
+    }
+    onError() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.mysqlConnector.releaseConnection(this.connection);
         });
     }
 };
-__decorate([
-    (0, paradigm_express_webapi_1.Action)({ route: "/" }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], EchoController.prototype, "get", null);
-__decorate([
-    (0, paradigm_express_webapi_1.Action)({ route: "/" }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], EchoController.prototype, "post", null);
-EchoController = __decorate([
-    (0, paradigm_express_webapi_1.Controller)({ route: "/api/echo" }),
-    __metadata("design:paramtypes", [])
-], EchoController);
-exports.EchoController = EchoController;
+MySqlConnectionFilter = __decorate([
+    (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
+    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer, mysql_connector_1.MySqlConnector])
+], MySqlConnectionFilter);
+exports.MySqlConnectionFilter = MySqlConnectionFilter;

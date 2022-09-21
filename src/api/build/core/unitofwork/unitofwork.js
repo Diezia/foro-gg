@@ -18,51 +18,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EchoController = void 0;
-const paradigm_express_webapi_1 = require("@miracledevs/paradigm-express-webapi");
-let EchoController = class EchoController extends paradigm_express_webapi_1.ApiController {
-    constructor() {
-        super();
+exports.UnitOfWork = void 0;
+const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
+const mysql_connection_1 = require("../mysql/mysql.connection");
+let UnitOfWork = class UnitOfWork {
+    constructor(connection) {
+        this._connection = connection;
     }
-    get() {
+    beginTransaction() {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                this.httpContext.response.status(200).send("ta to okei");
-                return;
-            }
-            catch (_a) {
-                this.httpContext.response.sendStatus(500);
-                return;
-            }
+            yield this._connection.connection.beginTransaction();
         });
     }
-    post() {
+    rollbackTransaction() {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                this.httpContext.response.status(200).send(this.httpContext.request.body);
-                return;
-            }
-            catch (_a) {
-                this.httpContext.response.sendStatus(500);
-                return;
-            }
+            yield this._connection.connection.rollback();
+        });
+    }
+    commitTransaction() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this._connection.connection.commit();
         });
     }
 };
-__decorate([
-    (0, paradigm_express_webapi_1.Action)({ route: "/" }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], EchoController.prototype, "get", null);
-__decorate([
-    (0, paradigm_express_webapi_1.Action)({ route: "/" }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], EchoController.prototype, "post", null);
-EchoController = __decorate([
-    (0, paradigm_express_webapi_1.Controller)({ route: "/api/echo" }),
-    __metadata("design:paramtypes", [])
-], EchoController);
-exports.EchoController = EchoController;
+UnitOfWork = __decorate([
+    (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
+    __metadata("design:paramtypes", [mysql_connection_1.MySqlConnection])
+], UnitOfWork);
+exports.UnitOfWork = UnitOfWork;
