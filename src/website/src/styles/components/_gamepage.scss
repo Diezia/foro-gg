@@ -1,15 +1,23 @@
+@import './modals';
+.post{
+    margin: 2% 30% 0% 2%;
+    border: 1px solid white;
+    height: 60%;  
+    overflow-y: auto;
+   
+}
 .container-post{
     display: flex;
     flex-direction: column;
 }
 
-.gamepost{
-    background-color: rgb(76, 76, 76);
-    color: white;  
-    margin: 20px 300px 20px 100px;  
+.gamepost{ 
+    @include neon();
+    background-color: red;
+    margin: 2%;
     border-radius: 20px;   
     display: flex;     
-    padding: 30px; 
+    padding: 10px; 
     font-size: 20px;
     border-style: double;
 }

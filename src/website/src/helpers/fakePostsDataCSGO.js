@@ -9,6 +9,7 @@ export const fakePostsDataCSGO = [
 		title:"In quis justo. Maecenas rhoncus aliquam lacus.",
 		valoration: 2,
 	},
+	
 	{
 		user_id: "Edyth",
 		title:"Fusce consequat. Nulla nisl. Nunc nisl.",
@@ -16,27 +17,27 @@ export const fakePostsDataCSGO = [
 	},
 	{
 		user_id: "Jaclyn",
-		title:"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.",
+		title:"Integer ac leo. Pellentesque ultrices mattis odio.",
 		valoration: 4,
 	},
 	{
 		user_id: "Leland",
-		title:"In hac habitasse platea dictumst. Etiam faucibus cursus urna.",
+		title:"In hac habitasse platea dictumst.",
 		valoration: 5,
 	},
 	{
 		user_id: "Jammie",
-		title:"Phasellus in felis. Donec semper sapien a libero. Nam dui.",
+		title:"Phasellus in felis. Donec semper sapien a libero.",
 		valoration: 6,
 	},
 	{
 		user_id: "Sephira",
-		title:"Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.",
+		title:"Cras mi pede, malesuada in.",
 		valoration: 7,
 	},
 	{
 		user_id: "Crysta",
-		title:"Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.",
+		title:"Maecenas ut massa quis augue luctus tincidunt.",
 		valoration: 8,
 	},
 	{
@@ -48,5 +49,5 @@ export const fakePostsDataCSGO = [
 		user_id: "Miof mela",
 		title:"In congue. Etiam justo. Etiam pretium iaculis justo.",
 		valoration: 10,
-	},
+	}, 
 ];

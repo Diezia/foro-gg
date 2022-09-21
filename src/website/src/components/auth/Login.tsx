@@ -41,7 +41,7 @@ export default function LoginForm() {
 
 				<label>
 				{" "}
-					<p>Eres nuevo? Registrate!</p>
+					<button>Eres nuevo? Registrate!</button>
 				</label>
 				
 				<label>
