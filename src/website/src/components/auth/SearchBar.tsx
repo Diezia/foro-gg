@@ -1,42 +1,30 @@
-import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const SearchBar = () => {
-    const [value, setValue] = useState('')
-    const location = useLocation()
-    const pathname = location.pathname
+	const [value, setValue] = useState("");
+	const location = useLocation();
+	const pathname = location.pathname;
 
-    useEffect(() => {
-        setValue('')    
-    }, [pathname])
+	useEffect(() => {
+		setValue("");
+	}, [pathname]);
 
-      
-    const handleChange = (e: any) => {
-        const newValue = e.target.value            
-        setValue(newValue)
-    }
+	const handleChange = (e: any) => {
+		const newValue = e.target.value;
+		setValue(newValue);
+	};
 
-    const handleSearchClick = () => {
-        setValue('')
+	const handleSearchClick = () => {
+		setValue("");
+	};
 
-    }  
-    
-    return (
-    <div className="search">
-      <input
-        name="message"
-        type="text"
-        className="searchTerm"
-        id="input_text" value={value}
-        onChange={handleChange}    
-        />
-      <button type="submit" className="searchButton" onClick={handleSearchClick}>
-       {'>'}
-      </button>
-    </div>
-    )
-}
+	return (
+		<div className="search">
+			<input name="message" type="text" className="searchTerm" id="input_text" value={value} onChange={handleChange} />
+			<button type="submit" className="searchButton" onClick={handleSearchClick}>Search</button>
+		</div>
+	);
+};
 
-export default SearchBar
-
-
+export default SearchBar;

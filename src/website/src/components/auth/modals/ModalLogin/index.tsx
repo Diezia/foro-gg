@@ -15,7 +15,7 @@ export function ModalLogin({ login }: LoginType) {
 	return (
 		<dialog ref={login} id="dialog_login" onClick={handleDialogClick}>
 			<div id="dialog_content">
-				<h1>Inicio de sesión</h1>
+				<h1>Iniciar sesión</h1>
 				<LoginForm />
 			</div>
 		</dialog>

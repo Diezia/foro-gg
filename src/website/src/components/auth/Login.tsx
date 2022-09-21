@@ -22,24 +22,32 @@ export default function LoginForm() {
 
 	return (
 		<>
-			<form>
+			<form className="login_form">
 				<label>
 					{" "}
-					<p>Username:</p>
-					<input value={user.username} onChange={handleChange} type="text" name="username" id="login_user" required/>
+					<input value={user.username} onChange={handleChange} type="text" name="username" id="login_user" placeholder="Username" required />
 				</label>
 				<label>
 					{" "}
-					<p>Password:</p>
-					<input value={user.password} onChange={handleChange} type="password" name="password" id="login_password" required/>
+					<input value={user.password} onChange={handleChange} type="password" name="password" id="login_password" placeholder="Password" required />
 				</label>
 				{user.password.length < 1 ? (
-					<p>The password is empty</p>
+					<p>Ingresa tu usuario y contraseña</p>
 				) : (
 					<label>
-						<input type="submit" value="Submit" />
+						<button type="submit" value="Submit">Ingresar</button>
 					</label>
 				)}
+
+				<label>
+				{" "}
+					<p>Eres nuevo? Registrate!</p>
+				</label>
+				
+				<label>
+				{" "}
+					<p>Olvidé mi contraseña</p>
+				</label>
 			</form>
 		</>
 	);
