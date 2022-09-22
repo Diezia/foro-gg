@@ -1,41 +1,41 @@
 export const games = [
 	{
-		name: "csgo",
+		nameGame: "Counter-Strike: Global Offensive",
 		imageSrc: "/assets/csgo.png",
 		gameUrl: "games/1",
 	},
 	{
-		name: "amongus",
+		nameGame: "amongus",
 		imageSrc: "/assets/amongus.png",
 		gameUrl: "games/2",
 	},
 	{
-		name: "dota",
+		nameGame: "dota",
 		imageSrc: "/assets/dota.png",
 		gameUrl: "games/3",
 	},
 	{
-		name: "rocket",
+		nameGame: "rocket",
 		imageSrc: "/assets/rocket.png",
 		gameUrl: "games/4",
 	},
 	{
-		name: "minecraft",
+		nameGame: "minecraft",
 		imageSrc: "/assets/minecraft.png",
 		gameUrl: "games/5",
 	},
 	{
-		name: "valorant",
+		nameGame: "valorant",
 		imageSrc: "/assets/valorant.png",
 		gameUrl: "games/6",
 	},
 	{
-		name: "lol",
+		nameGame: "lol",
 		imageSrc: "/assets/lol.png",
 		gameUrl: "games/7",
 	},
 	{
-		name: "gtav",
+		nameGame: "gtav",
 		imageSrc: "/assets/gtav.png",
 		gameUrl: "games/8",
 	},
