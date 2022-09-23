@@ -17,7 +17,6 @@ export function CreatePostPage() {
 	};
 
 	return (
-
 		<div className="edit">
 		<Editor
 			editorState={editorState}
@@ -29,6 +28,7 @@ export function CreatePostPage() {
 				},
 			}}
 		/>
+		<input type="submit" value="Submit"/>
 		</div>
 	);
 }

@@ -11,16 +11,14 @@ export function AppRouter() {
 		<BrowserRouter>
 		<Navbar />
 			<Routes>
-				
 				<Route path="/">
 					<Route index element={<HomePage />} />
 					<Route path="/create" element={<CreatePostPage />} />
-
 					<Route path="games">
 						<Route path=":gameId">
 							<Route index element={<GamePage />} />
 							<Route path="post">
-								<Route path="postId" element={<PostPage />} />
+								<Route path=":postId" element={<PostPage />} />
 							</Route>
 						</Route>
 					</Route>
