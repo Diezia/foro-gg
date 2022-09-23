@@ -9,18 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TestRepository = void 0;
+exports.PostRepository = void 0;
 const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
 const mysql_connection_1 = require("../core/mysql/mysql.connection");
 const edit_repository_1 = require("../core/repositories/edit.repository");
-const test_1 = require("../models/test");
-let TestRepository = class TestRepository extends edit_repository_1.EditRepositoryBase {
+const post_1 = require("../models/post");
+let PostRepository = class PostRepository extends edit_repository_1.EditRepositoryBase {
     constructor(dependencyContainer, connection) {
-        super(dependencyContainer, connection, test_1.Test, 'users');
+        super(dependencyContainer, connection, post_1.Post, 'posts');
     }
 };
-TestRepository = __decorate([
+PostRepository = __decorate([
     (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
     __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer, mysql_connection_1.MySqlConnection])
-], TestRepository);
-exports.TestRepository = TestRepository;
+], PostRepository);
+exports.PostRepository = PostRepository;

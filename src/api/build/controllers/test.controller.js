@@ -20,7 +20,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TestController = void 0;
 const paradigm_express_webapi_1 = require("@miracledevs/paradigm-express-webapi");
-const test_repository_1 = require("../respositories/test.repository");
+const valoration_repository_1 = require("../respositories/valoration.repository");
 let TestController = class TestController extends paradigm_express_webapi_1.ApiController {
     constructor(repo) {
         super();
@@ -80,6 +80,6 @@ __decorate([
 ], TestController.prototype, "post", null);
 TestController = __decorate([
     (0, paradigm_express_webapi_1.Controller)({ route: "/" }),
-    __metadata("design:paramtypes", [test_repository_1.TestRepository])
+    __metadata("design:paramtypes", [valoration_repository_1.ValorationRepository])
 ], TestController);
 exports.TestController = TestController;
