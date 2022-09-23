@@ -12,7 +12,7 @@ export function HomePage() {
 			</div>
 			<div className="grid-container">
 				{games.map((game, i) => {
-					return <GameBlock imageSrc={game.imageSrc} key={i} gameUrl={game.gameUrl} />;
+					return <GameBlock imageSrc={game.imageSrc} key={i} gameUrl={game.gameUrl} nameGame={game.nameGame}  />;
 				})}
 			</div>
 		</div>

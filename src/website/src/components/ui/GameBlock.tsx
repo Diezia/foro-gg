@@ -4,6 +4,7 @@ import '../../styles/components/_gameblock.scss'
 
 
 interface GameBlockTypes {
+	nameGame: string;
 	imageSrc: string;
 	gameUrl: string;
 }
