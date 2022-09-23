@@ -1,11 +1,11 @@
 import { DependencyContainer, DependencyLifeTime, Injectable } from "@miracledevs/paradigm-web-di";
 import { MySqlConnection } from "../core/mysql/mysql.connection";
 import { EditRepositoryBase } from "../core/repositories/edit.repository";
-import { Test } from "../models/test";
+import { Post } from "../models/post";
 
 @Injectable({ lifeTime: DependencyLifeTime.Scoped})
-export class TestRepository extends EditRepositoryBase<Test, number> {
+export class PostRepository extends EditRepositoryBase<Post, number> {
   constructor(dependencyContainer: DependencyContainer, connection: MySqlConnection) {
-    super(dependencyContainer, connection, Test, 'users');
+    super(dependencyContainer, connection, Post, 'posts');
   }
 }

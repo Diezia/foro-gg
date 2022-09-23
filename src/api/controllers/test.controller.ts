@@ -4,11 +4,16 @@ import {
   Controller,
   HttpMethod,
 } from "@miracledevs/paradigm-express-webapi";
+import { CommentRepository } from "../respositories/comment.repository";
+import { GameRepository } from "../respositories/game.repository";
+import { PostRepository } from "../respositories/post.repository";
 import { TestRepository } from "../respositories/test.repository";
+import { UserRepository } from "../respositories/user.repository";
+import { ValorationRepository } from "../respositories/valoration.repository";
 
 @Controller({ route: "/" })
 export class TestController extends ApiController {
-  constructor(private repo: TestRepository) {
+  constructor(private repo: ValorationRepository) {
     super();
   }
 
