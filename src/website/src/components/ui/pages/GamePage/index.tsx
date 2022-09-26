@@ -3,14 +3,15 @@ import { useLocation, useParams, Link } from "react-router-dom";
 import { fakePostsDataCSGO } from "../../../../helpers/fakePostsDataCSGO";
 import { PostPreview } from "../../PostPreview";
 import "../../../../styles/components/_gamepage.scss"; 
+import { games } from "../../../../helpers/gameBlocks";
 
 export function GamePage() {
-	const { gameName } = useParams();
+	const { gameId } = useParams();
 	return (
 		<>	
 			<div className="title-game">
 				{/* add gameName to get postPreviews by gameId*/} 
-				<h1>{gameName}</h1>{/*{gameId} Change gameId -> nameId */}
+				<h1>{gameId !== undefined && games[parseInt(gameId)-1].nameGame}</h1>{/*{gameId} Change gameId -> nameId */}
 			</div>
 			<Link to={'/create'}><button>Crear post</button></Link>
 			<div className="post-date">
