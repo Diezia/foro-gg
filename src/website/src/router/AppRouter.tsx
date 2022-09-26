@@ -5,6 +5,7 @@ import { GamePage } from "../components/ui/pages/GamePage";
 import { PostPage } from "../components/ui/pages/PostPage";
 import { CreatePostPage } from "../components/ui/pages/CreatePostPage";
 import { Navbar } from "../components/ui/header/Navbar";
+import { games } from "../helpers/gameBlocks";
 
 export function AppRouter() {
 	return (
@@ -16,9 +17,11 @@ export function AppRouter() {
 					<Route path="/create" element={<CreatePostPage />} />
 					<Route path="games">
 						<Route path=":gameId">
-							<Route index element={<GamePage />} />
-							<Route path="post">
-								<Route path=":postId" element={<PostPage />} />
+							<Route path=":gameName">
+								<Route index element={<GamePage />} />
+								<Route path="post">
+									<Route path=":postId" element={<PostPage />} />
+							</Route>
 							</Route>
 						</Route>
 					</Route>

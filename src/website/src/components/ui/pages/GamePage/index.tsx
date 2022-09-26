@@ -1,18 +1,16 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useLocation, useParams, Link } from "react-router-dom";
 import { fakePostsDataCSGO } from "../../../../helpers/fakePostsDataCSGO";
 import { PostPreview } from "../../PostPreview";
-import "../../../../styles/components/_gamepage.scss";
+import "../../../../styles/components/_gamepage.scss"; 
 
 export function GamePage() {
-	const { gameId } = useParams();
-	
+	const { gameName } = useParams();
 	return (
 		<>	
-			
 			<div className="title-game">
-				{/* add filter to get postPreviews by gameId*/} 
-				<h1>{gameId}</h1>{/*{gameId} Change gameId -> nameId */}
+				{/* add gameName to get postPreviews by gameId*/} 
+				<h1>{gameName}</h1>{/*{gameId} Change gameId -> nameId */}
 			</div>
 			<Link to={'/create'}><button>Crear post</button></Link>
 			<div className="post-date">
