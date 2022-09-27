@@ -10,6 +10,9 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const test_controller_1 = require("./controllers/test.controller");
 const mysql_filter_1 = require("./filters/mysql.filter");
+const echo_controller_1 = require("./controllers/echo.controller");
+const game_controller_1 = require("./controllers/game.controller");
+const post_controller_1 = require("./controllers/post.controller");
 // require('dotenv').config() utilizado antes de paradigm 
 class Server extends paradigm_express_webapi_1.ApiServer {
     configureApplication() {
@@ -24,7 +27,10 @@ class Server extends paradigm_express_webapi_1.ApiServer {
             .use(express_1.default.json())
             .listen(port, () => this.logger.debug(`Server listening on port: ${port}`));
         this.registerControllers([
-            test_controller_1.TestController
+            test_controller_1.TestController,
+            echo_controller_1.EchoController,
+            game_controller_1.GameController,
+            post_controller_1.PostController
         ]);
         this.routing.ignoreClosedResponseOnFilters();
         this.routing.registerGlobalFilters([mysql_filter_1.MySqlConnectionFilter]);

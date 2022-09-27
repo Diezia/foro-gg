@@ -49,15 +49,32 @@ let TestController = class TestController extends paradigm_express_webapi_1.ApiC
             return;
         }
     }
+    getPostCount() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const res = yield this.repo.countPostValorations(6);
+                console.log(res[0][0]["valoration"]);
+                this.httpContext.response.status(200).send(JSON.stringify(res[0][0]["valoration"]));
+                return;
+            }
+            catch (_a) {
+                this.httpContext.response.sendStatus(500);
+                return;
+            }
+        });
+    }
     post() {
-        try {
-            this.httpContext.response.status(200).send(this.httpContext.request.body);
-            return;
-        }
-        catch (_a) {
-            this.httpContext.response.sendStatus(500);
-            return;
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const res = yield this.repo.insertOne(this.httpContext.request.body);
+                this.httpContext.response.status(200).send(res);
+                return;
+            }
+            catch (_a) {
+                this.httpContext.response.sendStatus(500);
+                return;
+            }
+        });
     }
 };
 __decorate([
@@ -73,10 +90,16 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TestController.prototype, "getData", null);
 __decorate([
+    (0, paradigm_express_webapi_1.Action)({ route: "countposts", method: paradigm_express_webapi_1.HttpMethod.GET }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TestController.prototype, "getPostCount", null);
+__decorate([
     (0, paradigm_express_webapi_1.Action)({ route: "/" }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], TestController.prototype, "post", null);
 TestController = __decorate([
     (0, paradigm_express_webapi_1.Controller)({ route: "/" }),

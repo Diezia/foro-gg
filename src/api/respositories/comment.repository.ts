@@ -8,4 +8,7 @@ export class CommentRepository extends EditRepositoryBase<Comment, number> {
   constructor(dependencyContainer: DependencyContainer, connection: MySqlConnection) {
     super(dependencyContainer, connection, Comment, 'comments');
   }
+  async deleteComments(id: number) {
+    await this.connection.connection.query(`DELETE FROM \`${this.tableName}\` WHERE post_id=?`, [id]);
+  }
 }

@@ -4,6 +4,9 @@ import express from 'express';
 import cors from 'cors';
 import { TestController } from "./controllers/test.controller";
 import { MySqlConnectionFilter } from "./filters/mysql.filter";
+import { EchoController } from "./controllers/echo.controller";
+import { GameController } from "./controllers/game.controller";
+import { PostController } from "./controllers/post.controller";
 // require('dotenv').config() utilizado antes de paradigm 
 
 export class Server extends ApiServer
@@ -23,7 +26,10 @@ export class Server extends ApiServer
             .listen(port, () => this.logger.debug(`Server listening on port: ${port}`));
 
         this.registerControllers([
-            TestController
+            TestController,
+            EchoController,
+            GameController,
+            PostController
         ]);
         this.routing.ignoreClosedResponseOnFilters();
         this.routing.registerGlobalFilters([MySqlConnectionFilter]);

@@ -38,14 +38,30 @@ export class TestController extends ApiController {
       return;
     }
   }
-  @Action({ route: "/" })
-  post() {
+  @Action({ route: "countposts", method: HttpMethod.GET })
+  async getPostCount() {
     try {
-      this.httpContext.response.status(200).send(this.httpContext.request.body);
+      const res = await this.repo.countPostValorations(6);
+      console.log(res[0][0]["valoration"])
+
+
+      this.httpContext.response.status(200).send(JSON.stringify(res[0][0]["valoration"]));
       return;
     } catch {
       this.httpContext.response.sendStatus(500);
       return;
     }
   }
+  @Action({ route: "/" })
+  async post() {
+    try {
+      const res = await this.repo.insertOne(this.httpContext.request.body);
+      this.httpContext.response.status(200).send(res);
+      return;
+    } catch {
+      this.httpContext.response.sendStatus(500);
+      return;
+    }
+  }
+  
 }

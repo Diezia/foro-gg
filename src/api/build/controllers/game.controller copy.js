@@ -18,31 +18,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ValorationRepository = void 0;
-const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
-const mysql_connection_1 = require("../core/mysql/mysql.connection");
-const edit_repository_1 = require("../core/repositories/edit.repository");
-const valoration_1 = require("../models/valoration");
-let ValorationRepository = class ValorationRepository extends edit_repository_1.EditRepositoryBase {
-    constructor(dependencyContainer, connection) {
-        super(dependencyContainer, connection, valoration_1.Valoration, 'valorations');
+exports.GameController = void 0;
+const paradigm_express_webapi_1 = require("@miracledevs/paradigm-express-webapi");
+const game_repository_1 = require("../respositories/game.repository");
+let GameController = class GameController extends paradigm_express_webapi_1.ApiController {
+    constructor(repoGame) {
+        super();
+        this.repoGame = repoGame;
     }
-    // Agregar metodo para hacer el count en db basado en readonly.repository
-    countPostValorations(postId) {
+    get() {
         return __awaiter(this, void 0, void 0, function* () {
-            const res = yield this.connection.connection.query(`SELECT COUNT(*) AS valoration FROM ${this.tableName} WHERE post_id = ${postId}`);
-            return res;
-            // ver como carajo hacer para que retorne un numero -> ver como trae la data con un fetch desde el front
-        });
-    }
-    deleteValorations(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.connection.connection.query(`DELETE FROM \`${this.tableName}\` WHERE post_id=?`, [id]);
+            try {
+                const data = yield this.repoGame.getAll();
+                this.httpContext.response.status(200).send(data);
+                return;
+            }
+            catch (error) {
+                console.log(error);
+            }
         });
     }
 };
-ValorationRepository = __decorate([
-    (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
-    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer, mysql_connection_1.MySqlConnection])
-], ValorationRepository);
-exports.ValorationRepository = ValorationRepository;
+__decorate([
+    (0, paradigm_express_webapi_1.Action)({ route: "/" }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], GameController.prototype, "get", null);
+GameController = __decorate([
+    (0, paradigm_express_webapi_1.Controller)({ route: "/api/games" }),
+    __metadata("design:paramtypes", [game_repository_1.GameRepository])
+], GameController);
+exports.GameController = GameController;
