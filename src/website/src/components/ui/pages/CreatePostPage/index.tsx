@@ -11,13 +11,13 @@ import { PrePost } from "../PrePost";
 
 export function CreatePostPage() {
 	const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
-	const [previewState, setPreviewState] = useState('');
+	const [previewState, setPreviewState] = useState("");
 
 	const updateTextDescription = (state: any) => {
 		setEditorState(state);
 		const data = convertToRaw(editorState.getCurrentContent());
 		console.log(data);
-		return(draftToHtml(data));
+		return draftToHtml(data);
 	};
 
 	const previsualizar = () => {
@@ -34,16 +34,14 @@ export function CreatePostPage() {
 				</div>
 				<div className="title-post">
 					<input type="text" />
-					<button className="btn-preview" onClick={previsualizar}>
-						Prev
-					</button>
 					<select>
-						<option value="value1">Value 1</option>
-						<option value="value2" selected>
-							Value 2
-						</option>
+						<option value="value1">Counter-Strike: Global Offensive</option>
+						<option value="value2">Value 2</option>
 						<option value="value3">Value 3</option>
 					</select>
+					<button className="btn-preview" onClick={previsualizar}>
+						Previzualizar
+					</button>
 					<button className="btn-post">Publicar</button>
 				</div>
 			</div>
@@ -65,7 +63,7 @@ export function CreatePostPage() {
 					/>
 				</div>
 				<div className="text-preview">
-					<PrePost texto ={previewState}/>
+					<PrePost texto={previewState} />
 				</div>
 			</div>
 		</>
