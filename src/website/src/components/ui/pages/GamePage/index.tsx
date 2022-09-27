@@ -2,8 +2,11 @@ import React from "react";
 import { useLocation, useParams, Link } from "react-router-dom";
 import { fakePostsDataCSGO } from "../../../../helpers/fakePostsDataCSGO";
 import { PostPreview } from "../../PostPreview";
-import "../../../../styles/components/_gamepage.scss"; 
+import "../../../../styles/components/_gamepage.scss";
 import { games } from "../../../../helpers/gameBlocks";
+
+
+
 
 export function GamePage() {
 	const { gameId } = useParams();

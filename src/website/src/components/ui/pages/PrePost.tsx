@@ -1,7 +1,10 @@
 import React from 'react'
 
 export function PrePost (props: any) {
+  function createMarkup() {
+    return {__html: props.texto};
+  }
   return (
-    <div><p>{props.texto}</p></div>
+    <div dangerouslySetInnerHTML={createMarkup()}></div>
   )
 }

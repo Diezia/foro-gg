@@ -61,6 +61,7 @@ export function CreatePostPage() {
 						wrapperClassName="wrapperClassName"
 						editorClassName="editorClassName"
 						onEditorStateChange={updateTextDescription}
+						stripPastedStyles={true}
 					/>
 				</div>
 				<div className="text-preview">
