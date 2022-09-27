@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useState } from "react";
-
 type Login = {
 	username: string;
 	password: string;
@@ -35,17 +34,19 @@ export default function LoginForm() {
 					<p>Ingresa tu usuario y contraseña</p>
 				) : (
 					<label>
-						<button type="submit" value="Submit">Ingresar</button>
+						<button type="submit" value="Submit">
+							Ingresar
+						</button>
 					</label>
 				)}
 
 				<label>
-				{" "}
+					{" "}
 					<button>Eres nuevo? Registrate!</button>
 				</label>
-				
+
 				<label>
-				{" "}
+					{" "}
 					<p>Olvidé mi contraseña</p>
 				</label>
 			</form>

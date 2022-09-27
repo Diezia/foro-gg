@@ -1,0 +1,58 @@
+$f-size: 40px;
+$b-grey: rgb(200, 200, 200);
+$br-20: 20px;
+@mixin is-style {
+	font-size: $f-size;
+	background-color: $b-grey;
+	border-radius: $br-20;
+}
+
+div {
+	border: 1px solid red;
+}
+
+.title-create {
+	.title-edit {
+		p {
+			text-align: left;
+			font-size: $f-size;
+		}
+	}
+	.title-post {
+        display: flex;
+        justify-content: space-between;
+		height: 60px;
+
+		input {
+			@include is-style();
+			width: 50%;
+			margin-left: 30px;
+		}
+		select {
+			@include is-style();
+			margin-left: 30%;
+		}
+	}
+}
+
+.text-create {
+	display: flex;
+	justify-content: space-between;
+	margin: 30px;
+
+	.text-edit {
+		background-color: $b-grey;
+		width: 50%;
+		height: 600px;        
+		max-height: 600px;
+		border-radius: 20px;
+		overflow-y: scroll;
+	}
+	.text-preview {
+		width: 50%;
+		background-color: grey;
+		border-radius: 20px;
+		margin-left: 30px;
+	}
+}
+
