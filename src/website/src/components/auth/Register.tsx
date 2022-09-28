@@ -40,7 +40,7 @@ export default function RegisterForm() {
 				</label>
 				<label>
 					{" "}
-					<input value={user.password} onChange={handleChange} type="password" name="password" id="register_form_password_1" className="register_form_password" placeholder="Password" required />
+					<input value={user.password} onChange={handleChange} type="password" name="password" id="register_form_password_1" className="register_form_password" placeholder="Password" minLength={8} required />
 				</label>
 				<label>
 					{" "}
@@ -51,6 +51,7 @@ export default function RegisterForm() {
 						name="repeatPassword"
 						id="fregister_form_password_2"
 						className="register_form_password"
+						minLength={8}
 						required
 						placeholder="Password"
 					/>
