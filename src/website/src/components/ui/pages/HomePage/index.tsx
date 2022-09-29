@@ -4,16 +4,16 @@ import { games } from "../../../../helpers/gameBlocks";
 
 export function HomePage() {
 	// Ejemplo de como obtener data de la api 
-	useEffect(() => {
+/* 	useEffect(() => {
 		const fetchData = async () => {
-			const data = await fetch("http://localhost:8080/countposts")
+			const data = await fetch('')
 			.then((res: any) => res.json())
 			.then(data => console.log(data));
 		};
 		fetchData()
 			.catch(console.error);
-	}, []);
-	// fin Ejemplo de como obtener data de la api 
+	}, []); */
+	// Esto trae valoraciones
 
 	return (
 		<div>

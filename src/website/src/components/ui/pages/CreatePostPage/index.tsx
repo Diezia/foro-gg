@@ -12,6 +12,7 @@ import { PrePost } from "../PrePost";
 export function CreatePostPage() {
 	const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
 	const [previewState, setPreviewState] = useState("");
+	const [title, setTitle] = useState("");
 
 	const updateTextDescription = (state: any) => {
 		setEditorState(state);
@@ -26,6 +27,10 @@ export function CreatePostPage() {
 		setPreviewState(data);
 	};
 
+	const hola =() =>{
+		console.log(title);
+	}
+
 	return (
 		<>
 			<div className="title-create">
@@ -33,7 +38,13 @@ export function CreatePostPage() {
 					<p>Crear Post</p>
 				</div>
 				<div className="title-post">
-					<input type="text" />
+					<input
+					placeholder="Titulo"
+						type="text"
+						onChange={event => {
+							setTitle(event.target.value);
+						}}
+					/>
 					<select>
 						<option value="value1">Counter-Strike: Global Offensive</option>
 						<option value="value2">Value 2</option>
@@ -42,7 +53,7 @@ export function CreatePostPage() {
 					<button className="btn-preview" onClick={previsualizar}>
 						Previzualizar
 					</button>
-					<button className="btn-post">Publicar</button>
+					<button className="btn-post" onClick={hola}>Publicar</button>
 				</div>
 			</div>
 			<div className="text-create">
