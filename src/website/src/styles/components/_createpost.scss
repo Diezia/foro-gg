@@ -7,7 +7,6 @@ $br-20: 20px;
 	border-radius: $br-20;
 }
 
-
 .title-create {
 	.title-edit {
 		p {
@@ -16,19 +15,40 @@ $br-20: 20px;
 		}
 	}
 	.title-post {
-        display: flex;
-        justify-content: space-between;
-		height: 60px;
-
-		input {
-			@include is-style();
-			width: 50%;
-			margin-left: 30px;
-		}
-		select {
-			@include is-style();
-			margin-left: 30%;
-		}
+		width: 100vw;
+		height: 5vh;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+	}
+	input {
+		width: 40vw;
+		height: 5vh;
+		border-radius: 100px;
+		font-size: 20px;
+	}
+	select {
+		width: 15vw;
+		height: 3vh;
+		font-size: 15px;
+		border-radius: 100px;
+	}
+	button {
+		max-width: 480px;
+		line-height: 20px;
+		min-width: 0px;
+		min-height: 40px;
+		color: black;
+		border-radius: 100px;
+		cursor: pointer;
+		font-size: 15px;
+		font-weight: 600;
+		justify-content: center;
+		align-items: center;
+		padding: 0px;
+		padding-left: 20px;
+		padding-right: 20px;
+		text-align: center;
 	}
 }
 
@@ -40,7 +60,7 @@ $br-20: 20px;
 	.text-edit {
 		background-color: $b-grey;
 		width: 50%;
-		height: 600px;        
+		height: 600px;
 		max-height: 600px;
 		border-radius: 20px;
 		overflow-y: scroll;
@@ -50,6 +70,11 @@ $br-20: 20px;
 		background-color: grey;
 		border-radius: 20px;
 		margin-left: 30px;
+		.prev-post {
+			p {
+				margin: 10px;
+				text-align: start;
+			}
+		}
 	}
 }
-

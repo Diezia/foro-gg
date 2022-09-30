@@ -11,13 +11,14 @@ import { PrePost } from "../PrePost";
 
 export function CreatePostPage() {
 	const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
-	const [previewState, setPreviewState] = useState('');
+	const [previewState, setPreviewState] = useState("");
+	const [title, setTitle] = useState("");
 
 	const updateTextDescription = (state: any) => {
 		setEditorState(state);
 		const data = convertToRaw(editorState.getCurrentContent());
 		console.log(data);
-		return(draftToHtml(data));
+		return draftToHtml(data);
 	};
 
 	const previsualizar = () => {
@@ -26,6 +27,10 @@ export function CreatePostPage() {
 		setPreviewState(data);
 	};
 
+	const hola =() =>{
+		console.log(title);
+	}
+
 	return (
 		<>
 			<div className="title-create">
@@ -33,18 +38,22 @@ export function CreatePostPage() {
 					<p>Crear Post</p>
 				</div>
 				<div className="title-post">
-					<input type="text" />
-					<button className="btn-preview" onClick={previsualizar}>
-						Prev
-					</button>
+					<input
+					placeholder="Titulo"
+						type="text"
+						onChange={event => {
+							setTitle(event.target.value);
+						}}
+					/>
 					<select>
-						<option value="value1">Value 1</option>
-						<option value="value2" selected>
-							Value 2
-						</option>
+						<option value="value1">Counter-Strike: Global Offensive</option>
+						<option value="value2">Value 2</option>
 						<option value="value3">Value 3</option>
 					</select>
-					<button className="btn-post">Publicar</button>
+					<button className="btn-preview" onClick={previsualizar}>
+						Previzualizar
+					</button>
+					<button className="btn-post" onClick={hola}>Publicar</button>
 				</div>
 			</div>
 			<div className="text-create">
@@ -65,7 +74,7 @@ export function CreatePostPage() {
 					/>
 				</div>
 				<div className="text-preview">
-					<PrePost texto ={previewState}/>
+					<PrePost texto={previewState} />
 				</div>
 			</div>
 		</>

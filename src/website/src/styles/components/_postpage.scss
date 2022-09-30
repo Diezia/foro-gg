@@ -1,0 +1,23 @@
+@mixin format {
+	width: 50%;
+	background-color: grey;
+	border-radius: 20px;
+	margin-left: 30px;
+    p {
+        margin: 10px;
+        text-align: start;
+    }
+}
+
+.title-publicpost {
+	@include format();
+}
+.public-post {
+	@include format();
+	.prev-post {
+		p {
+			margin: 10px;
+			text-align: start;
+		}
+	}
+}

@@ -5,6 +5,6 @@ export function PrePost (props: any) {
     return {__html: props.texto};
   }
   return (
-    <div dangerouslySetInnerHTML={createMarkup()}></div>
+    <div dangerouslySetInnerHTML={createMarkup()} className="prev-post"></div>
   )
 }
