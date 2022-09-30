@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useParams, Link } from "react-router-dom";
 import { fakePostsDataCSGO } from "../../../../helpers/fakePostsDataCSGO";
 import { PostPreview } from "../../PostPreview";
 import "../../../../styles/components/_gamepage.scss";
-import { games } from "../../../../helpers/gameBlocks";
 
 
 
 
 export function GamePage() {
 	const { gameId } = useParams();
+	useEffect(() => {
+		(async function(){
+			try {
+				const data = await fetch(`http://localhost:8080/api/games/${gameId}/posts`);
+				const res = await data.json();
+				console.log(res);
+			} catch (error) {
+				console.log(error)
+			}
+		}())
+	}, [])
+	
 	return (
 		<>	
 			<div className="title-game">
 				{/* add gameName to get postPreviews by gameId*/} 
-				<h1>{gameId !== undefined && games[parseInt(gameId)-1].nameGame}</h1>{/*{gameId} Change gameId -> nameId */}
+				{/* <h1>{gameId !== undefined && games[parseInt(gameId)-1].nameGame}</h1> */}{/*{gameId} Change gameId -> nameId */}
 			</div>
 			<Link to={'/create'}><button>Crear post</button></Link>
 			<div className="post-date">

@@ -1,19 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { GameBlock } from "../../GameBlock";
-import { games } from "../../../../helpers/gameBlocks";
 
 export function HomePage() {
-	// Ejemplo de como obtener data de la api 
+	const [state, setState] = useState([]);
 	useEffect(() => {
 		const fetchData = async () => {
-			const data = await fetch("http://localhost:8080/countposts")
+			await fetch("http://localhost:8080/api/games")
 			.then((res: any) => res.json())
-			.then(data => console.log(data));
+			.then(data => setState(data));
 		};
 		fetchData()
 			.catch(console.error);
 	}, []);
-	// fin Ejemplo de como obtener data de la api 
 
 	return (
 		<div>
@@ -23,9 +21,11 @@ export function HomePage() {
 				</div>
 			</div>
 			<div className="grid-container">
-				{games.map((game, i) => {
-					return <GameBlock imageSrc={game.imageSrc} key={i} gameUrl={game.gameUrl} nameGame={game.nameGame} />;
-				})}
+				{state.length > 0 &&
+					state.map((game: any, i: number) => (
+						<GameBlock imageSrc={game.image_url} key={i} gameUrl={game.id} nameGame={game.name} />
+					))
+				}
 			</div>
 		</div>
 	);
