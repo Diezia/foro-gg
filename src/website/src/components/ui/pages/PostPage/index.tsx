@@ -1,34 +1,38 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { CreatePostPage } from "../CreatePostPage";
 import { PrePost } from "../PrePost";
 import "../../../../styles/components/_postpage.scss";
-
+import { useParams } from "react-router-dom";
+import CommentComponent from "../../CommentComponent/CommentComponent";
 
 export function PostPage() {
+	const {gameId, postId} = useParams()
+	const [post, setPost]: any = useState([])
+	useEffect(() => {
+		const FetchData = async() => {
+			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`)
+			.then((res: any) => res.json())
+			.then((data: any) => setPost(data));
+		}
+		FetchData()
+		.catch(console.error);
+	}, [])
 	return (
 		<>
-		<div className="title-publicpost">
-			<p>Hola</p>
-		</div>
-			<div className="public-post">
-			<p> 
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cLorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!um voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!
-			v
-			v
-			v
-			v
-			<var>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ex veritatis cum voluptas accusamus velit quod officiis harum aut dolore, eveniet doloribus voluptatibus eaque fugit, alias qui facilis expedita recusandae!</var>
-			</p>
+		{post.map((post: any, i: number) => (
+			<>
+			<div className="title-publicpost">
+				<h1>{post.title}</h1>
+				<span>{post.valoration}</span>
 			</div>
+			<div className="public-post">
+				<p> 
+					{post.body}
+				</p>
+			</div>
+			</>
+		))}
+		<CommentComponent />
 		</>
 	);
 }
