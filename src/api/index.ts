@@ -3,9 +3,9 @@ import { Server } from "./server";
 
 
 new HostBuilder()
-    .useConfiguration((configureishon: ConfigurationBuilder) =>
+    .useConfiguration((config: ConfigurationBuilder) =>
     {
-        configureishon.addJsonFile('config.json')
+        config.addJsonFile('config.json')
             .addEnvironmentFile('.env', 'paradigm_api__')
             .addEnvironmentVariables('paradigm_api__');
     })

@@ -97,7 +97,6 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
     deletePost(postId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                // esto falla por las foreign keys. Primero hay que borrar los comentarios relacionados
                 yield this.repoComment.deleteComments(parseInt(this.httpContext.request.params.postId));
                 yield this.repoValoration.deleteValorations(parseInt(this.httpContext.request.params.postId));
                 const data = yield this.repoPost.delete(parseInt(this.httpContext.request.params.postId));

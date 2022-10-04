@@ -79,7 +79,6 @@ export class PostController extends ApiController {
   @Action({ route: "/:postId", method: HttpMethod.DELETE })
   async deletePost(postId: number) {
     try {
-      // esto falla por las foreign keys. Primero hay que borrar los comentarios relacionados
       await this.repoComment.deleteComments(
         parseInt(this.httpContext.request.params.postId)
       );

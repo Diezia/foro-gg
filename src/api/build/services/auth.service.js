@@ -17,36 +17,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GameController = void 0;
-const paradigm_express_webapi_1 = require("@miracledevs/paradigm-express-webapi");
-const game_repository_1 = require("../respositories/game.repository");
-let GameController = class GameController extends paradigm_express_webapi_1.ApiController {
-    constructor(repoGame) {
-        super();
-        this.repoGame = repoGame;
+exports.AuthService = void 0;
+const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
+const bcrypt_1 = __importDefault(require("bcrypt"));
+let AuthService = class AuthService {
+    constructor(dependencyContainer) {
     }
-    get() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const data = yield this.repoGame.getAll();
-                this.httpContext.response.status(200).send(data);
-                return;
-            }
-            catch (error) {
-                console.log(error);
-            }
+    register(email, name, password, repoUser) {
+        const saltRounds = 10;
+        bcrypt_1.default.genSalt(saltRounds, function (err, salt) {
+            bcrypt_1.default.hash(password, salt, function (err, hash) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    const mydata = {
+                        email,
+                        name,
+                        password: hash
+                    };
+                    const data = yield repoUser.insertOne(mydata);
+                });
+            });
         });
     }
 };
-__decorate([
-    (0, paradigm_express_webapi_1.Action)({ route: "/" }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], GameController.prototype, "get", null);
-GameController = __decorate([
-    (0, paradigm_express_webapi_1.Controller)({ route: "/api/games" }),
-    __metadata("design:paramtypes", [game_repository_1.GameRepository])
-], GameController);
-exports.GameController = GameController;
+AuthService = __decorate([
+    (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
+    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer])
+], AuthService);
+exports.AuthService = AuthService;

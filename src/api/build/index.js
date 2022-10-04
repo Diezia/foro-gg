@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const paradigm_express_webapi_1 = require("@miracledevs/paradigm-express-webapi");
 const server_1 = require("./server");
 new paradigm_express_webapi_1.HostBuilder()
-    .useConfiguration((configureishon) => {
-    configureishon.addJsonFile('config.json')
+    .useConfiguration((config) => {
+    config.addJsonFile('config.json')
         .addEnvironmentFile('.env', 'paradigm_api__')
         .addEnvironmentVariables('paradigm_api__');
 })

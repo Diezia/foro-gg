@@ -13,6 +13,7 @@ let User = class User {
         this.id = 0;
         this.name = '';
         this.email = '';
+        this.password = '';
         this.role = '';
     }
 };
