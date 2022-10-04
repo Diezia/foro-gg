@@ -34,18 +34,21 @@ export class AuthFilter implements IFilter {
 
     }
   }
-  afterExecute(httpContext: HttpContext, routingContext: RoutingContext): void | Promise<void> {
+  /* afterExecute(httpContext: HttpContext, routingContext: RoutingContext): void | Promise<void> {
     try {
       const decoded: any = jwt.verify(httpContext.request.headers["authorization"] as string, 'my secret');
-
-     httpContext.request.headers["authorization"] = jwt.sign({
+      const newToken = jwt.sign({
         id: decoded.id,
         name: decoded.name
       }, "my secret", { expiresIn: '3h' })
-      console.log(httpContext.request.headers["authorization"])
+      httpContext.response.setHeader('authorization', newToken)
+      // console.log(httpContext.response.getHeader("authorization"))
+      console.log('httpContext.response.getHeader("authorization")', httpContext.response.getHeader("authorization"))
     } catch (error) {
       console.log(error);
       httpContext.response.sendStatus(500);
     }
-  }
+  } */
 }
+
+// que diferencia hay entre httpContext.request.headers["authorization"] y httpContext.response.getHeader("authorization")? uno es de request y el otro de response? cuál tengo que usar para setear el token?

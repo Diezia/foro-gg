@@ -65,9 +65,9 @@ export class AuthController extends ApiController {
           id: user[0].id,
           name: user[0].name
         }, "my secret", { expiresIn: '3h' });
-        this.httpContext.response.setHeader('Authorization', token);
-        this.httpContext.response.cookie('jwt', token);
-        this.httpContext.response.status(200).send(token);
+        this.httpContext.response.setHeader('Authorization', JSON.stringify(token));
+        this.httpContext.response.cookie('jwt', JSON.stringify(token));
+        this.httpContext.response.status(200).send(JSON.stringify(token));
         return;
       }
       this.httpContext.response.status(401).send("password incorrect");
