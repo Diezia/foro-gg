@@ -1,45 +1,27 @@
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 import React, { ChangeEvent, useState } from "react";
-
-type Register = {
-	name: string;
-	email: string;
-	password: string;
-	repeatPassword?: string;
-};
-
-type Submit = {
-	submit: boolean;
-};
+import { useForm } from "../../hooks/useForm";
 
 export default function RegisterForm() {
-	const [user, setUsername] = useState<Register>({
+	const [formState, handleInputChange, resetForm] = useForm({
 		name: "",
 		email: "",
 		password: "",
 		repeatPassword: "",
 	});
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value;
-		const selectedField = e.target.name;
-		setUsername({
-			...user,
-			[selectedField]: value,
-		});
-	};
-
 	function handleSubmit(e: any) {
 		e.preventDefault();
 		fetch(`http://localhost:8080/api/auth/register`, {
-			method: 'POST',
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
 			},
-			mode: 'cors',
-			body: JSON.stringify(user)
+			mode: "cors",
+			body: JSON.stringify(formState),
 		})
-		.then((res: any) => console.log(res))
-		.catch((err) => console.log(err))
+			.then((res: any) => console.log(res))
+			.catch(err => console.log(err));
 	}
 
 	return (
@@ -47,17 +29,17 @@ export default function RegisterForm() {
 			<form id="register_form">
 				<label>
 					{" "}
-					<input value={user.name} onChange={handleChange} type="text" name="name" id="register_form_user" placeholder="Username" required />
+					<input value={formState.name} onChange={handleInputChange} type="text" name="name" placeholder="Username" required />
 				</label>
 				<label>
 					{" "}
-					<input value={user.email} onChange={handleChange} type="email" name="email" id="register_form_email" autoComplete="off" placeholder="Email" required />
+					<input value={formState.email} onChange={handleInputChange} type="email" name="email" id="register_form_email" autoComplete="off" placeholder="Email" required />
 				</label>
 				<label>
 					{" "}
 					<input
-						value={user.password}
-						onChange={handleChange}
+						value={formState.password}
+						onChange={handleInputChange}
 						type="password"
 						name="password"
 						id="register_form_password_1"
@@ -70,8 +52,8 @@ export default function RegisterForm() {
 				<label>
 					{" "}
 					<input
-						value={user.repeatPassword}
-						onChange={handleChange}
+						value={formState.repeatPassword}
+						onChange={handleInputChange}
 						type="password"
 						name="repeatPassword"
 						id="fregister_form_password_2"
@@ -81,15 +63,14 @@ export default function RegisterForm() {
 						placeholder="Password"
 					/>
 				</label>
-				{user.password != user.repeatPassword ? (
+				{formState.password !== formState.repeatPassword && (
 					<p>Las contraseñas no coinciden!</p>
-				) : user.password.length == 0 || user.repeatPassword.length == 0 ? (
-					<p>Completa con tus datos!</p>
-				) : (
-					<label>
-						<button value="Submit" id="register_submit_button" onClick={handleSubmit} >Registrar</button>
-					</label>
 				)}
+				<label>
+					<button value="Submit" id="register_submit_button" disabled={(formState.name && formState.email && formState.password && formState.password === formState.repeatPassword) ? false : true } onClick={handleSubmit}>
+						Registrar
+					</button>
+				</label>
 			</form>
 		</div>
 	);
