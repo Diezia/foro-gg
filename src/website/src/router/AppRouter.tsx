@@ -17,12 +17,10 @@ export function AppRouter() {
 					<Route path="/create" element={<CreatePostPage />} />
 					<Route path="games">
 						<Route path=":gameId">
-							
 								<Route index element={<GamePage />} />
 								<Route path="post">
 									<Route path=":postId" element={<PostPage />} />
 							</Route>
-							
 						</Route>
 					</Route>
 				</Route>

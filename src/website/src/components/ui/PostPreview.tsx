@@ -10,9 +10,8 @@ interface PostPreviewTypes {
 
 export function PostPreview({ title, user_id, valoration, postId}: PostPreviewTypes) {
 	return (
-		
 			<li className="gamepost">
-				<p className='gp-title'><Link to={ postId }>{title}</Link></p>
+				<p className='gp-title'><Link to={`post/${postId}`}>{title}</Link></p>
 				<p className="gp-user_id">{user_id}</p>
 				<p className="gp-valoration">{valoration}</p>
 			</li>
