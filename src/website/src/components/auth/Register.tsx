@@ -55,7 +55,17 @@ export default function RegisterForm() {
 				</label>
 				<label>
 					{" "}
-					<input value={user.password} onChange={handleChange} type="password" name="password" id="register_form_password_1" className="register_form_password" placeholder="Password" minLength={8} required />
+					<input
+						value={user.password}
+						onChange={handleChange}
+						type="password"
+						name="password"
+						id="register_form_password_1"
+						className="register_form_password"
+						placeholder="Password"
+						minLength={8}
+						required
+					/>
 				</label>
 				<label>
 					{" "}
