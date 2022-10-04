@@ -25,6 +25,7 @@ export class AuthController extends ApiController {
       const findRes = await this.repoUser.find("email = ?", [
         this.httpContext.request.body.email,
       ]);
+      console.log('this.httpContext.request.body', this.httpContext.request.body)
       if (findRes.length === 0) {
         console.log("no existe el user");
         this.authService.register(

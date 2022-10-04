@@ -40,6 +40,7 @@ let AuthController = class AuthController extends paradigm_express_webapi_1.ApiC
                 const findRes = yield this.repoUser.find("email = ?", [
                     this.httpContext.request.body.email,
                 ]);
+                console.log('this.httpContext.request.body', this.httpContext.request.body);
                 if (findRes.length === 0) {
                     console.log("no existe el user");
                     this.authService.register(this.httpContext.request.body.email, this.httpContext.request.body.name, this.httpContext.request.body.password, this.repoUser);
