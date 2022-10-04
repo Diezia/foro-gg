@@ -1,4 +1,49 @@
-@mixin format {
+div {
+	border: 1px solid red;
+	color: white;
+}
+.t-v-post,
+.p-c-post {
+	display: flex;
+	.title-publicpost,
+	.public-post {
+		flex: 3;
+		background-color: grey;
+		border-radius: 25px;
+		margin: 20px;
+		h1,
+		p {
+			margin: 15px;
+			text-align: start;
+		}
+	}
+	.valoration-post,
+	.comment-post {
+		flex: 2;
+		li {
+			list-style: none;
+		}
+	}
+}
+
+/* .p-c-post {
+	display: flex;
+	.public-post {
+		flex: 3;
+		background-color: grey;
+		border-radius: 25px;
+		margin: 20px;
+		p{
+			text-align: start;
+			margin: 15px;
+		}
+	}
+	.comment-post {
+		flex: 2;
+	}
+}
+ */
+/* @mixin format {
 	width: 50%;
 	background-color: grey;
 	border-radius: 20px;
@@ -23,4 +68,4 @@
 			text-align: start;
 		}
 	}
-}
+} */

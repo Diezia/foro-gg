@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 
 type Register = {
-	user_name: string;
+	name: string;
 	email: string;
 	password: string;
 	repeatPassword?: string;
@@ -13,7 +13,7 @@ type Submit = {
 
 export default function RegisterForm() {
 	const [user, setUsername] = useState<Register>({
-		user_name: "",
+		name: "",
 		email: "",
 		password: "",
 		repeatPassword: "",
@@ -27,12 +27,25 @@ export default function RegisterForm() {
 			[selectedField]: value,
 		});
 	};
+	function handleSubmit(e:any) {
+		e.preventDefault();
+		fetch("http://localhost:8080/api/auth/register", {
+			mode: "cors",
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(user),
+		})
+			.then((res: any) => console.log(res))
+			.catch(err => console.log(err));
+	}
 	return (
 		<div>
 			<form id="register_form">
 				<label>
 					{" "}
-					<input value={user.user_name} onChange={handleChange} type="text" name="user_name" id="register_form_user" placeholder="Username" required />
+					<input value={user.name} onChange={handleChange} type="text" name="name" id="register_form_user" placeholder="Username" required />
 				</label>
 				<label>
 					{" "}
@@ -40,7 +53,17 @@ export default function RegisterForm() {
 				</label>
 				<label>
 					{" "}
-					<input value={user.password} onChange={handleChange} type="password" name="password" id="register_form_password_1" className="register_form_password" placeholder="Password" minLength={8} required />
+					<input
+						value={user.password}
+						onChange={handleChange}
+						type="password"
+						name="password"
+						id="register_form_password_1"
+						className="register_form_password"
+						placeholder="Password"
+						minLength={8}
+						required
+					/>
 				</label>
 				<label>
 					{" "}
@@ -62,7 +85,9 @@ export default function RegisterForm() {
 					<p>Completa con tus datos!</p>
 				) : (
 					<label>
-						<button type="submit" value="Submit" id="register_submit_button" >Registrar</button>
+						<button value="Submit" id="register_submit_button" onClick={handleSubmit}>
+							Registrar
+						</button>
 					</label>
 				)}
 			</form>
