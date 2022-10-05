@@ -26,6 +26,7 @@ export function PostPage() {
 		body: "",
 		created_by: tokenDecoded.id,
 		created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
+		created_by_name: tokenDecoded.name,
 		readyToPost: false, // set to true when click on createComment
 	});
 	const [valoration, setValoration]: any = useState(true);
@@ -53,6 +54,7 @@ export function PostPage() {
 					created_by: postCommentData.created_by,
 					created_at: postCommentData.created_at,
 					post_id: postId,
+					created_by_name: postCommentData.created_by_name
 				}),
 			})
 			getComments();
@@ -86,6 +88,7 @@ export function PostPage() {
 	{
 		valoration == true ? UpComment() : DownComment();
 	} */
+	console.log('postCommentData', postCommentData)
 function handlePostComment() {
 	setPostCommentData({
 		...postCommentData,

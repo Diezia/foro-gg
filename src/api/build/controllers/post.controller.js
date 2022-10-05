@@ -142,6 +142,7 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield this.repoComment.find("post_id = ?", [this.httpContext.request.params.postId]);
+                console.log("comments", data);
                 this.httpContext.response.status(200).send(data);
                 return;
             }
@@ -157,7 +158,8 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
                     body: this.httpContext.request.body.body,
                     created_at: this.httpContext.request.body.created_at,
                     created_by: this.httpContext.request.body.created_by,
-                    post_id: this.httpContext.request.params.postId
+                    post_id: this.httpContext.request.params.postId,
+                    created_by_name: this.httpContext.request.body.created_by_name
                 };
                 const data = yield this.repoComment.insertOne(mydata);
                 this.httpContext.response.status(200).send(data);

@@ -15,6 +15,7 @@ let Comment = class Comment {
         this.created_at = new Date();
         this.created_by = 0;
         this.post_id = 0;
+        this.created_by_name = '';
     }
 };
 Comment = __decorate([

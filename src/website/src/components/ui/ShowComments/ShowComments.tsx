@@ -16,7 +16,7 @@ export default function ShowComments({comments}: any) {
         <>
             <ul>
                 {comments.map((comment: any, key: number) => {
-                    return <Comment body={comment.body}  key={comment.id} created_by={comment.created_by}/>
+                    return <Comment body={comment.body}  key={comment.id} created_by={comment.created_by_name}/>
                 })}
             </ul>
         </>

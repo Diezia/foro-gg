@@ -127,6 +127,7 @@ export class PostController extends ApiController {
   async getCommentsByPostid(postId: number) {
     try {
       const data = await this.repoComment.find("post_id = ?", [this.httpContext.request.params.postId]);
+      console.log("comments", data)
       this.httpContext.response.status(200).send(data);
       return;
     } catch (error) {
@@ -140,7 +141,8 @@ export class PostController extends ApiController {
         body: this.httpContext.request.body.body,
         created_at: this.httpContext.request.body.created_at,
         created_by: this.httpContext.request.body.created_by,
-        post_id: this.httpContext.request.params.postId
+        post_id: this.httpContext.request.params.postId,
+        created_by_name: this.httpContext.request.body.created_by_name
       };
 
       const data = await this.repoComment.insertOne(mydata);
