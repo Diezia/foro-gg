@@ -19,7 +19,11 @@ export function PostPage() {
 	const tokenDecoded: ITokenData = jwtDecode(localStorage.getItem("jwt") as string);
 
 	const { gameId, postId } = useParams();
-	const [post, setPost]: any = useState([]);
+	const [post, setPost]: any = useState({
+		title: '',
+		valoration: 0,
+		body: ''
+	});
 	const [comments, setComments]: any = useState([]);
 
 	const [postCommentData, setPostCommentData] = useState({
@@ -98,20 +102,19 @@ function handlePostComment() {
 }
 	return (
 		<>
-			{post.map((post: any, i: number) => (
 				<>
 					<div className="t-v-post">
 						<div className="title-publicpost">
-							<h1>{post.title}</h1>
+							<h1>{post.length > 0 && post[0].title}</h1>
 						</div>
 						<div className="valoration-post">
-							<span>{post.valoration}</span>
+							<span>{post.length > 0 && post[0].valoration}</span>
 							<button onClick={() => setValoration(!valoration)}>Dedo arriba</button>
 						</div>
 					</div>
 					<div className="p-c-post">
 						<div className="public-post">
-							<PrePost texto={post.body} />
+							<PrePost texto={post.length > 0 && post[0].body} />
 						</div>
 						<div className="comment-post">
 							<CommentComponent comments={comments}/>
@@ -135,7 +138,6 @@ function handlePostComment() {
 						</div>
 					</div>
 				</>
-			))}
 		</>
 	);
 }
