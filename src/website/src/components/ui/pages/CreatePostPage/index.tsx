@@ -14,22 +14,28 @@ export function CreatePostPage() {
 	const [previewState, setPreviewState] = useState("");
 	const [title, setTitle] = useState("");
 
+	const [state, setState] = useState([]);
+	useEffect(() => {
+		const fetchData = async () => {
+			await fetch("http://localhost:8080/api/games")
+				.then((res: any) => res.json())
+				.then(data => setState(data));
+		};
+		fetchData().catch(console.error);
+	}, []);
+
 	const updateTextDescription = (state: any) => {
 		setEditorState(state);
 		const data = convertToRaw(editorState.getCurrentContent());
-		console.log(data);
+		//console.log(data);
 		return draftToHtml(data);
 	};
 
 	const previsualizar = () => {
 		const data = updateTextDescription(editorState);
-		console.log(data);
+		//console.log(data);
 		setPreviewState(data);
 	};
-
-	const hola =() =>{
-		console.log(title);
-	}
 
 	return (
 		<>
@@ -39,21 +45,23 @@ export function CreatePostPage() {
 				</div>
 				<div className="title-post">
 					<input
-					placeholder="Titulo"
+						placeholder="Titulo"
 						type="text"
 						onChange={event => {
 							setTitle(event.target.value);
 						}}
 					/>
-					<select>
-						<option value="value1">Counter-Strike: Global Offensive</option>
-						<option value="value2">Value 2</option>
-						<option value="value3">Value 3</option>
+					<select name="juegos">
+						{state.map((elemento: any) => (
+							<option key={elemento.id} value={elemento.id}>
+								{elemento.name}
+							</option>
+						))}
 					</select>
 					<button className="btn-preview" onClick={previsualizar}>
 						Previzualizar
 					</button>
-					<button className="btn-post" onClick={hola}>Publicar</button>
+					<button className="btn-post">Publicar</button>
 				</div>
 			</div>
 			<div className="text-create">

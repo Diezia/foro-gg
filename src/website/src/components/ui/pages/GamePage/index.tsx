@@ -15,12 +15,12 @@ export function GamePage() {
 		};
 		FetchData();
 	}, []);
+	{/* {gameId !== undefined && "¡Bienvenido al subforo!"} */}
+	
 	return (
 		<>
-			<div className="title-game">{gameId !== undefined && "¡Bienvenido al subforo!"}</div>
-			<Link to={"/create"}>
-				<button>Crear post</button>
-			</Link>
+			<div className="title-game"></div>
+		
 			<div className="search">
 				<input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />
 			</div>
