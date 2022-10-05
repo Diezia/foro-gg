@@ -1,6 +1,6 @@
 //import { actionTypes } from "../../../../helpers/actionTypes";
 //import { games } from "../../../../helpers/gameBlocks";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState, useContext } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertFromRaw, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
@@ -8,18 +8,39 @@ import htmlToDraft from "html-to-draftjs";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../styles/components/_createpost.scss";
 import { PrePost } from "../PrePost";
+import { useParams } from "react-router-dom";
+import { Context } from "../../../main/App";
+import jwt from "jwt-decode";
 
+interface ITokenData {
+	name: string;
+	id: number;
+}
 export function CreatePostPage() {
 	const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
 	const [previewState, setPreviewState] = useState("");
-	const [title, setTitle] = useState("");
+	// const [title, setTitle] = useState(""); agregar esta functionality abajo
+	// const [state, setState] = useState([]); agregar esta functionality abajo
+	const { state, dispatch } = useContext(Context);
+	const { user } = state;
+	const [postData, setPostData] = useState({
+		title: "",
+		body: "",
+		created_by: 0,
+		valoration: 0,
+		game_id: "",
+		created_at: new Date(),
+	});
+	const [games, setGames] = useState([]);
+	const { title, body, created_by, valoration, game_id, created_at } = postData;
 
-	const [state, setState] = useState([]);
+	
+
 	useEffect(() => {
 		const fetchData = async () => {
 			await fetch("http://localhost:8080/api/games")
 				.then((res: any) => res.json())
-				.then(data => setState(data));
+				.then(data => setGames(data));
 		};
 		fetchData().catch(console.error);
 	}, []);
@@ -37,6 +58,30 @@ export function CreatePostPage() {
 		setPreviewState(data);
 	};
 
+	async function handlePublish() {
+		const tokenDecoded: ITokenData = jwt(localStorage.getItem("jwt") as string);
+		
+		setPostData({
+			...postData,
+			created_by: tokenDecoded.id,
+			body: updateTextDescription(editorState)
+		})
+		await fetch(`http://localhost:8080/api/games/${postData.game_id}/posts/create`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			mode: "cors",
+			body: JSON.stringify({
+				title,
+				body,
+				created_by,
+				valoration,
+				game_id,
+				created_at
+			}),
+		});
+	}
 	return (
 		<>
 			<div className="title-create">
@@ -48,11 +93,26 @@ export function CreatePostPage() {
 						placeholder="Titulo"
 						type="text"
 						onChange={event => {
-							setTitle(event.target.value);
+							setPostData({
+								...postData,
+								title: event.target.value,
+							});
 						}}
 					/>
-					<select name="juegos">
-						{state.map((elemento: any) => (
+					<select
+						name="juegos"
+						id="juegos"
+						onChange={e => {
+							setPostData({
+								...postData,
+								game_id: e.target.value,
+							});
+						}}
+					>
+						<option selected disabled value={0}>
+							Selecciona un juego
+						</option>
+						{games.map((elemento: any) => (
 							<option key={elemento.id} value={elemento.id}>
 								{elemento.name}
 							</option>
@@ -61,7 +121,7 @@ export function CreatePostPage() {
 					<button className="btn-preview" onClick={previsualizar}>
 						Previzualizar
 					</button>
-					<button className="btn-post">Publicar</button>
+					<button className="btn-post" onClick={handlePublish}>Publicar</button>
 				</div>
 			</div>
 			<div className="text-create">
@@ -85,6 +145,11 @@ export function CreatePostPage() {
 					<PrePost texto={previewState} />
 				</div>
 			</div>
+			<button
+				
+			>
+				finish set state test
+			</button>
 		</>
 	);
 }
