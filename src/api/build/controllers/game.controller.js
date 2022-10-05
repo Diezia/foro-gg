@@ -38,6 +38,21 @@ let GameController = class GameController extends paradigm_express_webapi_1.ApiC
             }
         });
     }
+    getGame(gameId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { gameId } = this.httpContext.request.params;
+                const data = yield this.repoGame.find("id = ?", [
+                    gameId
+                ]);
+                this.httpContext.response.status(200).send(JSON.stringify(data[0]));
+                return;
+            }
+            catch (error) {
+                console.log("Error en get game by id", error);
+            }
+        });
+    }
 };
 __decorate([
     (0, paradigm_express_webapi_1.Action)({ route: "/" }),
@@ -45,6 +60,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], GameController.prototype, "get", null);
+__decorate([
+    (0, paradigm_express_webapi_1.Action)({ route: ":gameId", method: paradigm_express_webapi_1.HttpMethod.GET }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], GameController.prototype, "getGame", null);
 GameController = __decorate([
     (0, paradigm_express_webapi_1.Controller)({ route: "/api/games" }),
     __metadata("design:paramtypes", [game_repository_1.GameRepository])

@@ -5,10 +5,14 @@ export function reducer(state: any, action: any) {
     case types.setNewToken:
       return {
         ...state,
-        token: action.payload
+        token: action.payload.token,
+        user: action.payload.name
       };
-    case 'decrement':
-      return {count: state.count - 1};
+    case types.setUserName:
+      return {
+        ...state,
+        user: action.payload
+      };
     default:
       throw new Error();
   }

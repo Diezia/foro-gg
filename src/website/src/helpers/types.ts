@@ -1,3 +1,4 @@
 export const types = {
-  setNewToken: "[auth] set new token"
+  setNewToken: "[auth] set new token",
+  setUserName: "[auth] set user name"
 }

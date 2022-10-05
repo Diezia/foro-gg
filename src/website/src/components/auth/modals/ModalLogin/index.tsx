@@ -1,17 +1,27 @@
-import React, { RefObject, SyntheticEvent } from "react";
+import React, { RefObject, SyntheticEvent, useContext, useEffect } from "react";
 import LoginForm from "../../Login";
-import "../../../../styles/components/_modals.scss"
+import "../../../../styles/components/_modals.scss";
+import { Context } from "../../../main/App";
 
 interface LoginType {
-	login: RefObject<HTMLDialogElement>
+	login: RefObject<HTMLDialogElement>;
 }
 
 export function ModalLogin({ login }: LoginType) {
+	const { state, dispatch } = useContext(Context);
+	useEffect(() => {
+		if (state.token) {
+			// close modal on login
+			login.current!.close();
+		}
+	}, [state.token]);
+
 	const handleDialogClick = (e: SyntheticEvent<EventTarget>) => {
 		if (e.target === login.current) {
 			login.current!.close();
 		}
 	};
+
 	return (
 		<dialog ref={login} id="dialog_login" onClick={handleDialogClick}>
 			<div id="dialog_content">

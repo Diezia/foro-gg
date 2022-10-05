@@ -1,33 +1,72 @@
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ModalRegister } from "../../../auth/modals/ModalRegister";
 import { ModalLogin } from "../../../auth/modals/ModalLogin";
+import jwt from "jwt-decode";
 
 import SearchBar from "../../../auth/SearchBar";
 import "../../../../styles/components/_navbar.scss";
+import { Context, RefContext } from "../../../main/App";
+import { types } from "../../../../helpers/types";
+import { Link } from "react-router-dom";
+
+interface ITokenData {
+	name: string;
+	id: number;
+}
 
 export function Navbar() {
-	const register = useRef<HTMLDialogElement>(null);
-	const login = useRef<HTMLDialogElement>(null);
+	const { state, dispatch } = useContext(Context);
+
+	useEffect(() => {
+		if (localStorage.getItem("jwt")) {
+			const tokenDecoded: ITokenData = jwt(localStorage.getItem("jwt") as string);
+			dispatch({
+				type: types.setUserName,
+				payload: tokenDecoded.name,
+			});
+		}
+	}, []);
+
+	/* const register = useRef<HTMLDialogElement>(null);
+	const login = useRef<HTMLDialogElement>(null); */
+	const { register, login } = useContext(RefContext);
+
+
 	const handleRegisterClick = () => {
 		register.current!.showModal();
 	};
-	const handleLoginClick = () => {
+	function handleLoginClick() {
 		login && login.current!.showModal();
-	};
+	}
 	return (
 		<nav>
 			<div className="nav">
-			<div className="logo">
-			<a href="/">
-				<img src="/assets/logo.png" alt="logo" id="logo" />
-			</a>
+				<div className="logo">
+					<Link to="/">
+						<img src="/assets/logo.png" alt="logo" id="logo" />
+					</Link>
+				</div>
+				<SearchBar />
+				<div className="btn">
+					{!state.user ? (
+						<>
+							<button className="register" onClick={handleRegisterClick}>
+								Registrarse
+							</button>
+							<button className="login" onClick={handleLoginClick}>
+								Iniciar Sesión
+							</button>
+						</>
+					) : (
+						<>
+							<Link to={"/create"}>
+								<button>Crear post</button>
+							</Link>
+							<p>{state.user}</p>
+						</>
+					)}
+				</div>
 			</div>
-			<SearchBar />
-			<div className="btn">
-				<button className="register" onClick={handleRegisterClick}>Registrarse</button>
-				<button className="login"onClick={handleLoginClick}>Iniciar Sesión</button>
-			</div>
-			</div>		
 
 			<ModalRegister register={register} />
 			<ModalLogin login={login} />

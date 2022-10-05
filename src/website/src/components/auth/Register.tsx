@@ -67,7 +67,7 @@ export default function RegisterForm() {
 					<p>Las contraseñas no coinciden!</p>
 				)}
 				<label>
-					<button value="Submit" id="register_submit_button" disabled={(formState.name && formState.email && formState.password && formState.password === formState.repeatPassword) ? false : true } onClick={handleSubmit}>
+					<button value="Submit" id="register_submit_button" disabled={(!formState.name || !formState.email || !formState.password || formState.password !== formState.repeatPassword)} onClick={handleSubmit}>
 						Registrar
 					</button>
 				</label>

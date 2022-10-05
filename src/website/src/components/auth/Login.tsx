@@ -29,12 +29,13 @@ export default function LoginForm() {
 			}),
 		})
 			.then((res: any) => res.json())
-			.then((data: any) =>
+			.then((data: any) => {
 				dispatch({
 					type: types.setNewToken,
 					payload: data,
 				})
-			)
+				localStorage.setItem('jwt', data.token);
+			})
 			.catch(err => console.log(err));
 	}
 	function randTest(e: any) {
@@ -43,7 +44,6 @@ export default function LoginForm() {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: state.token,
 			},
 			mode: "cors",
 		})
@@ -62,7 +62,7 @@ export default function LoginForm() {
 						<input value={password} onChange={handleInputChange} type="password" name="password" id="login_password" placeholder="Password" required />
 					</label>
 
-					<button value="Submit" disabled={(email && password ) ? false : true } onClick={handleSubmit}>
+					<button value="Submit" disabled={(!email || !password)} onClick={handleSubmit}>
 						Ingresar
 					</button>
 					<button onClick={randTest}>some</button>

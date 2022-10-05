@@ -5,6 +5,11 @@ import "../../../../styles/components/_gamepage.scss";
 
 export function GamePage() {
 	const [query, setQuery] = useState("");
+	const [game, setGame] = useState({
+		id: 0,
+		name: "",
+		image_url: ""
+	})
 	const { gameId } = useParams();
 	const [posts, setPosts]: any = useState([]);
 	useEffect(() => {
@@ -15,12 +20,20 @@ export function GamePage() {
 		};
 		FetchData();
 	}, []);
+
+	useEffect(() => {
+		const FetchData = async () => {
+			await fetch(`http://localhost:8080/api/games/${gameId}`)
+				.then((res: any) => res.json())
+				.then((data: any) => setGame(data));
+		};
+		FetchData()
+	}, [])
+	
 	return (
 		<>
-			<div className="title-game">{gameId !== undefined && "¡Bienvenido al subforo!"}</div>
-			<Link to={"/create"}>
-				<button>Crear post</button>
-			</Link>
+			<div className="title-game">{game.name}</div>
+			
 			<div className="search">
 				<input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />
 			</div>
