@@ -17,6 +17,7 @@ interface ITokenData {
 	id: number;
 }
 export function CreatePostPage() {
+	
 	const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
 	const [previewState, setPreviewState] = useState("");
 	// const [title, setTitle] = useState(""); agregar esta functionality abajo

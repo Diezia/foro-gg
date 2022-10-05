@@ -2,23 +2,21 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { Comment } from '../Comment';
 
-export default function ShowComments() {
-    const [comments, setComments]: any = useState([]);
+export default function ShowComments({comments}: any) {
     const {gameId, postId} = useParams()
-    useEffect(() => {
+    /* useEffect(() => {
 		const FetchData = async() => {
-			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/comments`)
-			.then((res: any) => res.json())
-			.then((data: any) => setComments(data));
+			
 		}
 		FetchData()
 		.catch(console.error);
-	}, []);
+	}, []); */
+    // console.log(comments)
     return(
         <>
             <ul>
                 {comments.map((comment: any, key: number) => {
-                    return <Comment body={comment.body}  key={key} created_by={comment.created_by}/>
+                    return <Comment body={comment.body}  key={comment.id} created_by={comment.created_by}/>
                 })}
             </ul>
         </>

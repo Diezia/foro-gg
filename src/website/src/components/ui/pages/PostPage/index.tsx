@@ -14,10 +14,14 @@ interface ITokenData {
 }
 
 export function PostPage() {
+	// TENGO QUE CREAR UN ESTADO COMPLETO DEL POST CON SUS COMENTARIOS Y CREAR UNA LÓGICA QUE SE INTERRELACIONE PARA QUE CUANDO 
+	// en cambio, lo que está pasando ahora es que hace la petición de los comentarios antes de crear el nuevo
 	const tokenDecoded: ITokenData = jwtDecode(localStorage.getItem("jwt") as string);
 
 	const { gameId, postId } = useParams();
 	const [post, setPost]: any = useState([]);
+	const [comments, setComments]: any = useState([]);
+
 	const [postCommentData, setPostCommentData] = useState({
 		body: "",
 		created_by: tokenDecoded.id,
@@ -25,6 +29,17 @@ export function PostPage() {
 		readyToPost: false, // set to true when click on createComment
 	});
 	const [valoration, setValoration]: any = useState(true);
+	
+	useEffect(() => {
+		const FetchData = async () => {
+			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`)
+				.then((res: any) => res.json())
+				.then((data: any) => setPost(data));
+		};
+		FetchData().catch(console.error);
+		getComments()
+	}, []);
+
 	useEffect(() => {
 		async function publishComment() {
 			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/comments/create`, {
@@ -39,21 +54,20 @@ export function PostPage() {
 					created_at: postCommentData.created_at,
 					post_id: postId,
 				}),
-			});
+			})
+			getComments();
 		}
-		if (postCommentData.readyToPost && postCommentData.created_by && postCommentData.created_at && postCommentData.body) {
+		if (postCommentData.created_by && postCommentData.created_at && postCommentData.body) {
 			publishComment();
 		}
-	}, [postCommentData]);
-	useEffect(() => {
-		const FetchData = async () => {
-			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`)
-				.then((res: any) => res.json())
-				.then((data: any) => setPost(data));
-		};
-		FetchData().catch(console.error);
-	}, []);
-
+	}, [postCommentData.readyToPost]);
+	
+	async function getComments() {
+		await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/comments`)
+			.then((res: any) => res.json())
+			.then((data: any) => setComments(data));
+			console.log("commenst", comments)
+	}
 	/* const UpComment = async () => {
 		await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/valoration`, {
 			method: "POST",
@@ -72,7 +86,13 @@ export function PostPage() {
 	{
 		valoration == true ? UpComment() : DownComment();
 	} */
-
+function handlePostComment() {
+	setPostCommentData({
+		...postCommentData,
+		created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
+		readyToPost: !postCommentData.readyToPost,
+	})
+}
 	return (
 		<>
 			{post.map((post: any, i: number) => (
@@ -91,7 +111,7 @@ export function PostPage() {
 							<PrePost texto={post.body} />
 						</div>
 						<div className="comment-post">
-							<CommentComponent />
+							<CommentComponent comments={comments}/>
 						</div>
 						<div>
 							<textarea
@@ -105,13 +125,7 @@ export function PostPage() {
 								name="text_comment"
 							></textarea>
 							<button
-								onClick={() => {
-									setPostCommentData({
-										...postCommentData,
-										created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
-										readyToPost: true,
-									});
-								}}
+								onClick={handlePostComment}
 							>
 								Enviar comentario
 							</button>
@@ -122,3 +136,9 @@ export function PostPage() {
 		</>
 	);
 }
+
+// pseudo
+/* handlePostComment onclick "enviar comentario".
+handlePostComment setea lo que falte del estado del comment para que la info que se envía al back esté completa.
+
+*/
