@@ -4,7 +4,7 @@ interface Comments {
 	created_by: number;
 }
 
-export function ShowComments({ body, created_by}: Comments) {
+export function Comment({ body, created_by}: Comments) {
 	return (
 			<li className="">
 				<p className=''>{body}</p>
