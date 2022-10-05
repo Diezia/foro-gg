@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { ShowComments } from '../ShowComments';
+import { Comment } from '../Comment';
 
-export default function CommentComponent() {
+export default function ShowComments() {
     const [comments, setComments]: any = useState([]);
     const {gameId, postId} = useParams()
     useEffect(() => {
@@ -18,7 +18,7 @@ export default function CommentComponent() {
         <>
             <ul>
                 {comments.map((comment: any, key: number) => {
-                    return <ShowComments body={comment.body}  key={key} created_by={comment.created_by}/>
+                    return <Comment body={comment.body}  key={key} created_by={comment.created_by}/>
                 })}
             </ul>
         </>
