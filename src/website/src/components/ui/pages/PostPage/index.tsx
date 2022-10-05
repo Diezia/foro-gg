@@ -55,7 +55,8 @@ export function PostPage() {
 					</div>
 					<div className="p-c-post">
 						<div className="public-post">
-							<p>{post.body}</p>
+							<PrePost texto={post.body} />
+
 						</div>
 						<div className="comment-post">
 							<CommentComponent />

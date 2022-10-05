@@ -29,12 +29,10 @@ export function CreatePostPage() {
 		created_by: 0,
 		valoration: 0,
 		game_id: "",
-		created_at: new Date(),
+		created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
 	});
 	const [games, setGames] = useState([]);
 	const { title, body, created_by, valoration, game_id, created_at } = postData;
-
-	
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -44,6 +42,28 @@ export function CreatePostPage() {
 		};
 		fetchData().catch(console.error);
 	}, []);
+	useEffect(() => {
+		async function publishPost() {
+			await fetch(`http://localhost:8080/api/games/${postData.game_id}/posts/create`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				mode: "cors",
+				body: JSON.stringify({
+					title,
+					body,
+					created_by,
+					valoration,
+					game_id,
+					created_at,
+				}),
+			});
+		}
+		if (postData.created_by) {
+			publishPost();
+		}
+	}, [postData]);
 
 	const updateTextDescription = (state: any) => {
 		setEditorState(state);
@@ -60,26 +80,12 @@ export function CreatePostPage() {
 
 	async function handlePublish() {
 		const tokenDecoded: ITokenData = jwt(localStorage.getItem("jwt") as string);
-		
+		console.log(tokenDecoded);
 		setPostData({
 			...postData,
 			created_by: tokenDecoded.id,
-			body: updateTextDescription(editorState)
-		})
-		await fetch(`http://localhost:8080/api/games/${postData.game_id}/posts/create`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			mode: "cors",
-			body: JSON.stringify({
-				title,
-				body,
-				created_by,
-				valoration,
-				game_id,
-				created_at
-			}),
+			body: updateTextDescription(editorState),
+			created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
 		});
 	}
 	return (
@@ -121,7 +127,9 @@ export function CreatePostPage() {
 					<button className="btn-preview" onClick={previsualizar}>
 						Previzualizar
 					</button>
-					<button className="btn-post" onClick={handlePublish}>Publicar</button>
+					<button className="btn-post" onClick={handlePublish}>
+						Publicar
+					</button>
 				</div>
 			</div>
 			<div className="text-create">
@@ -145,11 +153,7 @@ export function CreatePostPage() {
 					<PrePost texto={previewState} />
 				</div>
 			</div>
-			<button
-				
-			>
-				finish set state test
-			</button>
+			<button>finish set state test</button>
 		</>
 	);
 }
