@@ -109,6 +109,26 @@ export class PostController extends ApiController {
       console.log(error);
     }
   }
+  @Action({ route: "/:postId/valoration/valorationexist", method: HttpMethod.POST })
+  async getValorationStateByUser(postId: number) {
+    // obtener true o false según sea para manejar el estado de la valoración del front de un usuario en particular
+    try {
+      const mydata: any = {
+        user_id: this.httpContext.request.body.user_id,
+        post_id: this.httpContext.request.params.postId,
+      };
+      const valorationExists = await this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id])
+      if (valorationExists.length > 0) {
+        this.httpContext.response.status(200).send(true);
+        return;
+      } else {
+        this.httpContext.response.status(404).send(false);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   @Action({ route: "/:postId/valoration", method: HttpMethod.POST })
   async addValoration(postId: number) {
     try {
@@ -116,9 +136,36 @@ export class PostController extends ApiController {
         user_id: this.httpContext.request.body.user_id,
         post_id: this.httpContext.request.params.postId,
       };
-      const data = await this.repoValoration.insertOne(mydata);
-      this.httpContext.response.status(200).send(data);
-      return;
+      const valorationExists = await this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id])
+      if (valorationExists.length === 0) {
+        console.log('valorationExists', valorationExists);
+        const data = await this.repoValoration.insertOne(mydata);
+        this.httpContext.response.status(200).send(data);
+        return;
+      } else {
+        this.httpContext.response.status(404).send("valoration already added");
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  @Action({ route: "/:postId/valoration", method: HttpMethod.DELETE })
+  async deleteValoration(postId: number) {
+    try {
+      const mydata: any = {
+        user_id: this.httpContext.request.body.user_id,
+        post_id: this.httpContext.request.params.postId,
+      };
+      const valorationExists = await this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id])
+      if (valorationExists.length > 0) {
+        const data = await this.repoValoration.delete(valorationExists[0].id); 
+        this.httpContext.response.status(200).send("valoration deleted succesfully");
+        return;
+      } else {
+        this.httpContext.response.status(404).send("valoration wasn't found");
+        return;
+      }
     } catch (error) {
       console.log(error);
     }

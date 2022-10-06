@@ -122,6 +122,29 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
             }
         });
     }
+    getValorationStateByUser(postId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // obtener true o false según sea para manejar el estado de la valoración del front de un usuario en particular
+            try {
+                const mydata = {
+                    user_id: this.httpContext.request.body.user_id,
+                    post_id: this.httpContext.request.params.postId,
+                };
+                const valorationExists = yield this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id]);
+                if (valorationExists.length > 0) {
+                    this.httpContext.response.status(200).send(true);
+                    return;
+                }
+                else {
+                    this.httpContext.response.status(404).send(false);
+                    return;
+                }
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
     addValoration(postId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -129,9 +152,40 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
                     user_id: this.httpContext.request.body.user_id,
                     post_id: this.httpContext.request.params.postId,
                 };
-                const data = yield this.repoValoration.insertOne(mydata);
-                this.httpContext.response.status(200).send(data);
-                return;
+                const valorationExists = yield this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id]);
+                if (valorationExists.length === 0) {
+                    console.log('valorationExists', valorationExists);
+                    const data = yield this.repoValoration.insertOne(mydata);
+                    this.httpContext.response.status(200).send(data);
+                    return;
+                }
+                else {
+                    this.httpContext.response.status(404).send("valoration already added");
+                    return;
+                }
+            }
+            catch (error) {
+                console.log(error);
+            }
+        });
+    }
+    deleteValoration(postId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const mydata = {
+                    user_id: this.httpContext.request.body.user_id,
+                    post_id: this.httpContext.request.params.postId,
+                };
+                const valorationExists = yield this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id]);
+                if (valorationExists.length > 0) {
+                    const data = yield this.repoValoration.delete(valorationExists[0].id);
+                    this.httpContext.response.status(200).send("valoration deleted succesfully");
+                    return;
+                }
+                else {
+                    this.httpContext.response.status(404).send("valoration wasn't found");
+                    return;
+                }
             }
             catch (error) {
                 console.log(error);
@@ -219,11 +273,23 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "getValoration", null);
 __decorate([
+    (0, paradigm_express_webapi_1.Action)({ route: "/:postId/valoration/valorationexist", method: paradigm_express_webapi_1.HttpMethod.POST }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], PostController.prototype, "getValorationStateByUser", null);
+__decorate([
     (0, paradigm_express_webapi_1.Action)({ route: "/:postId/valoration", method: paradigm_express_webapi_1.HttpMethod.POST }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], PostController.prototype, "addValoration", null);
+__decorate([
+    (0, paradigm_express_webapi_1.Action)({ route: "/:postId/valoration", method: paradigm_express_webapi_1.HttpMethod.DELETE }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], PostController.prototype, "deleteValoration", null);
 __decorate([
     (0, paradigm_express_webapi_1.Action)({ route: "/:postId/comments", method: paradigm_express_webapi_1.HttpMethod.GET }),
     __metadata("design:type", Function),

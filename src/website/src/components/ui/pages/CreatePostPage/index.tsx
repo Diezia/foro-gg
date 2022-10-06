@@ -106,6 +106,7 @@ export function CreatePostPage() {
 							});
 						}}
 					/>
+					<span>Seleccionar Juego &#8594;</span>
 					<select
 						name="juegos"
 						id="juegos"
@@ -116,9 +117,7 @@ export function CreatePostPage() {
 							});
 						}}
 					>
-						<option selected disabled value={0}>
-							Selecciona un juego
-						</option>
+						
 						{games.map((elemento: any) => (
 							<option key={elemento.id} value={elemento.id}>
 								{elemento.name}
