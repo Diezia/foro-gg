@@ -37,11 +37,11 @@ export default function LoginForm() {
 				})
 				localStorage.setItem('jwt', data.token);
 			})
-			.catch(err => setWrongInformation(wrongInformation == true));
+			.catch(() => setWrongInformation(true));
 	}
 	function randTest(e: any) {
 		e.preventDefault();
-		fetch(`http://localhost:8080/api/auth/example`, {
+		fetch(`http://localhost:8080/api/auth/example`, {	
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
