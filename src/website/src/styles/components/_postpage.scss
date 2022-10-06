@@ -42,10 +42,6 @@ div {
 			background-color: black;
 			color: white;
 		}
-		/* 
-		button:active{
-			background-color: green;
-		}  */
 	}
 }
 
@@ -55,11 +51,13 @@ div {
 	.body-post {
 		flex: 2;
 		padding-left: 30px;
+	
 		.prev-post {
 			background-color: rgba(20, 20, 20, 0.8);
 			border-radius: 25px;
 			padding: 15px;
-
+			min-height: 560px;
+			height: auto;
 			p {
 				text-align: start;
 			}
@@ -107,14 +105,16 @@ div {
 			textarea {
 				background: rgba(240, 240, 240, 0.8);
 				resize: none;
-				padding: 15px;
+				padding: 10px;
 				width: 100%;
 				border-radius: 25px;
+				height: 60px;
 				max-height: 300px;
 				text-align: start;
+				overflow-y: hidden;
 			}
 			button {
-				padding: 10px 20px;
+				padding: 20px 40px; 
 				border-radius: 200px;
 				font-size: 15px;
 				font-weight: bold;
