@@ -7,6 +7,7 @@ import CommentComponent from "../../ShowComments/ShowComments";
 import "../../../../styles/components/_postpage.scss";
 import { useForm } from "../../../../hooks/useForm";
 import jwtDecode from "jwt-decode";
+import e from "express";
 
 interface ITokenData {
 	name: string;
@@ -174,7 +175,9 @@ export function PostPage() {
 					</div>
 					<div className="valoration-post">
 						<span>+ {post.length > 0 && post[0].valoration}</span>
-						<button onClick={handleValoration}>Me gusta</button>
+						<button className={userValorationExists.checkPreviousValoration ? "clickeado" : ""} onClick={handleValoration}>
+							{!userValorationExists.checkPreviousValoration ? "Me gusta" : "No me gusta"}
+						</button>
 					</div>
 				</div>
 
@@ -188,6 +191,8 @@ export function PostPage() {
 						</div>
 						<div className="user-comment">
 							<textarea
+								maxLength={300}
+								placeholder="Max 300 caracteres"
 								value={postCommentData.body}
 								onChange={e => {
 									setPostCommentData({

@@ -34,13 +34,18 @@ div {
 			font-weight: bold;
 			cursor: pointer;
 		}
+		.clickeado {
+			background-color: black;
+			color: white;
+		}
 		button:hover {
 			background-color: black;
 			color: white;
 		}
-		/* button:active{
+		/* 
+		button:active{
 			background-color: green;
-		} */
+		}  */
 	}
 }
 
@@ -84,9 +89,8 @@ div {
 						margin-left: 30px;
 						margin-top: 0px;
 						margin-bottom: 0px;
-						
 					}
-					.user-id{
+					.user-id {
 						font-weight: bold;
 						margin-bottom: 5px;
 					}
@@ -101,12 +105,13 @@ div {
 			/* background: rgba(238, 238, 238, 0.8); */
 
 			textarea {
+				background: rgba(240, 240, 240, 0.8);
 				resize: none;
+				padding: 15px;
 				width: 100%;
 				border-radius: 25px;
-				background: rgba(240, 240, 240, 0.8);
-				text-align: start;
 				max-height: 300px;
+				text-align: start;
 			}
 			button {
 				padding: 10px 20px;
