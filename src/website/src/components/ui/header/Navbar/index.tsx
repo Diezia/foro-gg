@@ -7,7 +7,7 @@ import SearchBar from "../../../auth/SearchBar";
 import "../../../../styles/components/_navbar.scss";
 import { Context, RefContext } from "../../../main/App";
 import { types } from "../../../../helpers/types";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 interface ITokenData {
 	name: string;
@@ -30,13 +30,21 @@ export function Navbar() {
 	/* const register = useRef<HTMLDialogElement>(null);
 	const login = useRef<HTMLDialogElement>(null); */
 	const { register, login } = useContext(RefContext);
-
+	const navigate = useNavigate()
 
 	const handleRegisterClick = () => {
 		register.current!.showModal();
 	};
 	function handleLoginClick() {
 		login && login.current!.showModal();
+	}
+	function handleLogoutClick() {
+		localStorage.removeItem('jwt');
+		console.log("handleLogoutClick");
+		// handlear navbar state
+		dispatch({type: types.logout})
+		// navigate to home 
+		navigate("/");
 	}
 	return (
 		<nav>
@@ -63,6 +71,9 @@ export function Navbar() {
 								<button>Crear post</button>
 							</Link>
 							<p>{state.user}</p>
+							<button className="logout" onClick={handleLogoutClick}>
+								Cerrar Sesión
+							</button>
 						</>
 					)}
 				</div>

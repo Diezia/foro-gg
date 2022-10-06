@@ -13,6 +13,11 @@ export function reducer(state: any, action: any) {
         ...state,
         user: action.payload
       };
+    case types.logout:
+      return {
+        ...state,
+        user: ''
+      };
     default:
       throw new Error();
   }
