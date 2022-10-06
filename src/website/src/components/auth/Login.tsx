@@ -8,6 +8,7 @@ type Login = {
 };
 
 export default function LoginForm() {
+	const [wrongInformation, setWrongInformation] = useState(false)
 	const { state, dispatch } = useContext(Context);
 	const [formState, handleInputChange, resetForm] = useForm({
 		email: "",
@@ -36,11 +37,11 @@ export default function LoginForm() {
 				})
 				localStorage.setItem('jwt', data.token);
 			})
-			.catch(err => console.log(err));
+			.catch(() => setWrongInformation(true));
 	}
 	function randTest(e: any) {
 		e.preventDefault();
-		fetch(`http://localhost:8080/api/auth/example`, {
+		fetch(`http://localhost:8080/api/auth/example`, {	
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -49,7 +50,7 @@ export default function LoginForm() {
 		})
 			.then((res: any) => res.json())
 			.then((data: any) => console.log(data))
-			.catch(err => console.log(err));
+			.catch(err => err);
 	}
 	return (
 		<>
@@ -61,12 +62,11 @@ export default function LoginForm() {
 					<label>
 						<input value={password} onChange={handleInputChange} type="password" name="password" id="login_password" placeholder="Password" required />
 					</label>
-
 					<button value="Submit" disabled={(!email || !password)} onClick={handleSubmit}>
 						Ingresar
 					</button>
-					<button onClick={randTest}>some</button>
 				</form>
+				{ wrongInformation ? <p>Email o contraseña incorrecta.</p> : <p></p> }
 			</div>
 		</>
 	);
