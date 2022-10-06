@@ -35,7 +35,7 @@ export function PostPage() {
 	});
 	const [userValorationExists, setUserValorationExists]: any = useState({
 		readyToSetValoration: false, // se pone en true al clickear el botón de valoration
-		checkPreviousValoration: false
+		checkPreviousValoration: false,
 	});
 
 	useEffect(() => {
@@ -77,10 +77,10 @@ export function PostPage() {
 			console.log("valoration exist?:", valExistsJson);
 			setUserValorationExists({
 				...userValorationExists,
-				checkPreviousValoration: valExistsJson
+				checkPreviousValoration: valExistsJson,
 			});
 		}
-		userValorationExists()
+		userValorationExists();
 	}, []);
 
 	useEffect(() => {
@@ -139,9 +139,9 @@ export function PostPage() {
 
 	useEffect(() => {
 		if (userValorationExists.readyToSetValoration && userValorationExists.checkPreviousValoration) {
-			addValoration()
+			addValoration();
 		} else if (userValorationExists.readyToSetValoration && !userValorationExists.checkPreviousValoration) {
-			deleteValoration()
+			deleteValoration();
 		}
 	}, [userValorationExists.checkPreviousValoration]);
 
@@ -162,40 +162,43 @@ export function PostPage() {
 	function handleValoration() {
 		setUserValorationExists({
 			readyToSetValoration: true,
-			checkPreviousValoration: !userValorationExists.checkPreviousValoration
+			checkPreviousValoration: !userValorationExists.checkPreviousValoration,
 		});
 	}
 	return (
 		<>
 			<>
-				<div className="t-v-post">
-					<div className="title-publicpost">
-						<h1>{post.length > 0 && post[0].title}</h1>
+				<div className="header-post">
+					<div className="title-post">
+						<p>{post.length > 0 && post[0].title}</p>
 					</div>
 					<div className="valoration-post">
-						<span>{post.length > 0 && post[0].valoration}</span>
-						<button onClick={handleValoration}>Dedo arriba</button>
+						<span>+ {post.length > 0 && post[0].valoration}</span>
+						<button onClick={handleValoration}>Me gusta</button>
 					</div>
 				</div>
-				<div className="p-c-post">
-					<div className="public-post">
+
+				<div className="container-post">
+					<div className="body-post">
 						<PrePost texto={post.length > 0 && post[0].body} />
 					</div>
-					<div className="comment-post">
-						<CommentComponent comments={comments} />
-					</div>
-					<div>
-						<textarea
-							value={postCommentData.body}
-							onChange={e => {
-								setPostCommentData({
-									...postCommentData,
-									body: e.target.value,
-								});
-							}}
-							name="text_comment"
-						></textarea>
-						<button onClick={handlePostComment}>Enviar comentario</button>
+					<div className="all-comments">
+						<div className="comments-post">
+							<CommentComponent comments={comments} />
+						</div>
+						<div className="user-comment">
+							<textarea
+								value={postCommentData.body}
+								onChange={e => {
+									setPostCommentData({
+										...postCommentData,
+										body: e.target.value,
+									});
+								}}
+								name="text_comment"
+							></textarea>
+							<button onClick={handlePostComment}>Enviar</button>
+						</div>
 					</div>
 				</div>
 			</>

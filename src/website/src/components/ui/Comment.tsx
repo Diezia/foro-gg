@@ -7,8 +7,8 @@ interface Comments {
 export function Comment({ body, created_by}: Comments) {
 	return (
 			<li className="">
+				<p className="user-id">{created_by}:</p>
 				<p className=''>{body}</p>
-				<p className="">{created_by}</p>
 			</li>
 	);
 }

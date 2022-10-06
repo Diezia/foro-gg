@@ -71,7 +71,6 @@ export default function RegisterForm() {
 					<button value="Submit" id="register_submit_button" disabled={(!formState.name || !formState.email || !formState.password || formState.password !== formState.repeatPassword)} onClick={handleSubmit}>
 						Registrar
 					</button>
-	
 				</label>
 			</form>
 		</div>

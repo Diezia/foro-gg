@@ -1,71 +1,124 @@
 div {
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	color: white;
 }
-.t-v-post,
-.p-c-post {
+
+.header-post {
 	display: flex;
-	.title-publicpost,
-	.public-post {
-		flex: 3;
-		background-color: grey;
+	margin: 10px 50px 0px 30px;
+	.title-post {
+		flex: 2;
+		background-color: rgba(20, 20, 20, 0.8);
 		border-radius: 25px;
-		margin: 20px;
-		h1,
 		p {
-			margin: 15px;
 			text-align: start;
+			margin-left: 30px;
+			font-size: 30px;
 		}
 	}
-	.valoration-post,
-	.comment-post {
-		flex: 2;
-		li {
-			list-style: none;
+	.valoration-post {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		span {
+			margin-right: 20px;
+			font-size: 20px;
+			font-weight: bold;
 		}
+		button {
+			padding: 10px 20px;
+			border-radius: 200px;
+			font-size: 15px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+		button:hover {
+			background-color: black;
+			color: white;
+		}
+		/* button:active{
+			background-color: green;
+		} */
 	}
 }
 
-/* .p-c-post {
+.container-post {
 	display: flex;
-	.public-post {
-		flex: 3;
-		background-color: grey;
-		border-radius: 25px;
-		margin: 20px;
-		p{
-			text-align: start;
-			margin: 15px;
-		}
-	}
-	.comment-post {
+	margin-top: 20px;
+	.body-post {
 		flex: 2;
-	}
-}
- */
-/* @mixin format {
-	width: 50%;
-	background-color: grey;
-	border-radius: 20px;
-	margin: auto;
-    p {
-        margin: 10px;
-        text-align: start;
-    }
-	h1 {
-		text-align: center;
-	}
-}
+		padding-left: 30px;
+		.prev-post {
+			background-color: rgba(20, 20, 20, 0.8);
+			border-radius: 25px;
+			padding: 15px;
 
-.title-publicpost {
-	@include format();
-}
-.public-post {
-	@include format();
-	.prev-post {
-		p {
-			margin: 10px;
-			text-align: start;
+			p {
+				text-align: start;
+			}
 		}
 	}
-} */
+	.all-comments {
+		flex: 1;
+		padding: 0 30px;
+
+		.comments-post {
+			background-color: rgba(20, 20, 20, 0.8);
+			max-height: 500px;
+			overflow-y: scroll;
+			border-radius: 25px;
+
+			ul {
+				li {
+					list-style: none;
+					margin: 10px;
+					max-width: 600px;
+					background-color: rgba(85, 85, 85, 0.8);
+					border-radius: 10px;
+
+					p {
+						text-align: start;
+						word-wrap: break-word;
+						margin-left: 30px;
+						margin-top: 0px;
+						margin-bottom: 0px;
+						
+					}
+					.user-id{
+						font-weight: bold;
+						margin-bottom: 5px;
+					}
+				}
+			}
+		}
+		.user-comment {
+			border-radius: 25px;
+			margin-top: 5px;
+			display: flex;
+			justify-content: center;
+			/* background: rgba(238, 238, 238, 0.8); */
+
+			textarea {
+				resize: none;
+				width: 100%;
+				border-radius: 25px;
+				background: rgba(240, 240, 240, 0.8);
+				text-align: start;
+				max-height: 300px;
+			}
+			button {
+				padding: 10px 20px;
+				border-radius: 200px;
+				font-size: 15px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+			button:hover {
+				background-color: black;
+				color: white;
+			}
+		}
+	}
+}

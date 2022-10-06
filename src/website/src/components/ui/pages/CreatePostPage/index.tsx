@@ -3,6 +3,7 @@
 import React, { useEffect, useReducer, useState, useContext } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertFromRaw, convertToRaw } from "draft-js";
+import { useNavigate } from "react-router-dom";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -17,7 +18,8 @@ interface ITokenData {
 	id: number;
 }
 export function CreatePostPage() {
-	
+	const { gameId, postId } = useParams()
+	const navigate = useNavigate()
 	const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
 	const [previewState, setPreviewState] = useState("");
 	// const [title, setTitle] = useState(""); agregar esta functionality abajo
@@ -60,9 +62,11 @@ export function CreatePostPage() {
 					created_at,
 				}),
 			});
+
 		}
 		if (postData.created_by) {
 			publishPost();
+			navigate(`/games/${postData.game_id}`)
 		}
 	}, [postData]);
 
