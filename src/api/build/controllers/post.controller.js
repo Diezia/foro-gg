@@ -34,7 +34,7 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const gameId = this.httpContext.request.params.gameId;
-                const data = yield this.repoPost.find("game_id = ?", [gameId]);
+                const data = yield this.repoPost.getOrderedPostsByDateByGameId("game_id = ?", [gameId]);
                 this.httpContext.response.status(200).send(data);
                 return;
             }

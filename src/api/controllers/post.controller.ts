@@ -22,7 +22,7 @@ export class PostController extends ApiController {
   async getPostsByGameid() {
     try {
       const gameId = this.httpContext.request.params.gameId;
-      const data = await this.repoPost.find("game_id = ?", [gameId]);
+      const data = await this.repoPost.getOrderedPostsByDateByGameId("game_id = ?", [gameId]);
       this.httpContext.response.status(200).send(data);
       return;
     } catch (error) {
