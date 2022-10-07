@@ -18,6 +18,8 @@ interface ITokenData {
 	id: number;
 }
 export function CreatePostPage() {
+	const tokenDecoded: ITokenData = jwt(localStorage.getItem("jwt") as string);
+
 	const { gameId, postId } = useParams();
 	const navigate = useNavigate();
 	const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
@@ -33,9 +35,10 @@ export function CreatePostPage() {
 		valoration: 0,
 		game_id: "",
 		created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
+		created_by_name: tokenDecoded.name
 	});
 	const [games, setGames] = useState([]);
-	const { title, body, created_by, valoration, game_id, created_at } = postData;
+	const { title, body, created_by, valoration, game_id, created_at, created_by_name } = postData;
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -60,6 +63,7 @@ export function CreatePostPage() {
 					valoration,
 					game_id,
 					created_at,
+					created_by_name
 				}),
 			});
 			navigate(`/games/${postData.game_id}`);
@@ -83,7 +87,6 @@ export function CreatePostPage() {
 	};
 
 	async function handlePublish() {
-		const tokenDecoded: ITokenData = jwt(localStorage.getItem("jwt") as string);
 		console.log(tokenDecoded);
 		setPostData({
 			...postData,

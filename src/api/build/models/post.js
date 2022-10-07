@@ -18,6 +18,7 @@ let Post = class Post {
         this.updated_at = new Date();
         this.created_by = 0;
         this.game_id = 0;
+        this.created_by_name = '';
     }
 };
 Post = __decorate([

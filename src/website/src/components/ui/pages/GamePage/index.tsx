@@ -48,7 +48,7 @@ export function GamePage() {
 							}
 						})
 						.map((post: any, i: number) => (
-							<PostPreview gameId={gameId} postId={post.id} key={i} title={post.title} user_id={post.created_by} valoration={post.valoration} />
+							<PostPreview created_by_name={post.created_by_name} gameId={gameId} postId={post.id} key={i} title={post.title} user_id={post.created_by} valoration={post.valoration} />
 						))}
 				</ul>
 			</div>

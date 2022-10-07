@@ -45,7 +45,8 @@ export function PostPage() {
 				.then((res: any) => res.json())
 				.then((data: any) => setPost({
 					title: data[0].title,
-					body: data[0].body
+					body: data[0].body,
+					created_by_name: data[0].created_by_name
 				}));
 				
 		};
@@ -182,6 +183,9 @@ export function PostPage() {
 				<div className="header-post">
 					<div className="title-post">
 						<p>{post.title}</p>
+					</div>
+					<div className="name-post">
+						<p>{post.created_by_name}</p>
 					</div>
 					<div className="valoration-post">
 						<span>+ {countValoration}</span>

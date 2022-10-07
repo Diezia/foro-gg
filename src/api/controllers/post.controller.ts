@@ -50,7 +50,7 @@ export class PostController extends ApiController {
   async createPost() {
     try {
       // validar que los datos sean correctos: title, body, etc sin strings vacíos, formatos válidos, valoration cero, que coincidan los datos con las cols de la db, entre otras
-      const { title, body, created_by, valoration, game_id, created_at } =
+      const { title, body, created_by, valoration, game_id, created_at, created_by_name } =
         this.httpContext.request.body;
       const data = await this.repoPost.insertOne(this.httpContext.request.body);
       this.httpContext.response.status(200).send(data);

@@ -9,6 +9,7 @@ interface IPost {
   updated_at?: Date;
   created_by: number;
   game_id: number;
+  created_by_name: string;
 }
 
 @Injectable({ lifeTime: DependencyLifeTime.Transient})
@@ -21,4 +22,5 @@ export class Post implements IPost {
   updated_at?: Date = new Date();
   created_by: number = 0;
   game_id: number = 0;
+  created_by_name: string = '';
 }
