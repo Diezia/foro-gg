@@ -103,6 +103,10 @@ export function PostPage() {
 		}
 		if (postCommentData.created_by && postCommentData.created_at && postCommentData.body) {
 			publishComment();
+			setPostCommentData({ 
+				...postCommentData,
+				body: ''
+			});
 		}
 	}, [postCommentData.readyToPost]);
 
@@ -154,7 +158,6 @@ export function PostPage() {
 			...postCommentData,
 			created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
 			readyToPost: !postCommentData.readyToPost,
-			
 		});
 	}
 	function handleValoration() {

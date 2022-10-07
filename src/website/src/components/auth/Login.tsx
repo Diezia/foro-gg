@@ -12,7 +12,10 @@ export default function LoginForm() {
 		password: "",
 	});
 	const { email, password } = formState;
-
+	function handleLocalInputChange(e: SyntheticEvent) {
+		handleInputChange(e);
+		setWrongInformation(false)
+	}
 	function handleSubmit(e: SyntheticEvent) {
 		e.preventDefault();
 		fetch(`http://localhost:8080/api/auth/login`, {
@@ -42,10 +45,10 @@ export default function LoginForm() {
 			<div>
 				<form className="login_form">
 					<label>
-						<input value={email} onChange={handleInputChange} type="email" name="email" id="login_user" placeholder="email" required />
+						<input value={email} onChange={handleLocalInputChange} type="email" name="email" id="login_user" placeholder="Email" required />
 					</label>
 					<label>
-						<input value={password} onChange={handleInputChange} type="password" name="password" id="login_password" placeholder="Password" required />
+						<input value={password} onChange={handleLocalInputChange} type="password" name="password" id="login_password" placeholder="Contraseña" required />
 					</label>
 					<button value="Submit" disabled={!email || !password} onClick={handleSubmit}>
 						Ingresar

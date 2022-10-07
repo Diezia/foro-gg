@@ -33,7 +33,7 @@ export default function RegisterForm() {
 					</p>
 				)}
 				<label>
-					<input value={formState.name} onChange={handleInputChange} type="text" name="name" placeholder="Username" required />
+					<input value={formState.name} onChange={handleInputChange} type="text" name="name" placeholder="Nombre" required />
 				</label>
 				<label>
 					<input value={formState.email} onChange={handleInputChange} type="email" name="email" id="register_form_email" autoComplete="off" placeholder="Email" required />
@@ -46,7 +46,7 @@ export default function RegisterForm() {
 						name="password"
 						id="register_form_password_1"
 						className="register_form_password"
-						placeholder="Password"
+						placeholder="Contraseña"
 						minLength={8}
 						required
 					/>
@@ -61,7 +61,7 @@ export default function RegisterForm() {
 						className="register_form_password"
 						minLength={8}
 						required
-						placeholder="Password"
+						placeholder="Repetir contraseña"
 					/>
 				</label>
 				{formState.password !== formState.repeatPassword && <p>Las contraseñas no coinciden!</p>}

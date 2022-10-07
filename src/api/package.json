@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm i && tsc -p ./tsconfig.json && npm-run-all --parallel watch:typescript start:server",
     "watch:typescript": "tsc -p ./tsconfig.json --watch",
-    "start:server": "nodemon ./build/index.js"
+    "start:server": "nodemon ./build/index.js",
+    "start": "node ./build/index.js"
   },
   "author": "gg team",
   "license": "ISC",

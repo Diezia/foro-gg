@@ -84,6 +84,7 @@
 					max-width: 600px;
 					background-color: rgba(85, 85, 85, 0.8);
 					border-radius: 10px;
+					padding: 15px 0;
 
 					p {
 						text-align: start;
@@ -104,6 +105,7 @@
 
 			display: flex;
 			justify-content: center;
+			margin-top: 15px;
 
 			textarea {
 				background: rgba(240, 240, 240, 0.8);
@@ -122,6 +124,7 @@
 				font-size: 15px;
 				font-weight: bold;
 				cursor: pointer;
+				margin-left: 15px;
 			}
 			button:hover {
 				background-color: black;
