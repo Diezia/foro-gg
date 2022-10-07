@@ -9,7 +9,7 @@ type Login = {
 };
 
 export default function LoginForm() {
-	const [wrongInformation, setWrongInformation] = useState(false)
+	const [wrongInformation, setWrongInformation] = useState(false);
 	const { state, dispatch } = useContext(Context);
 	const [formState, handleInputChange, resetForm] = useForm({
 		email: "",
@@ -30,13 +30,13 @@ export default function LoginForm() {
 				password,
 			}),
 		})
-			.then((res: any) => res.json())
-			.then((data: any) => {
+			.then((res: Response) => res.json())
+			.then((data: Storage) => {
 				dispatch({
 					type: types.setNewToken,
 					payload: data,
-				})
-				localStorage.setItem('jwt', data.token);
+				});
+				localStorage.setItem("jwt", data.token);
 			})
 			.catch(() => setWrongInformation(true));
 	}
@@ -51,11 +51,11 @@ export default function LoginForm() {
 					<label>
 						<input value={password} onChange={handleInputChange} type="password" name="password" id="login_password" placeholder="Password" required />
 					</label>
-					<button value="Submit" disabled={(!email || !password)} onClick={handleSubmit}>
+					<button value="Submit" disabled={!email || !password} onClick={handleSubmit}>
 						Ingresar
 					</button>
 				</form>
-				{ wrongInformation ? <p>Email o contraseña incorrecta.</p> : <p></p> }
+				{wrongInformation ? <p>Email o contraseña incorrecta.</p> : <p></p>}
 			</div>
 		</>
 	);

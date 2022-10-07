@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Params } from "react-router-dom";
 import { PostPreview } from "../../PostPreview";
 import "../../../../styles/components/_gamepage.scss";
 
@@ -10,13 +10,13 @@ export function GamePage() {
 		name: "",
 		image_url: "",
 	});
-	const { gameId }:any = useParams();
-	const [posts, setPosts]: any = useState([]);
+	const { gameId }: any = useParams();
+	const [posts, setPosts] = useState([]);
 	useEffect(() => {
 		const FetchData = async () => {
 			await fetch(`http://localhost:8080/api/games/${gameId}/posts`)
-				.then((res: any) => res.json())
-				.then((data: any) => setPosts(data));
+				.then((res: Response) => res.json())
+				.then((data: React.SetStateAction<never[]>) => setPosts(data));
 		};
 		FetchData();
 	}, []);
@@ -24,8 +24,16 @@ export function GamePage() {
 	useEffect(() => {
 		const FetchData = async () => {
 			await fetch(`http://localhost:8080/api/games/${gameId}`)
-				.then((res: any) => res.json())
-				.then((data: any) => setGame(data));
+				.then((res: Response) => res.json())
+				.then(
+					(
+						data: React.SetStateAction<{
+							id: number;
+							name: string;
+							image_url: string;
+						}>
+					) => setGame(data)
+				);
 		};
 		FetchData();
 	}, []);
@@ -40,15 +48,23 @@ export function GamePage() {
 			<div className="post-date">
 				<ul className="container-list">
 					{posts
-						.filter((post: any) => {
+						.filter((post: Storage) => {
 							if (query === "") {
 								return post;
 							} else if (post.title.toLowerCase().includes(query.toLowerCase())) {
 								return post;
 							}
 						})
-						.map((post: any, i: number) => (
-							<PostPreview created_by_name={post.created_by_name} gameId={gameId} postId={post.id} key={i} title={post.title} user_id={post.created_by} valoration={post.valoration} />
+						.map((post: Storage, i: number) => (
+							<PostPreview
+								created_by_name={post.created_by_name}
+								gameId={gameId}
+								postId={post.id}
+								key={i}
+								title={post.title}
+								user_id={post.created_by}
+								valoration={post.valoration}
+							/>
 						))}
 				</ul>
 			</div>

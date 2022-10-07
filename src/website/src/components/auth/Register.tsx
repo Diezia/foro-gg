@@ -1,6 +1,7 @@
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 import React, { ChangeEvent, useState } from "react";
+import { SyntheticEvent } from "react-draft-wysiwyg";
 import { useForm } from "../../hooks/useForm";
 
 export default function RegisterForm() {
@@ -12,7 +13,7 @@ export default function RegisterForm() {
 	});
 	const [isRegistered, setIsRegistered] = useState(false);
 
-	function handleSubmit(e: any) {
+	function handleSubmit(e: SyntheticEvent) {
 		e.preventDefault();
 		fetch(`http://localhost:8080/api/auth/register`, {
 			method: "POST",

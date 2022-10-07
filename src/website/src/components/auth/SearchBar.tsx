@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { SyntheticEvent } from "react-draft-wysiwyg";
 import { useLocation } from "react-router-dom";
 
 const SearchBar = () => {
