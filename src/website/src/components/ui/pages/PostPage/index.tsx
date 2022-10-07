@@ -15,8 +15,6 @@ interface ITokenData {
 }
 
 export function PostPage() {
-	// TENGO QUE CREAR UN ESTADO COMPLETO DEL POST CON SUS COMENTARIOS Y CREAR UNA LÓGICA QUE SE INTERRELACIONE PARA QUE CUANDO
-	// en cambio, lo que está pasando ahora es que hace la petición de los comentarios antes de crear el nuevo
 	const tokenDecoded: ITokenData = jwtDecode(localStorage.getItem("jwt") as string);
 	const [countValoration, setCountValoration] = useState("")
 	const navigate = useNavigate();
@@ -174,10 +172,21 @@ export function PostPage() {
 		});
 	}
 	async function handleDeletePost() {
-		await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`, {
-			method: 'DELETE'
-		});
-		navigate(`/games/${gameId}`);
+		try {
+			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`, {
+				method: 'DELETE',
+				headers: {
+					"Content-type": "application/json",
+				},
+				mode: "cors",
+				body: JSON.stringify({
+					created_by: tokenDecoded.id
+				})
+			});
+			navigate(`/games/${gameId}`);
+		} catch (error) {
+			console.log(error)
+		}
 	}
 	return (
 		<>

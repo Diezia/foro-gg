@@ -79,17 +79,29 @@ export class PostController extends ApiController {
   @Action({ route: "/:postId", method: HttpMethod.DELETE })
   async deletePost(postId: number) {
     try {
-      await this.repoComment.deleteComments(
-        parseInt(this.httpContext.request.params.postId)
-      );
-      await this.repoValoration.deleteValorations(
-        parseInt(this.httpContext.request.params.postId)
-      );
-
-      const data = await this.repoPost.delete(
-        parseInt(this.httpContext.request.params.postId)
-      );
-      this.httpContext.response.status(200).send(data);
+      const { gameId, postId } = this.httpContext.request.params;
+      const getPostById = await this.repoPost.find("game_id = ? AND id = ?", [
+        gameId,
+        postId,
+      ]); 
+      console.log("getPostById[0]",getPostById[0].created_by) // obtener de acá el id del usuario que creó el post
+      
+      const { created_by } = this.httpContext.request.body; // este que el id que mando desde el token del front 
+      if ( created_by == getPostById[0].created_by ) {
+        await this.repoComment.deleteComments(
+          parseInt(this.httpContext.request.params.postId)
+        );
+        await this.repoValoration.deleteValorations(
+          parseInt(this.httpContext.request.params.postId)
+        );
+  
+        const data = await this.repoPost.delete(
+          parseInt(this.httpContext.request.params.postId)
+        );
+        this.httpContext.response.status(200).send(data);
+      } else {
+        this.httpContext.response.status(403).send("Not authorized to do this action");
+      }
     } catch (error) {
       console.log(error);
     }
