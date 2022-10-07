@@ -1,13 +1,7 @@
-* {
-	font-family: "Century Gothic";
-}
-
-body {
-	background-image: url(../../../public/assets/background.png);
-}
+@import '../base/variables';
 
 .glitch {
-	color: white;
+	color: $white-c;
 	font-size: 70px;
 	position: relative;
 	width: 800px;
@@ -20,8 +14,8 @@ body {
 	left: 16px;
 	text-shadow: -1px 0 red;
 	top: 0;
-	color: white;
-	background: black;
+	color: $white-c;
+	background: $black-c;
 	overflow: hidden;
 	clip: rect(0, 900px, 0, 0);
 	animation: noise-anim 9s infinite linear alternate-reverse;
@@ -33,8 +27,8 @@ body {
 	left: 8px;
 	text-shadow: 1px 0 blue;
 	top: 0;
-	color: white;
-	background: black;
+	color: $white-c;
+	background: $black-c;
 	overflow: hidden;
 	clip: rect(0, 900px, 0, 0);
 	animation: noise-anim-2 10s infinite linear alternate-reverse;
