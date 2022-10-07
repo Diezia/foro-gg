@@ -1,1 +1,12 @@
-// import all styles here
+@import './base/base';
+@import './base/variables';
+
+// components
+@import './components/homepage';
+@import './components/navbar';
+@import './components/modals';
+@import './components/gameblock';
+@import './components/gamepage';
+@import './components/createpost';
+@import './components/postpage';
+

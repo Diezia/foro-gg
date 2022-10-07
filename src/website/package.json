@@ -6,12 +6,18 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
+    "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-draft-wysiwyg": "^1.15.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "prestart": "npm i",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -36,8 +42,12 @@
     ]
   },
   "devDependencies": {
+    "@types/draft-js": "^0.11.9",
+    "@types/draftjs-to-html": "^0.8.1",
+    "@types/html-to-draftjs": "^1.4.0",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@types/react-draft-wysiwyg": "^1.13.4",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "eslint": "^8.20.0",

@@ -1,0 +1,135 @@
+.header-post {
+	display: flex;
+	margin: 10px 50px 0px 30px;
+	.title-post {
+		flex: 2;
+		background-color: rgba(20, 20, 20, 0.8);
+		border-radius: 25px;
+		border: 1px solid white;
+		p {
+			text-align: start;
+			margin-left: 30px;
+			font-size: 30px;
+		}
+	}
+	.valoration-post {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		span {
+			margin-right: 20px;
+			font-size: 20px;
+			font-weight: bold;
+		}
+		button {
+			padding: 10px 20px;
+			border-radius: 200px;
+			font-size: 15px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+		.clickeado {
+			background-color: black;
+			color: white;
+			border: 1px solid white;
+		}
+		button:hover {
+			background-color: black;
+			color: white;
+		}
+		.delete-post {
+			margin-left: 30px;
+			background-color: rgb(153, 44, 44);
+			color: white;
+		}
+	}
+}
+
+.container-post {
+	display: flex;
+	margin-top: 20px;
+
+	.body-post {
+		flex: 2;
+		padding-left: 30px;
+
+		.prev-post {
+			background-color: rgba(20, 20, 20, 0.8);
+			border-radius: 25px;
+			padding: 15px;
+			min-height: 560px;
+			height: auto;
+			border: 1px solid white;
+			p {
+				text-align: start;
+			}
+		}
+	}
+	.all-comments {
+		flex: 1;
+		padding: 0 30px;
+
+		.comments-post {
+			background-color: rgba(20, 20, 20, 0.8);
+			max-height: 500px;
+			overflow-y: scroll;
+			border-radius: 25px;
+
+			ul {
+				li {
+					list-style: none;
+					margin: 10px;
+					max-width: 600px;
+					background-color: rgba(85, 85, 85, 0.8);
+					border-radius: 10px;
+					padding: 15px 0;
+
+					p {
+						text-align: start;
+						word-wrap: break-word;
+						margin-left: 30px;
+						margin-top: 0px;
+						margin-bottom: 0px;
+					}
+					.user-id {
+						font-weight: bold;
+						margin-bottom: 5px;
+					}
+				}
+			}
+		}
+		.user-comment {
+			border-radius: 25px;
+
+			display: flex;
+			justify-content: center;
+			margin-top: 15px;
+
+			textarea {
+				background: rgba(240, 240, 240, 0.8);
+				resize: none;
+				padding: 10px;
+				width: 100%;
+				border-radius: 25px;
+				height: 60px;
+				max-height: 300px;
+				text-align: start;
+				overflow-y: hidden;
+			}
+			button {
+				padding: 20px 40px;
+				border-radius: 200px;
+				font-size: 15px;
+				font-weight: bold;
+				cursor: pointer;
+				margin-left: 15px;
+			}
+			button:hover {
+				background-color: black;
+				color: white;
+			}
+		}
+	}
+}

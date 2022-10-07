@@ -1,0 +1,63 @@
+@import "../base/variables";
+
+@mixin header-pag {
+	height: 100px;
+	display: flex;
+	align-items: center;
+	margin-left: 30px;
+}
+.title-game {
+	color: $white-c;
+	@include header-pag();
+	font-size: 40px;
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #676866, 0 0 30px #cdcecd, 0 0 40px #cbd6c8, 0 0 55px #aab6a6, 0 0 75px #c0c4bf;
+}
+
+.search-bar {
+	@include header-pag();
+	input {
+		font-size: 15px;
+		border-radius:25px;
+		padding: 10px;
+		width: 40%;
+	}
+}
+
+.post-date {
+	.container-list {
+		width: 60%;
+		margin: 10px;
+
+		.gamepost {
+			display: flex;
+			flex: 1;
+			margin: 20px;
+			background-color: $black-c;
+			border-radius: 20px;
+		}
+
+		li {
+			border: 1px solid $white-c;
+			list-style: none;
+
+			a:link,
+			a:visited,
+			a:active {
+				color:  $white-c;
+			}
+			.gp-title {
+				flex: 0 0 70%;
+				text-align: start;
+				margin-left: 20px;
+			}
+			.gp-user_id {
+				flex: 0 1 auto;
+			}
+			.gp-valoration {
+				flex: 1 0 auto;
+				text-align: right;
+				margin-right: 100px;
+			}
+		}
+	}
+}

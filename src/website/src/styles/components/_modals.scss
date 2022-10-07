@@ -1,0 +1,56 @@
+@mixin neon {
+	color: #fff;
+	text-shadow:  0 0 20px rgb(152, 153, 153);
+}
+dialog {
+	background: url("../../../public/assets/background.png");
+	width: 400px;
+	height: 400px;
+	position: absolute;
+	top: 30%;
+	left: 40%;
+	border-radius: 15%;
+	overflow-y: hidden;
+	&::backdrop {
+		backdrop-filter: blur(10px);
+	}
+	h1 {
+		text-align: center;
+		padding: 20px;
+		color: #fff;
+		@include neon;
+	}
+}
+form p {
+	margin-top: 0;
+}
+form input,
+form button {
+	display: block;
+	width: 50%;
+	margin: 0 auto;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 15px;
+	margin: 10px auto;
+}
+
+form input {
+	box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+}
+
+form button {
+	background-color: rgb(0, 0, 0);
+	width: 200px;
+	height: 50px;
+	@include neon;
+	box-shadow: 0 0 10px  rgb(255, 255, 255);
+}
+
+p {
+	@include neon;
+	margin: 20px auto;
+	text-align: center;
+}
