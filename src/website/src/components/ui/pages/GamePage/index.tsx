@@ -10,7 +10,7 @@ export function GamePage() {
 		name: "",
 		image_url: "",
 	});
-	const { gameId } = useParams();
+	const { gameId }:any = useParams();
 	const [posts, setPosts]: any = useState([]);
 	useEffect(() => {
 		const FetchData = async () => {
@@ -48,7 +48,7 @@ export function GamePage() {
 							}
 						})
 						.map((post: any, i: number) => (
-							<PostPreview postId={post.id} key={i} title={post.title} user_id={post.created_by} valoration={post.valoration} />
+							<PostPreview gameId={gameId} postId={post.id} key={i} title={post.title} user_id={post.created_by} valoration={post.valoration} />
 						))}
 				</ul>
 			</div>
