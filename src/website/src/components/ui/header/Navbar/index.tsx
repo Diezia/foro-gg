@@ -54,7 +54,7 @@ export function Navbar() {
 						<img src="/assets/logo.png" alt="logo" id="logo" />
 					</Link>
 				</div>
-				<SearchBar />
+				{/* <SearchBar /> */}
 				<div className="btn">
 					{!state.user ? (
 						<>

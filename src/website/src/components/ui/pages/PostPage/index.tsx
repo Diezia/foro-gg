@@ -215,7 +215,7 @@ export function PostPage() {
 									});
 								}}
 								name="text_comment"
-							></textarea>
+							>HOLA MIGUEL</textarea>
 							<button onClick={handlePostComment}>Enviar</button>
 						</div>
 					</div>
