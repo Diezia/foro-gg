@@ -203,7 +203,7 @@ export function PostPage() {
 						<button className={userValorationExists.checkPreviousValoration ? "clickeado" : ""} onClick={handleValoration}>
 							{!userValorationExists.checkPreviousValoration ? "Me gusta" : "No me gusta"}
 						</button>
-						<button onClick={handleDeletePost}>Borrar post</button>
+						{post.created_by_name === tokenDecoded.name && <button onClick={handleDeletePost}>Borrar post</button>}
 					</div>
 				</div>
 
