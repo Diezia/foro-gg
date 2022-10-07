@@ -35,7 +35,8 @@ export function CreatePostPage() {
 		valoration: 0,
 		game_id: "",
 		created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
-		created_by_name: tokenDecoded.name
+		created_by_name: tokenDecoded.name,
+		readyToPublish: false
 	});
 	const [games, setGames] = useState([]);
 	const { title, body, created_by, valoration, game_id, created_at, created_by_name } = postData;
@@ -68,8 +69,10 @@ export function CreatePostPage() {
 			});
 			navigate(`/games/${postData.game_id}`);
 		}
-		if (postData.created_by) {
+		if (postData.created_by && postData.game_id && postData.body && postData.title && postData.readyToPublish) {
 			publishPost();
+		} else {
+			console.log("si entro acá no se postea una verga")
 		}
 	}, [postData]);
 
@@ -93,8 +96,29 @@ export function CreatePostPage() {
 			created_by: tokenDecoded.id,
 			body: updateTextDescription(editorState),
 			created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
+			readyToPublish: true
 		});
 	}
+	/* async function handlePublish() {
+		const tokenDecoded: ITokenData = jwt(localStorage.getItem("jwt") as string);
+		if (postData.title.length > 0) {
+
+				if (postData.body.length > 9) {
+						console.log(tokenDecoded);
+						setPostData({
+								...postData,
+								created_by: tokenDecoded.id,
+								body: updateTextDescription(editorState),
+								created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
+						});
+				} else {
+						alert("Falta llenar cuerpo del post");
+				}
+		} else {
+				alert("Falta poner titulo al post");
+		}
+	} */
+
 	return (
 		<>
 			<div className="title-create">
@@ -109,6 +133,7 @@ export function CreatePostPage() {
 							setPostData({
 								...postData,
 								title: event.target.value,
+								readyToPublish: false
 							});
 						}}
 					/>
@@ -121,6 +146,7 @@ export function CreatePostPage() {
 							setPostData({
 								...postData,
 								game_id: e.target.value,
+								readyToPublish: false
 							});
 						}}
 					>
