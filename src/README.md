@@ -1,4 +1,7 @@
-# Guía para levantar el proyecto después del git clone
+# Presentaicón de funcionamiento del Foro
+https://youtu.be/J_vZpvzO61k
+
+## Guía para levantar el proyecto después del git clone
 - Correr una instancia de la base de datos (src/database/foroggdatabase.sql).
 - npm start en back (src/api).
 - npm start en front (src/website).
