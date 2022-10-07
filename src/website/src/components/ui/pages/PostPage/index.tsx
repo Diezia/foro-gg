@@ -154,6 +154,7 @@ export function PostPage() {
 			...postCommentData,
 			created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
 			readyToPost: !postCommentData.readyToPost,
+			
 		});
 	}
 	function handleValoration() {
@@ -182,15 +183,14 @@ export function PostPage() {
 					<div className="title-post">
 						<p>{post.title}</p>
 					</div>
-					<div className="name-post">
-						<p>{post.created_by_name}</p>
-					</div>
+
 					<div className="valoration-post">
+						<p>Creado por: {post.created_by_name}</p>
 						<span>+ {countValoration}</span>
 						<button className={userValorationExists.checkPreviousValoration ? "clickeado" : ""} onClick={handleValoration}>
 							{!userValorationExists.checkPreviousValoration ? "Me gusta" : "No me gusta"}
 						</button>
-						{post.created_by_name === tokenDecoded.name && <button onClick={handleDeletePost}>Borrar post</button>}
+						{post.created_by_name === tokenDecoded.name && <button className="delete-post" onClick={handleDeletePost}>Borrar post</button>}
 					</div>
 				</div>
 

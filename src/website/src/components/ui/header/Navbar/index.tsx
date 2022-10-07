@@ -60,10 +60,10 @@ export function Navbar() {
 						</>
 					) : (
 						<>
+							<p>{state.user}</p>
 							<Link to={"/create"}>
 								<button>Crear post</button>
 							</Link>
-							<p>{state.user}</p>
 							<button className="logout" onClick={handleLogoutClick}>
 								Cerrar Sesión
 							</button>
