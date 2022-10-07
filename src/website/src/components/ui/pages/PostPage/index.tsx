@@ -18,11 +18,11 @@ export function PostPage() {
 	// TENGO QUE CREAR UN ESTADO COMPLETO DEL POST CON SUS COMENTARIOS Y CREAR UNA LÓGICA QUE SE INTERRELACIONE PARA QUE CUANDO
 	// en cambio, lo que está pasando ahora es que hace la petición de los comentarios antes de crear el nuevo
 	const tokenDecoded: ITokenData = jwtDecode(localStorage.getItem("jwt") as string);
+	const [countValoration, setCountValoration] = useState("")
 
 	const { gameId, postId } = useParams();
 	const [post, setPost]: any = useState({
 		title: "",
-		valoration: 0,
 		body: "",
 	});
 	const [comments, setComments]: any = useState([]);
@@ -41,25 +41,17 @@ export function PostPage() {
 
 	useEffect(() => {
 		const FetchData = async () => {
-			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`)
+			fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`)
 				.then((res: any) => res.json())
-				.then((data: any) => setPost(data));
+				.then((data: any) => setPost({
+					title: data[0].title,
+					body: data[0].body
+				}));
+				
 		};
 		FetchData().catch(console.error);
 		getComments();
-		async function getValorations() {
-			const getVal = await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/valoration`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				mode: "cors",
-			});
-			// hendlear esto para que muestre las valoraciones
-			const valJson = await getVal.json();
-			console.log("valoracions desde fetch:", JSON.stringify(valJson));
-		}
-		getValorations();
+		
 		// obtener la valoración del usuario en si para setear como true o false el valoration state
 		async function userValorationExists() {
 			const valExists = await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/valoration/valorationexist`, {
@@ -73,7 +65,6 @@ export function PostPage() {
 				}),
 				mode: "cors",
 			});
-			// falta hendlear esto desde acá del front para que muestre las valoraciones
 			const valExistsJson = await valExists.json();
 			console.log("valoration exist?:", valExistsJson);
 			setUserValorationExists({
@@ -82,8 +73,25 @@ export function PostPage() {
 			});
 		}
 		userValorationExists();
+		getValorations()
 	}, []);
 
+	async function getValorations() {
+		const getVal = await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/valoration`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			mode: "cors",
+		});
+		const valJson = await getVal.json();
+		setCountValoration(JSON.stringify(valJson))
+	}
+	/* useEffect(() => {
+		// trae número de las valoraciones
+		getValorations();
+	}, [countValoration]) */
+	
 	useEffect(() => {
 		async function publishComment() {
 			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/comments/create`, {
@@ -121,6 +129,7 @@ export function PostPage() {
 		})
 			.then((res: any) => console.log(res))
 			.catch(err => console.log(err));
+			getValorations()
 	}
 	async function deleteValoration() {
 		await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/valoration`, {
@@ -136,6 +145,7 @@ export function PostPage() {
 		})
 			.then((res: any) => console.log(res))
 			.catch(err => console.log(err));
+			getValorations()
 	}
 
 	useEffect(() => {
@@ -171,10 +181,10 @@ export function PostPage() {
 			<>
 				<div className="header-post">
 					<div className="title-post">
-						<p>{post.length > 0 && post[0].title}</p>
+						<p>{post.title}</p>
 					</div>
 					<div className="valoration-post">
-						<span>+ {post.length > 0 && post[0].valoration}</span>
+						<span>+ {countValoration}</span>
 						<button className={userValorationExists.checkPreviousValoration ? "clickeado" : ""} onClick={handleValoration}>
 							{!userValorationExists.checkPreviousValoration ? "Me gusta" : "No me gusta"}
 						</button>
@@ -183,7 +193,7 @@ export function PostPage() {
 
 				<div className="container-post">
 					<div className="body-post">
-						<PrePost texto={post.length > 0 && post[0].body} />
+						<PrePost texto={post.body} />
 					</div>
 					<div className="all-comments">
 						<div className="comments-post">

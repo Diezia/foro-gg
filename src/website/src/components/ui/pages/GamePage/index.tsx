@@ -8,8 +8,8 @@ export function GamePage() {
 	const [game, setGame] = useState({
 		id: 0,
 		name: "",
-		image_url: ""
-	})
+		image_url: "",
+	});
 	const { gameId } = useParams();
 	const [posts, setPosts]: any = useState([]);
 	useEffect(() => {
@@ -27,13 +27,13 @@ export function GamePage() {
 				.then((res: any) => res.json())
 				.then((data: any) => setGame(data));
 		};
-		FetchData()
-	}, [])
-	
+		FetchData();
+	}, []);
+
 	return (
 		<>
 			<div className="title-game">{game.name}</div>
-			
+
 			<div className="search">
 				<input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />
 			</div>

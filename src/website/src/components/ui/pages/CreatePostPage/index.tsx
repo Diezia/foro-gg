@@ -18,8 +18,8 @@ interface ITokenData {
 	id: number;
 }
 export function CreatePostPage() {
-	const { gameId, postId } = useParams()
-	const navigate = useNavigate()
+	const { gameId, postId } = useParams();
+	const navigate = useNavigate();
 	const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
 	const [previewState, setPreviewState] = useState("");
 	// const [title, setTitle] = useState(""); agregar esta functionality abajo
@@ -32,7 +32,7 @@ export function CreatePostPage() {
 		created_by: 0,
 		valoration: 0,
 		game_id: "",
-		created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+		created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
 	});
 	const [games, setGames] = useState([]);
 	const { title, body, created_by, valoration, game_id, created_at } = postData;
@@ -62,11 +62,10 @@ export function CreatePostPage() {
 					created_at,
 				}),
 			});
-
+			navigate(`/games/${postData.game_id}`);
 		}
 		if (postData.created_by) {
 			publishPost();
-			navigate(`/games/${postData.game_id}`)
 		}
 	}, [postData]);
 
@@ -90,7 +89,7 @@ export function CreatePostPage() {
 			...postData,
 			created_by: tokenDecoded.id,
 			body: updateTextDescription(editorState),
-			created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
+			created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
 		});
 	}
 	return (
@@ -110,8 +109,9 @@ export function CreatePostPage() {
 							});
 						}}
 					/>
-					<span>Seleccionar Juego &#8594;</span>
+
 					<select
+						defaultValue="0"
 						name="juegos"
 						id="juegos"
 						onChange={e => {
@@ -121,13 +121,16 @@ export function CreatePostPage() {
 							});
 						}}
 					>
-						
+						<option disabled value={0}>
+							Selecciona un juego
+						</option>
 						{games.map((elemento: any) => (
 							<option key={elemento.id} value={elemento.id}>
 								{elemento.name}
 							</option>
 						))}
 					</select>
+
 					<button className="btn-preview" onClick={previsualizar}>
 						Previzualizar
 					</button>
