@@ -10,17 +10,17 @@ export const RefContext = React.createContext<any>(null);
 export default function App() {
 	const register = useRef<HTMLDialogElement>(null);
 	const login = useRef<HTMLDialogElement>(null);
-	
+
 	const [state, dispatch] = useReducer(reducer, {
-		token: ''
-	})
+		token: "",
+	});
 	return (
 		<>
-		<Context.Provider value={{state, dispatch}}>
-			<RefContext.Provider value={{register, login}}>
-				<AppRouter />
-			</RefContext.Provider>
-		</Context.Provider>
+			<Context.Provider value={{ state, dispatch }}>
+				<RefContext.Provider value={{ register, login }}>
+					<AppRouter />
+				</RefContext.Provider>
+			</Context.Provider>
 		</>
 	);
 }

@@ -1,4 +1,7 @@
-import React, { ChangeEvent, useContext, useState } from "react";
+import { EventType } from "@testing-library/react";
+import { JwtDecodeOptions } from "jwt-decode";
+import React, { AllHTMLAttributes, ChangeEvent, FormEventHandler, MouseEventHandler, useContext, useState } from "react";
+import { SyntheticEvent } from "react-draft-wysiwyg";
 import { types } from "../../helpers/types";
 import { useForm } from "../../hooks/useForm";
 import { Context } from "../main/App";
@@ -8,7 +11,7 @@ type Login = {
 };
 
 export default function LoginForm() {
-	const [wrongInformation, setWrongInformation] = useState(false)
+	const [wrongInformation, setWrongInformation] = useState(false);
 	const { state, dispatch } = useContext(Context);
 	const [formState, handleInputChange, resetForm] = useForm({
 		email: "",
@@ -16,7 +19,7 @@ export default function LoginForm() {
 	});
 	const { email, password } = formState;
 
-	function handleSubmit(e: any) {
+	function handleSubmit(e: SyntheticEvent) {
 		e.preventDefault();
 		fetch(`http://localhost:8080/api/auth/login`, {
 			method: "POST",
@@ -29,27 +32,27 @@ export default function LoginForm() {
 				password,
 			}),
 		})
-			.then((res: any) => res.json())
-			.then((data: any) => {
+			.then((res: Response) => res.json())
+			.then((data: Storage) => {
 				dispatch({
 					type: types.setNewToken,
 					payload: data,
-				})
-				localStorage.setItem('jwt', data.token);
+				});
+				localStorage.setItem("jwt", data.token);
 			})
 			.catch(() => setWrongInformation(true));
 	}
-	function randTest(e: any) {
+	function randTest(e: SyntheticEvent) {
 		e.preventDefault();
-		fetch(`http://localhost:8080/api/auth/example`, {	
+		fetch(`http://localhost:8080/api/auth/example`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			mode: "cors",
 		})
-			.then((res: any) => res.json())
-			.then((data: any) => console.log(data))
+			.then((res: Response) => res.json())
+			.then((data: Storage) => console.log(data))
 			.catch(err => err);
 	}
 	return (
@@ -62,11 +65,11 @@ export default function LoginForm() {
 					<label>
 						<input value={password} onChange={handleInputChange} type="password" name="password" id="login_password" placeholder="Password" required />
 					</label>
-					<button value="Submit" disabled={(!email || !password)} onClick={handleSubmit}>
+					<button value="Submit" disabled={!email || !password} onClick={handleSubmit}>
 						Ingresar
 					</button>
 				</form>
-				{ wrongInformation ? <p>Email o contraseña incorrecta.</p> : <p></p> }
+				{wrongInformation ? <p>Email o contraseña incorrecta.</p> : <p></p>}
 			</div>
 		</>
 	);

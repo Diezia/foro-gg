@@ -1,6 +1,7 @@
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 import React, { ChangeEvent, useState } from "react";
+import { SyntheticEvent } from "react-draft-wysiwyg";
 import { useForm } from "../../hooks/useForm";
 
 export default function RegisterForm() {
@@ -11,7 +12,7 @@ export default function RegisterForm() {
 		repeatPassword: "",
 	});
 
-	function handleSubmit(e: any) {
+	function handleSubmit(e: SyntheticEvent) {
 		e.preventDefault();
 		fetch(`http://localhost:8080/api/auth/register`, {
 			method: "POST",
@@ -21,7 +22,7 @@ export default function RegisterForm() {
 			mode: "cors",
 			body: JSON.stringify(formState),
 		})
-			.then((res: any) => console.log(res))
+			.then((res: Response) => console.log(res))
 			.catch(err => console.log(err));
 	}
 
@@ -64,11 +65,14 @@ export default function RegisterForm() {
 						placeholder="Password"
 					/>
 				</label>
-				{formState.password !== formState.repeatPassword && (
-					<p>Las contraseñas no coinciden!</p>
-				)}
+				{formState.password !== formState.repeatPassword && <p>Las contraseñas no coinciden!</p>}
 				<label>
-					<button value="Submit" id="register_submit_button" disabled={(!formState.name || !formState.email || !formState.password || formState.password !== formState.repeatPassword)} onClick={handleSubmit}>
+					<button
+						value="Submit"
+						id="register_submit_button"
+						disabled={!formState.name || !formState.email || !formState.password || formState.password !== formState.repeatPassword}
+						onClick={handleSubmit}
+					>
 						Registrar
 					</button>
 				</label>
