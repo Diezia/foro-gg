@@ -20,18 +20,15 @@ let AuthFilter = class AuthFilter {
     beforeExecute(httpContext) {
         try {
             const token = httpContext.request.headers["authorization"];
-            console.log("token 1", token);
             if (!token) {
                 httpContext.response.sendStatus(401);
             }
-            const decoded = jsonwebtoken_1.default.verify(token, 'my secret');
+            const decoded = jsonwebtoken_1.default.verify(token, "my secret");
             if (!decoded) {
                 httpContext.response.sendStatus(401);
             }
-            console.log("decoded", decoded);
         }
         catch (err) {
-            console.log(err);
             httpContext.response.sendStatus(500);
         }
     }
@@ -41,4 +38,3 @@ AuthFilter = __decorate([
     __metadata("design:paramtypes", [])
 ], AuthFilter);
 exports.AuthFilter = AuthFilter;
-// que diferencia hay entre httpContext.request.headers["authorization"] y httpContext.response.getHeader("authorization")? uno es de request y el otro de response? cuál tengo que usar para setear el token?

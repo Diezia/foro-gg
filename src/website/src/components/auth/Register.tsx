@@ -20,9 +20,7 @@ export default function RegisterForm() {
 			},
 			mode: "cors",
 			body: JSON.stringify(formState),
-		})
-			.then(() => setIsRegistered(true))
-			.catch(err => console.log(err));
+		}).then(() => setIsRegistered(true));
 	}
 
 	return (

@@ -47,8 +47,6 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { gameId, postId } = this.httpContext.request.params;
-                console.log(gameId);
-                console.log(postId);
                 const data = yield this.repoPost.find("game_id = ? AND id = ?", [
                     gameId,
                     postId,
@@ -102,7 +100,6 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
                     gameId,
                     postId,
                 ]);
-                console.log("getPostById[0]", getPostById[0].created_by); // obtener de acá el id del usuario que creó el post
                 const { created_by } = this.httpContext.request.body; // este que el id que mando desde el token del front 
                 if (created_by == getPostById[0].created_by) {
                     yield this.repoComment.deleteComments(parseInt(this.httpContext.request.params.postId));
@@ -123,7 +120,6 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const res = yield this.repoValoration.countPostValorations(parseInt(this.httpContext.request.params.postId));
-                console.log(res[0][0]["valoration"]);
                 this.httpContext.response
                     .status(200)
                     .send(JSON.stringify(res[0][0]["valoration"]));
@@ -166,7 +162,6 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
                 };
                 const valorationExists = yield this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id]);
                 if (valorationExists.length === 0) {
-                    console.log('valorationExists', valorationExists);
                     const data = yield this.repoValoration.insertOne(mydata);
                     this.httpContext.response.status(200).send(data);
                     return;
@@ -208,7 +203,6 @@ let PostController = class PostController extends paradigm_express_webapi_1.ApiC
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield this.repoComment.find("post_id = ?", [this.httpContext.request.params.postId]);
-                console.log("comments", data);
                 this.httpContext.response.status(200).send(data);
                 return;
             }

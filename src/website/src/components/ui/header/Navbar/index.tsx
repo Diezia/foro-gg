@@ -37,7 +37,6 @@ export function Navbar() {
 	}
 	function handleLogoutClick() {
 		localStorage.removeItem("jwt");
-		console.log("handleLogoutClick");
 		dispatch({ type: types.logout });
 		navigate("/");
 	}

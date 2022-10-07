@@ -62,7 +62,6 @@ export function PostPage() {
 				mode: "cors",
 			});
 			const valExistsJson = await valExists.json();
-			console.log("valoration exist?:", valExistsJson);
 			setUserValorationExists({
 				...userValorationExists,
 				checkPreviousValoration: valExistsJson,
@@ -118,9 +117,7 @@ export function PostPage() {
 				user_id: tokenDecoded.id,
 				post_id: postId,
 			}),
-		})
-			.then((res: any) => console.log(res))
-			.catch(err => console.log(err));
+		});
 		getValorations();
 	}
 	async function deleteValoration() {
@@ -134,9 +131,7 @@ export function PostPage() {
 				user_id: tokenDecoded.id,
 				post_id: postId,
 			}),
-		})
-			.then((res: any) => console.log(res))
-			.catch(err => console.log(err));
+		});
 		getValorations();
 	}
 
@@ -152,7 +147,6 @@ export function PostPage() {
 		await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/comments`)
 			.then((res: any) => res.json())
 			.then((data: any) => setComments(data));
-		console.log("commenst", comments);
 	}
 
 	function handlePostComment() {
@@ -169,21 +163,17 @@ export function PostPage() {
 		});
 	}
 	async function handleDeletePost() {
-		try {
-			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`, {
-				method: "DELETE",
-				headers: {
-					"Content-type": "application/json",
-				},
-				mode: "cors",
-				body: JSON.stringify({
-					created_by: tokenDecoded.id,
-				}),
-			});
-			navigate(`/games/${gameId}`);
-		} catch (error) {
-			console.log(error);
-		}
+		await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`, {
+			method: "DELETE",
+			headers: {
+				"Content-type": "application/json",
+			},
+			mode: "cors",
+			body: JSON.stringify({
+				created_by: tokenDecoded.id,
+			}),
+		});
+		navigate(`/games/${gameId}`);
 	}
 	return (
 		<>

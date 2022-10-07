@@ -40,14 +40,11 @@ let AuthController = class AuthController extends paradigm_express_webapi_1.ApiC
                 const findRes = yield this.repoUser.find("email = ?", [
                     this.httpContext.request.body.email,
                 ]);
-                console.log('this.httpContext.request.body', this.httpContext.request.body);
                 if (findRes.length === 0) {
-                    console.log("no existe el user");
                     this.authService.register(this.httpContext.request.body.email, this.httpContext.request.body.name, this.httpContext.request.body.password, this.repoUser);
                     this.httpContext.response.status(200).send("User created");
                     return;
                 }
-                console.log(findRes);
                 this.httpContext.response.status(409).send("User already exists");
                 return;
             }
@@ -69,7 +66,6 @@ let AuthController = class AuthController extends paradigm_express_webapi_1.ApiC
                 }
                 const match = yield bcrypt_1.default.compare(this.httpContext.request.body.password, user[0].password);
                 if (match) {
-                    // user logged in
                     const token = jsonwebtoken_1.default.sign({
                         id: user[0].id,
                         name: user[0].name

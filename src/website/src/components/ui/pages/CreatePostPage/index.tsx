@@ -62,8 +62,6 @@ export function CreatePostPage() {
 		}
 		if (postData.created_by && postData.game_id && postData.body && postData.title && postData.readyToPublish) {
 			publishPost();
-		} else {
-			console.log("si entro acá no se postea una verga");
 		}
 	}, [postData]);
 

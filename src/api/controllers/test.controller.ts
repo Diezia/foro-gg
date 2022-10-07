@@ -21,7 +21,6 @@ export class TestController extends ApiController {
   async get() {
     try {
       const some = await this.repo.getAll()
-      console.log(some)
       this.httpContext.response.status(200).send(some);
       return;
     } catch {
@@ -42,7 +41,6 @@ export class TestController extends ApiController {
   async getPostCount() {
     try {
       const res = await this.repo.countPostValorations(6);
-      console.log(res[0][0]["valoration"])
 
 
       this.httpContext.response.status(200).send(JSON.stringify(res[0][0]["valoration"]));

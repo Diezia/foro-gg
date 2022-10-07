@@ -25,9 +25,7 @@ export class AuthController extends ApiController {
       const findRes = await this.repoUser.find("email = ?", [
         this.httpContext.request.body.email,
       ]);
-      console.log('this.httpContext.request.body', this.httpContext.request.body)
       if (findRes.length === 0) {
-        console.log("no existe el user");
         this.authService.register(
           this.httpContext.request.body.email,
           this.httpContext.request.body.name,
@@ -37,7 +35,6 @@ export class AuthController extends ApiController {
         this.httpContext.response.status(200).send("User created");
         return;
       }
-      console.log(findRes);
       this.httpContext.response.status(409).send("User already exists");
       return;
     } catch {
@@ -60,7 +57,6 @@ export class AuthController extends ApiController {
         user[0].password
       );
       if (match) {
-        // user logged in
         const token: string = jwt.sign({
           id: user[0].id,
           name: user[0].name

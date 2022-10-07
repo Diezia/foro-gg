@@ -4,7 +4,6 @@ import {
   Controller,
   HttpMethod,
 } from "@miracledevs/paradigm-express-webapi";
-import { Post } from "../models/post";
 import { CommentRepository } from "../respositories/comment.repository";
 import { PostRepository } from "../respositories/post.repository";
 import { ValorationRepository } from "../respositories/valoration.repository";
@@ -33,8 +32,6 @@ export class PostController extends ApiController {
   async getPost(postId: number) {
     try {
       const { gameId, postId } = this.httpContext.request.params;
-      console.log(gameId);
-      console.log(postId);
 
       const data = await this.repoPost.find("game_id = ? AND id = ?", [
         gameId,
@@ -84,7 +81,6 @@ export class PostController extends ApiController {
         gameId,
         postId,
       ]); 
-      console.log("getPostById[0]",getPostById[0].created_by) // obtener de acá el id del usuario que creó el post
       
       const { created_by } = this.httpContext.request.body; // este que el id que mando desde el token del front 
       if ( created_by == getPostById[0].created_by ) {
@@ -112,7 +108,6 @@ export class PostController extends ApiController {
       const res = await this.repoValoration.countPostValorations(
         parseInt(this.httpContext.request.params.postId)
       );
-      console.log(res[0][0]["valoration"]);
       this.httpContext.response
         .status(200)
         .send(JSON.stringify(res[0][0]["valoration"]));
@@ -150,7 +145,6 @@ export class PostController extends ApiController {
       };
       const valorationExists = await this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id])
       if (valorationExists.length === 0) {
-        console.log('valorationExists', valorationExists);
         const data = await this.repoValoration.insertOne(mydata);
         this.httpContext.response.status(200).send(data);
         return;
@@ -186,7 +180,6 @@ export class PostController extends ApiController {
   async getCommentsByPostid(postId: number) {
     try {
       const data = await this.repoComment.find("post_id = ?", [this.httpContext.request.params.postId]);
-      console.log("comments", data)
       this.httpContext.response.status(200).send(data);
       return;
     } catch (error) {
