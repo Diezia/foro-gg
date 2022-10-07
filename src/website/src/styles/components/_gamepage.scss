@@ -1,4 +1,66 @@
-@import "./modals";
+/* div {
+	border: 1px solid red;
+} */
+.title-game {
+	height: 100px;
+	display: flex;
+	align-items: center;
+	margin-left: 30px;
+	font-size: 40px;
+	/* font-weight: bold; */
+}
+
+.search-bar {
+	height: 100px;
+	display: flex;
+	align-items: center;
+	margin-left: 30px;
+	input {
+		font-size: 15px;
+		border-radius: 25px;
+		padding: 10px;
+		width: 40%;
+	}
+}
+
+.post-date {
+	.container-list {
+		width: 60%;
+		margin: 10px;
+
+		.gamepost {
+			display: flex;
+			flex: 1;
+			margin: 20px;
+			background-color: black;
+			border-radius: 20px;
+		}
+
+		li {
+			border: 1px solid white;
+			list-style: none;
+
+			a:link,
+			a:visited,
+			a:active {
+				color: white;
+			}
+			.gp-title {
+				flex: 0 0 70%;
+				text-align: start;
+				margin-left: 20px;
+			}
+		
+			.gp-valoration {
+				flex: 1 0 auto;
+				text-align: right;
+				margin-right:100px;
+			}
+		}
+	}
+}
+
+/* @import "./modals";
 
 .title-game {
 	color: white;
@@ -23,17 +85,7 @@
 	}
 }
 
-.gp-title {
-	flex: 0 0 70%;
-	text-align: start;
-}
-.gp-user_id {
-	flex: 0 1 auto;
-    
-}
-.gp-valoration {
-	flex: 1 0 auto;
-	text-align: end;
-}
 
 
+
+ */

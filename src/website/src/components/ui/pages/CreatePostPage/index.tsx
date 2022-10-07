@@ -189,7 +189,7 @@ export function CreatePostPage() {
 					<PrePost texto={previewState} />
 				</div>
 			</div>
-			<button>finish set state test</button>
+		
 		</>
 	);
 }
