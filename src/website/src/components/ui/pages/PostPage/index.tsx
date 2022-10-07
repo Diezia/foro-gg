@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CreatePostPage } from "../CreatePostPage";
 import { PrePost } from "../PrePost";
 import "../../../../styles/components/_postpage.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CommentComponent from "../../ShowComments/ShowComments";
 import "../../../../styles/components/_postpage.scss";
 import { useForm } from "../../../../hooks/useForm";
@@ -19,7 +19,7 @@ export function PostPage() {
 	// en cambio, lo que está pasando ahora es que hace la petición de los comentarios antes de crear el nuevo
 	const tokenDecoded: ITokenData = jwtDecode(localStorage.getItem("jwt") as string);
 	const [countValoration, setCountValoration] = useState("")
-
+	const navigate = useNavigate();
 	const { gameId, postId } = useParams();
 	const [post, setPost]: any = useState({
 		title: "",
@@ -177,6 +177,12 @@ export function PostPage() {
 			checkPreviousValoration: !userValorationExists.checkPreviousValoration,
 		});
 	}
+	async function handleDeletePost() {
+		await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`, {
+			method: 'DELETE'
+		});
+		navigate(`/games/${gameId}`);
+	}
 	return (
 		<>
 			<>
@@ -192,6 +198,7 @@ export function PostPage() {
 						<button className={userValorationExists.checkPreviousValoration ? "clickeado" : ""} onClick={handleValoration}>
 							{!userValorationExists.checkPreviousValoration ? "Me gusta" : "No me gusta"}
 						</button>
+						<button onClick={handleDeletePost}>Borrar post</button>
 					</div>
 				</div>
 
@@ -215,7 +222,7 @@ export function PostPage() {
 									});
 								}}
 								name="text_comment"
-							>HOLA MIGUEL</textarea>
+							></textarea>
 							<button onClick={handlePostComment}>Enviar</button>
 						</div>
 					</div>
