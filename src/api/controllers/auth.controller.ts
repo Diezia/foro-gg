@@ -1,6 +1,7 @@
 import {
   Action,
   ApiController,
+  ConfigurationBuilder,
   Controller,
   HttpMethod,
 } from "@miracledevs/paradigm-express-webapi";
@@ -8,15 +9,20 @@ import { UserRepository } from "../respositories/user.repository";
 import { AuthService } from "../services/auth.service";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { AuthFilter } from "../filters/auth.filter";
+import { Configuration } from "../configuration/configuration";
+import { JwtConfiguration } from "../configuration/jwt.configuration";
 
 @Controller({ route: "/api/auth" })
 export class AuthController extends ApiController {
+  private jwt: JwtConfiguration;
   constructor(
     private repoUser: UserRepository,
-    private authService: AuthService
+    private authService: AuthService,
+    configurationBuilder: ConfigurationBuilder
   ) {
     super();
+    const configuration = configurationBuilder.build(Configuration);
+    this.jwt = configuration.jwt
   }
   @Action({ route: "/register", method: HttpMethod.POST })
   async register() {
@@ -61,7 +67,7 @@ export class AuthController extends ApiController {
             id: user[0].id,
             name: user[0].name,
           },
-          "my secret",
+          this.jwt.secret,
           { expiresIn: "3h" }
         );
         this.httpContext.response.setHeader(

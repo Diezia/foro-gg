@@ -27,11 +27,14 @@ const user_repository_1 = require("../respositories/user.repository");
 const auth_service_1 = require("../services/auth.service");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const configuration_1 = require("../configuration/configuration");
 let AuthController = class AuthController extends paradigm_express_webapi_1.ApiController {
-    constructor(repoUser, authService) {
+    constructor(repoUser, authService, configurationBuilder) {
         super();
         this.repoUser = repoUser;
         this.authService = authService;
+        const configuration = configurationBuilder.build(configuration_1.Configuration);
+        this.jwt = configuration.jwt;
     }
     register() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -68,7 +71,7 @@ let AuthController = class AuthController extends paradigm_express_webapi_1.ApiC
                     const token = jsonwebtoken_1.default.sign({
                         id: user[0].id,
                         name: user[0].name,
-                    }, "my secret", { expiresIn: "3h" });
+                    }, this.jwt.secret, { expiresIn: "3h" });
                     this.httpContext.response.setHeader("Authorization", JSON.stringify(token));
                     this.httpContext.response.cookie("jwt", JSON.stringify(token));
                     const res = {
@@ -103,6 +106,7 @@ __decorate([
 AuthController = __decorate([
     (0, paradigm_express_webapi_1.Controller)({ route: "/api/auth" }),
     __metadata("design:paramtypes", [user_repository_1.UserRepository,
-        auth_service_1.AuthService])
+        auth_service_1.AuthService,
+        paradigm_express_webapi_1.ConfigurationBuilder])
 ], AuthController);
 exports.AuthController = AuthController;

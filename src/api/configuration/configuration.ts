@@ -1,3 +1,4 @@
+import { JwtConfiguration } from "./jwt.configuration";
 import { MySqlConfiguration } from "./mysql.configuration";
 
 export class Configuration {
@@ -20,4 +21,9 @@ export class Configuration {
    * Session timeout
    */
   sessionTimeout: string;
+
+  /**
+   * Token Secret
+   */
+   jwt: JwtConfiguration;
 }

@@ -13,17 +13,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthFilter = void 0;
+const paradigm_express_webapi_1 = require("@miracledevs/paradigm-express-webapi");
 const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const configuration_1 = require("../configuration/configuration");
 let AuthFilter = class AuthFilter {
-    constructor() { }
+    constructor(configurationBuilder) {
+        const configuration = configurationBuilder.build(configuration_1.Configuration);
+        this.jwt = configuration.jwt;
+    }
     beforeExecute(httpContext) {
         try {
             const token = httpContext.request.headers["authorization"];
             if (!token) {
                 httpContext.response.sendStatus(401);
             }
-            const decoded = jsonwebtoken_1.default.verify(token, "my secret");
+            const decoded = jsonwebtoken_1.default.verify(token, this.jwt.secret);
             if (!decoded) {
                 httpContext.response.sendStatus(401);
             }
@@ -35,6 +40,6 @@ let AuthFilter = class AuthFilter {
 };
 AuthFilter = __decorate([
     (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [paradigm_express_webapi_1.ConfigurationBuilder])
 ], AuthFilter);
 exports.AuthFilter = AuthFilter;
