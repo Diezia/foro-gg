@@ -34,11 +34,11 @@ export function GamePage() {
 		<>
 			<div className="title-game">{game.name}</div>
 
-			<div className="search">
+			<div className="search-bar">
 				<input placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />
 			</div>
 			<div className="post-date">
-				<ul className="container-post">
+				<ul className="container-list">
 					{posts
 						.filter((post: any) => {
 							if (query === "") {
