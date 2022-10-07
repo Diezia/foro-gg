@@ -1,5 +1,5 @@
 import "../../../styles/styles.scss";
-import React, { createContext, useReducer, useRef } from "react";
+import React, { useReducer, useRef } from "react";
 import { AppRouter } from "../../../router/AppRouter";
 import { reducer } from "../../../helpers/reducer";
 

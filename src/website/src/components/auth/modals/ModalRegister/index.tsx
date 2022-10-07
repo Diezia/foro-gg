@@ -1,11 +1,10 @@
 import React, { RefObject, SyntheticEvent } from "react";
 import Register from "../../Register";
 
-import "../../../../styles/components/_modals.scss"
-
+import "../../../../styles/components/_modals.scss";
 
 interface RegisterType {
-	register: RefObject<HTMLDialogElement>
+	register: RefObject<HTMLDialogElement>;
 }
 
 export function ModalRegister({ register }: RegisterType) {
@@ -19,7 +18,6 @@ export function ModalRegister({ register }: RegisterType) {
 			<div id="dialog_content">
 				<h1>Regristrate !</h1>
 				<Register />
-			
 			</div>
 		</dialog>
 	);

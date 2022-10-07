@@ -4,11 +4,11 @@ interface Comments {
 	created_by: number;
 }
 
-export function Comment({ body, created_by}: Comments) {
+export function Comment({ body, created_by }: Comments) {
 	return (
-			<li className="">
-				<p className="user-id">{created_by}:</p>
-				<p className=''>{body}</p>
-			</li>
+		<li className="">
+			<p className="user-id">{created_by}:</p>
+			<p className="">{body}</p>
+		</li>
 	);
 }

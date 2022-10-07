@@ -1,13 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/components/_gameblock.scss";
-import { Context, RefContext } from "../main/App";
-import jwtDecode from "jwt-decode";
-
-interface ITokenData {
-	name: string;
-	id: number;
-}
+import { RefContext } from "../main/App";
 
 interface GameBlockTypes {
 	nameGame: string;
@@ -16,8 +10,7 @@ interface GameBlockTypes {
 }
 
 export function GameBlock({ imageSrc, gameUrl, nameGame }: GameBlockTypes) {
-	const { register, login } = useContext(RefContext);
-	const { state, dispatch } = useContext(Context);
+	const { login } = useContext(RefContext);
 
 	return (
 		<>

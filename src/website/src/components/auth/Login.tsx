@@ -1,17 +1,13 @@
-import React, { ChangeEvent, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { SyntheticEvent } from "react";
 import { types } from "../../helpers/types";
 import { useForm } from "../../hooks/useForm";
 import { Context } from "../main/App";
-type Login = {
-	email: string;
-	password: string;
-};
 
 export default function LoginForm() {
 	const [wrongInformation, setWrongInformation] = useState(false);
-	const { state, dispatch } = useContext(Context);
-	const [formState, handleInputChange, resetForm] = useForm({
+	const { dispatch } = useContext(Context);
+	const [formState, handleInputChange] = useForm({
 		email: "",
 		password: "",
 	});
@@ -40,7 +36,7 @@ export default function LoginForm() {
 			})
 			.catch(() => setWrongInformation(true));
 	}
-	
+
 	return (
 		<>
 			<div>

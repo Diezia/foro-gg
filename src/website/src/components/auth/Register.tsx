@@ -1,11 +1,9 @@
-import { isDisabled } from "@testing-library/user-event/dist/utils";
-
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { SyntheticEvent } from "react-draft-wysiwyg";
 import { useForm } from "../../hooks/useForm";
 
 export default function RegisterForm() {
-	const [formState, handleInputChange, resetForm] = useForm({
+	const [formState, handleInputChange] = useForm({
 		name: "",
 		email: "",
 		password: "",
@@ -23,14 +21,19 @@ export default function RegisterForm() {
 			mode: "cors",
 			body: JSON.stringify(formState),
 		})
-			.then((res: any) => setIsRegistered(true))
+			.then(() => setIsRegistered(true))
 			.catch(err => console.log(err));
 	}
 
 	return (
 		<div>
 			<form id="register_form">
-				{isRegistered && <p>Registro realizado con éxito! <br/>Ya puedes iniciar sesión</p>}
+				{isRegistered && (
+					<p>
+						Registro realizado con éxito! <br />
+						Ya puedes iniciar sesión
+					</p>
+				)}
 				<label>
 					<input value={formState.name} onChange={handleInputChange} type="text" name="name" placeholder="Username" required />
 				</label>
@@ -51,7 +54,6 @@ export default function RegisterForm() {
 					/>
 				</label>
 				<label>
-					{" "}
 					<input
 						value={formState.repeatPassword}
 						onChange={handleInputChange}

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 interface IProps {
 	target: EventTarget & HTMLInputElement;
 }

@@ -6,7 +6,6 @@ import { PostPage } from "../components/ui/pages/PostPage";
 import { CreatePostPage } from "../components/ui/pages/CreatePostPage";
 import { Navbar } from "../components/ui/header/Navbar";
 import PrivateRoute from "./PrivateRoute";
-// import { games } from "../helpers/gameBlocks";
 
 export function AppRouter() {
 	return (

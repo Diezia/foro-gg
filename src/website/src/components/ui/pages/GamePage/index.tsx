@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link, Params } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { PostPreview } from "../../PostPreview";
 import "../../../../styles/components/_gamepage.scss";
 
@@ -16,7 +16,7 @@ export function GamePage() {
 		const FetchData = async () => {
 			await fetch(`http://localhost:8080/api/games/${gameId}/posts`)
 				.then((res: Response) => res.json())
-				.then((data: React.SetStateAction<never[]>) => setPosts(data));
+				.then((data: any) => setPosts(data));
 		};
 		FetchData();
 	}, []);
@@ -48,14 +48,14 @@ export function GamePage() {
 			<div className="post-date">
 				<ul className="container-list">
 					{posts
-						.filter((post: Storage) => {
+						.filter((post: any) => {
 							if (query === "") {
 								return post;
 							} else if (post.title.toLowerCase().includes(query.toLowerCase())) {
 								return post;
 							}
 						})
-						.map((post: Storage, i: number) => (
+						.map((post: any, i: number) => (
 							<PostPreview
 								created_by_name={post.created_by_name}
 								gameId={gameId}

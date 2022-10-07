@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { SyntheticEvent } from "react-draft-wysiwyg";
+import React, { useState, useEffect, ChangeEvent } from "react";
+
 import { useLocation } from "react-router-dom";
 
 const SearchBar = () => {
@@ -11,7 +11,7 @@ const SearchBar = () => {
 		setValue("");
 	}, [pathname]);
 
-	const handleChange = (e: any) => {
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const newValue = e.target.value;
 		setValue(newValue);
 	};

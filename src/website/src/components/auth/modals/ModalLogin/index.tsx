@@ -8,10 +8,9 @@ interface LoginType {
 }
 
 export function ModalLogin({ login }: LoginType) {
-	const { state, dispatch } = useContext(Context);
+	const { state } = useContext(Context);
 	useEffect(() => {
 		if (state.token) {
-			// close modal on login
 			login.current!.close();
 		}
 	}, [state.token]);

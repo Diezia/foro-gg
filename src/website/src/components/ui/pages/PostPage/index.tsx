@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { CreatePostPage } from "../CreatePostPage";
 import { PrePost } from "../PrePost";
 import "../../../../styles/components/_postpage.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import CommentComponent from "../../ShowComments/ShowComments";
 import "../../../../styles/components/_postpage.scss";
-import { useForm } from "../../../../hooks/useForm";
 import jwtDecode from "jwt-decode";
-import e from "express";
 
 interface ITokenData {
 	name: string;
@@ -16,7 +13,7 @@ interface ITokenData {
 
 export function PostPage() {
 	const tokenDecoded: ITokenData = jwtDecode(localStorage.getItem("jwt") as string);
-	const [countValoration, setCountValoration] = useState("")
+	const [countValoration, setCountValoration] = useState("");
 	const navigate = useNavigate();
 	const { gameId, postId } = useParams();
 	const [post, setPost]: any = useState({
@@ -30,10 +27,10 @@ export function PostPage() {
 		created_by: tokenDecoded.id,
 		created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
 		created_by_name: tokenDecoded.name,
-		readyToPost: false, // set to true when click on createComment
+		readyToPost: false,
 	});
 	const [userValorationExists, setUserValorationExists]: any = useState({
-		readyToSetValoration: false, // se pone en true al clickear el botón de valoration
+		readyToSetValoration: false,
 		checkPreviousValoration: false,
 	});
 
@@ -41,16 +38,17 @@ export function PostPage() {
 		const FetchData = async () => {
 			fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`)
 				.then((res: any) => res.json())
-				.then((data: any) => setPost({
-					title: data[0].title,
-					body: data[0].body,
-					created_by_name: data[0].created_by_name
-				}));
+				.then((data: any) =>
+					setPost({
+						title: data[0].title,
+						body: data[0].body,
+						created_by_name: data[0].created_by_name,
+					})
+				);
 		};
 		FetchData().catch(console.error);
 		getComments();
-		
-		// obtener la valoración del usuario en si para setear como true o false el valoration state
+
 		async function userValorationExists() {
 			const valExists = await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/valoration/valorationexist`, {
 				method: "POST",
@@ -71,7 +69,7 @@ export function PostPage() {
 			});
 		}
 		userValorationExists();
-		getValorations()
+		getValorations();
 	}, []);
 
 	async function getValorations() {
@@ -83,10 +81,9 @@ export function PostPage() {
 			mode: "cors",
 		});
 		const valJson = await getVal.json();
-		setCountValoration(JSON.stringify(valJson))
+		setCountValoration(JSON.stringify(valJson));
 	}
-	
-	
+
 	useEffect(() => {
 		async function publishComment() {
 			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/comments/create`, {
@@ -124,7 +121,7 @@ export function PostPage() {
 		})
 			.then((res: any) => console.log(res))
 			.catch(err => console.log(err));
-			getValorations()
+		getValorations();
 	}
 	async function deleteValoration() {
 		await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}/valoration`, {
@@ -140,7 +137,7 @@ export function PostPage() {
 		})
 			.then((res: any) => console.log(res))
 			.catch(err => console.log(err));
-			getValorations()
+		getValorations();
 	}
 
 	useEffect(() => {
@@ -174,18 +171,18 @@ export function PostPage() {
 	async function handleDeletePost() {
 		try {
 			await fetch(`http://localhost:8080/api/games/${gameId}/posts/${postId}`, {
-				method: 'DELETE',
+				method: "DELETE",
 				headers: {
 					"Content-type": "application/json",
 				},
 				mode: "cors",
 				body: JSON.stringify({
-					created_by: tokenDecoded.id
-				})
+					created_by: tokenDecoded.id,
+				}),
 			});
 			navigate(`/games/${gameId}`);
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
 	}
 	return (

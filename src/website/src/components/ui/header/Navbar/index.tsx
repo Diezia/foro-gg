@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { ModalRegister } from "../../../auth/modals/ModalRegister";
 import { ModalLogin } from "../../../auth/modals/ModalLogin";
 import jwt from "jwt-decode";
 
-import SearchBar from "../../../auth/SearchBar";
 import "../../../../styles/components/_navbar.scss";
 import { Context, RefContext } from "../../../main/App";
 import { types } from "../../../../helpers/types";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface ITokenData {
 	name: string;
@@ -27,10 +26,8 @@ export function Navbar() {
 		}
 	}, []);
 
-	/* const register = useRef<HTMLDialogElement>(null);
-	const login = useRef<HTMLDialogElement>(null); */
 	const { register, login } = useContext(RefContext);
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const handleRegisterClick = () => {
 		register.current!.showModal();
@@ -39,11 +36,9 @@ export function Navbar() {
 		login && login.current!.showModal();
 	}
 	function handleLogoutClick() {
-		localStorage.removeItem('jwt');
+		localStorage.removeItem("jwt");
 		console.log("handleLogoutClick");
-		// handlear navbar state
-		dispatch({type: types.logout})
-		// navigate to home 
+		dispatch({ type: types.logout });
 		navigate("/");
 	}
 	return (
@@ -54,7 +49,6 @@ export function Navbar() {
 						<img src="/assets/logo.png" alt="logo" id="logo" />
 					</Link>
 				</div>
-				{/* <SearchBar /> */}
 				<div className="btn">
 					{!state.user ? (
 						<>

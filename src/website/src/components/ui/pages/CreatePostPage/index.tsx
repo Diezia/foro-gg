@@ -1,16 +1,11 @@
-//import { actionTypes } from "../../../../helpers/actionTypes";
-//import { games } from "../../../../helpers/gameBlocks";
-import React, { useEffect, useReducer, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertFromRaw, convertToRaw } from "draft-js";
-import { RouteObject, useNavigate } from "react-router-dom";
+import { EditorState, convertToRaw } from "draft-js";
+import { useNavigate } from "react-router-dom";
 import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../styles/components/_createpost.scss";
 import { PrePost } from "../PrePost";
-import { useParams } from "react-router-dom";
-import { Context } from "../../../main/App";
 import jwt from "jwt-decode";
 
 interface ITokenData {
@@ -20,13 +15,10 @@ interface ITokenData {
 export function CreatePostPage() {
 	const tokenDecoded: ITokenData = jwt(localStorage.getItem("jwt") as string);
 
-	const { gameId, postId } = useParams();
 	const navigate = useNavigate();
 	const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
 	const [previewState, setPreviewState] = useState("");
 
-	const { state, dispatch } = useContext(Context);
-	const { user } = state;
 	const [postData, setPostData] = useState({
 		title: "",
 		body: "",
@@ -78,18 +70,15 @@ export function CreatePostPage() {
 	const updateTextDescription = (state: EditorState) => {
 		setEditorState(state);
 		const data = convertToRaw(editorState.getCurrentContent());
-		//console.log(data);
 		return draftToHtml(data);
 	};
 
 	const previsualizar = () => {
 		const data = updateTextDescription(editorState);
-		//console.log(data);
 		setPreviewState(data);
 	};
 
 	async function handlePublish() {
-		console.log(tokenDecoded);
 		setPostData({
 			...postData,
 			created_by: tokenDecoded.id,

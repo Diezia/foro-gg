@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Navigate, RouteObject, IndexRouteProps, OutletProps } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
 const PrivateRoutes = () => {
 	const auth: any = { token: localStorage.getItem("jwt") };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 interface PostPreviewTypes {
 	title: string;
@@ -10,8 +10,8 @@ interface PostPreviewTypes {
 	created_by_name: string;
 }
 
-export function PostPreview({ title, user_id, valoration, postId, gameId, created_by_name}: PostPreviewTypes) {
-	const [countValoration, setCountValoration] = useState("")
+export function PostPreview({ title, postId, gameId, created_by_name }: PostPreviewTypes) {
+	const [countValoration, setCountValoration] = useState("");
 
 	useEffect(() => {
 		async function getValorations() {
@@ -23,17 +23,18 @@ export function PostPreview({ title, user_id, valoration, postId, gameId, create
 				mode: "cors",
 			});
 			const valJson = await getVal.json();
-			setCountValoration(JSON.stringify(valJson))
+			setCountValoration(JSON.stringify(valJson));
 		}
-		getValorations()
-	}, [])
-	
+		getValorations();
+	}, []);
+
 	return (
-			<li className="gamepost">
-				<p className='gp-title'><Link to={`post/${postId}`}>{title}</Link></p>
-				<p className="gp-user_id">{created_by_name}</p>
-				<p className="gp-valoration">{countValoration}</p>
-			</li>
-		
+		<li className="gamepost">
+			<p className="gp-title">
+				<Link to={`post/${postId}`}>{title}</Link>
+			</p>
+			<p className="gp-user_id">{created_by_name}</p>
+			<p className="gp-valoration">{countValoration}</p>
+		</li>
 	);
 }
