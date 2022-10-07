@@ -10,6 +10,7 @@ export default function RegisterForm() {
 		password: "",
 		repeatPassword: "",
 	});
+	const [isRegistered, setIsRegistered] = useState(false);
 
 	function handleSubmit(e: any) {
 		e.preventDefault();
@@ -21,23 +22,21 @@ export default function RegisterForm() {
 			mode: "cors",
 			body: JSON.stringify(formState),
 		})
-			.then((res: any) => console.log(res))
+			.then((res: any) => setIsRegistered(true))
 			.catch(err => console.log(err));
 	}
 
 	return (
 		<div>
 			<form id="register_form">
+				{isRegistered && <p>Registro realizado con éxito! <br/>Ya puedes iniciar sesión</p>}
 				<label>
-					{" "}
 					<input value={formState.name} onChange={handleInputChange} type="text" name="name" placeholder="Username" required />
 				</label>
 				<label>
-					{" "}
 					<input value={formState.email} onChange={handleInputChange} type="email" name="email" id="register_form_email" autoComplete="off" placeholder="Email" required />
 				</label>
 				<label>
-					{" "}
 					<input
 						value={formState.password}
 						onChange={handleInputChange}
@@ -64,11 +63,14 @@ export default function RegisterForm() {
 						placeholder="Password"
 					/>
 				</label>
-				{formState.password !== formState.repeatPassword && (
-					<p>Las contraseñas no coinciden!</p>
-				)}
+				{formState.password !== formState.repeatPassword && <p>Las contraseñas no coinciden!</p>}
 				<label>
-					<button value="Submit" id="register_submit_button" disabled={(!formState.name || !formState.email || !formState.password || formState.password !== formState.repeatPassword)} onClick={handleSubmit}>
+					<button
+						value="Submit"
+						id="register_submit_button"
+						disabled={!formState.name || !formState.email || !formState.password || formState.password !== formState.repeatPassword}
+						onClick={handleSubmit}
+					>
 						Registrar
 					</button>
 				</label>

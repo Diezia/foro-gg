@@ -48,7 +48,6 @@ export function PostPage() {
 					body: data[0].body,
 					created_by_name: data[0].created_by_name
 				}));
-				
 		};
 		FetchData().catch(console.error);
 		getComments();
@@ -88,10 +87,7 @@ export function PostPage() {
 		const valJson = await getVal.json();
 		setCountValoration(JSON.stringify(valJson))
 	}
-	/* useEffect(() => {
-		// trae número de las valoraciones
-		getValorations();
-	}, [countValoration]) */
+	
 	
 	useEffect(() => {
 		async function publishComment() {

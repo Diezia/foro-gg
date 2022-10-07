@@ -10,6 +10,7 @@ dialog {
 	top: 30%;
 	left: 40%;
 	border-radius: 15%;
+	overflow-y: hidden;
 	&::backdrop {
 		backdrop-filter: blur(10px);
 	}
@@ -20,7 +21,9 @@ dialog {
 		@include neon;
 	}
 }
-
+form p {
+	margin-top: 0;
+}
 form input,
 form button {
 	display: block;

@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useContext, useState } from "react";
+import { SyntheticEvent } from "react";
 import { types } from "../../helpers/types";
 import { useForm } from "../../hooks/useForm";
 import { Context } from "../main/App";
@@ -16,7 +17,7 @@ export default function LoginForm() {
 	});
 	const { email, password } = formState;
 
-	function handleSubmit(e: any) {
+	function handleSubmit(e: SyntheticEvent) {
 		e.preventDefault();
 		fetch(`http://localhost:8080/api/auth/login`, {
 			method: "POST",
@@ -39,19 +40,7 @@ export default function LoginForm() {
 			})
 			.catch(() => setWrongInformation(true));
 	}
-	function randTest(e: any) {
-		e.preventDefault();
-		fetch(`http://localhost:8080/api/auth/example`, {	
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			mode: "cors",
-		})
-			.then((res: any) => res.json())
-			.then((data: any) => console.log(data))
-			.catch(err => err);
-	}
+	
 	return (
 		<>
 			<div>
