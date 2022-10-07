@@ -42,9 +42,7 @@ let GameController = class GameController extends paradigm_express_webapi_1.ApiC
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { gameId } = this.httpContext.request.params;
-                const data = yield this.repoGame.find("id = ?", [
-                    gameId
-                ]);
+                const data = yield this.repoGame.find("id = ?", [gameId]);
                 this.httpContext.response.status(200).send(JSON.stringify(data[0]));
                 return;
             }

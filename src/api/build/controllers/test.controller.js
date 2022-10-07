@@ -52,7 +52,9 @@ let TestController = class TestController extends paradigm_express_webapi_1.ApiC
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const res = yield this.repo.countPostValorations(6);
-                this.httpContext.response.status(200).send(JSON.stringify(res[0][0]["valoration"]));
+                this.httpContext.response
+                    .status(200)
+                    .send(JSON.stringify(res[0][0]["valoration"]));
                 return;
             }
             catch (_a) {

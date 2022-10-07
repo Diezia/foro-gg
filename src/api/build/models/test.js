@@ -11,9 +11,9 @@ const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
 let Test = class Test {
     constructor() {
         this.id = 0;
-        this.name = '';
+        this.name = "";
         this.age = 0;
-        this.email = '';
+        this.email = "";
     }
 };
 Test = __decorate([

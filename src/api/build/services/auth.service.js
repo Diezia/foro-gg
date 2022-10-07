@@ -25,8 +25,7 @@ exports.AuthService = void 0;
 const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 let AuthService = class AuthService {
-    constructor(dependencyContainer) {
-    }
+    constructor(dependencyContainer) { }
     register(email, name, password, repoUser) {
         const saltRounds = 10;
         bcrypt_1.default.genSalt(saltRounds, function (err, salt) {
@@ -35,7 +34,7 @@ let AuthService = class AuthService {
                     const mydata = {
                         email,
                         name,
-                        password: hash
+                        password: hash,
                     };
                     const data = yield repoUser.insertOne(mydata);
                 });

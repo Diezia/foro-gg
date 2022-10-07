@@ -8,11 +8,11 @@ interface IUser {
   role: string;
 }
 
-@Injectable({ lifeTime: DependencyLifeTime.Transient})
+@Injectable({ lifeTime: DependencyLifeTime.Transient })
 export class User implements IUser {
   id: number = 0;
-  name: string = '';
-  email: string = '';
-  password: string = '';
-  role: string = '';
+  name: string = "";
+  email: string = "";
+  password: string = "";
+  role: string = "";
 }

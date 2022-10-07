@@ -25,7 +25,7 @@ const edit_repository_1 = require("../core/repositories/edit.repository");
 const post_1 = require("../models/post");
 let PostRepository = class PostRepository extends edit_repository_1.EditRepositoryBase {
     constructor(dependencyContainer, connection) {
-        super(dependencyContainer, connection, post_1.Post, 'posts');
+        super(dependencyContainer, connection, post_1.Post, "posts");
     }
     getOrderedPostsByDateByGameId(where, args) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -36,6 +36,7 @@ let PostRepository = class PostRepository extends edit_repository_1.EditReposito
 };
 PostRepository = __decorate([
     (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
-    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer, mysql_connection_1.MySqlConnection])
+    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer,
+        mysql_connection_1.MySqlConnection])
 ], PostRepository);
 exports.PostRepository = PostRepository;

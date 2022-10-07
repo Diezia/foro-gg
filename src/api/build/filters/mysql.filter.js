@@ -54,6 +54,7 @@ let MySqlConnectionFilter = class MySqlConnectionFilter {
 };
 MySqlConnectionFilter = __decorate([
     (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
-    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer, mysql_connector_1.MySqlConnector])
+    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer,
+        mysql_connector_1.MySqlConnector])
 ], MySqlConnectionFilter);
 exports.MySqlConnectionFilter = MySqlConnectionFilter;

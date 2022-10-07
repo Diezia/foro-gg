@@ -15,15 +15,14 @@ const echo_controller_1 = require("./controllers/echo.controller");
 const game_controller_1 = require("./controllers/game.controller");
 const post_controller_1 = require("./controllers/post.controller");
 const auth_controller_1 = require("./controllers/auth.controller");
-// require('dotenv').config() utilizado antes de paradigm 
 class Server extends paradigm_express_webapi_1.ApiServer {
     configureApplication() {
         this.logger.debug("Configuring application...");
         const configuration = this.configurationBuilder.build(configuration_1.Configuration);
         const port = configuration.port || process.env.PORT || 8080;
         this.expressApplication
-            .disable('etag')
-            .set('port', port)
+            .disable("etag")
+            .set("port", port)
             .use((0, cors_1.default)())
             .use((0, cookie_parser_1.default)())
             .use(express_1.default.urlencoded({ extended: true }))
@@ -34,7 +33,7 @@ class Server extends paradigm_express_webapi_1.ApiServer {
             echo_controller_1.EchoController,
             game_controller_1.GameController,
             post_controller_1.PostController,
-            auth_controller_1.AuthController
+            auth_controller_1.AuthController,
         ]);
         this.routing.ignoreClosedResponseOnFilters();
         this.routing.registerGlobalFilters([mysql_filter_1.MySqlConnectionFilter]);

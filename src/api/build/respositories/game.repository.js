@@ -16,11 +16,12 @@ const edit_repository_1 = require("../core/repositories/edit.repository");
 const game_1 = require("../models/game");
 let GameRepository = class GameRepository extends edit_repository_1.EditRepositoryBase {
     constructor(dependencyContainer, connection) {
-        super(dependencyContainer, connection, game_1.Game, 'games');
+        super(dependencyContainer, connection, game_1.Game, "games");
     }
 };
 GameRepository = __decorate([
     (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
-    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer, mysql_connection_1.MySqlConnection])
+    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer,
+        mysql_connection_1.MySqlConnection])
 ], GameRepository);
 exports.GameRepository = GameRepository;

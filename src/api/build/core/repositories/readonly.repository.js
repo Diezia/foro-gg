@@ -42,7 +42,7 @@ class ReadonlyRepositoryBase {
         });
     }
     map(rows, entityType) {
-        return rows.map(row => {
+        return rows.map((row) => {
             const entity = this.dependencyContainer.resolve(entityType);
             for (const key in row) {
                 if (Object.prototype.hasOwnProperty.call(entity, key)) {

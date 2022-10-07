@@ -14,7 +14,7 @@ class InsertDbCommand extends db_command_1.DbCommand {
         this._parameters = this.getValueArray(entities);
     }
     getColumnNames(entities) {
-        const keys = Object.keys(entities[0]).map(x => `\`${x}\``);
+        const keys = Object.keys(entities[0]).map((x) => `\`${x}\``);
         return keys.join(",");
     }
     getValues(entities) {
@@ -24,7 +24,7 @@ class InsertDbCommand extends db_command_1.DbCommand {
         return entities.map(() => `(${questionMarks})`).join(",");
     }
     getUpdateStatement(entities) {
-        const keys = Object.keys(entities[0]).map(x => (x !== "id" ? `\`${x}\` = VALUES(${x})` : "id=id"));
+        const keys = Object.keys(entities[0]).map((x) => x !== "id" ? `\`${x}\` = VALUES(${x})` : "id=id");
         return keys.join(",");
     }
     getValueArray(entities) {

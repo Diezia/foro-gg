@@ -21,7 +21,10 @@ export class PostController extends ApiController {
   async getPostsByGameid() {
     try {
       const gameId = this.httpContext.request.params.gameId;
-      const data = await this.repoPost.getOrderedPostsByDateByGameId("game_id = ?", [gameId]);
+      const data = await this.repoPost.getOrderedPostsByDateByGameId(
+        "game_id = ?",
+        [gameId]
+      );
       this.httpContext.response.status(200).send(data);
       return;
     } catch (error) {
@@ -46,9 +49,6 @@ export class PostController extends ApiController {
   @Action({ route: "/create", method: HttpMethod.POST })
   async createPost() {
     try {
-      // validar que los datos sean correctos: title, body, etc sin strings vacíos, formatos válidos, valoration cero, que coincidan los datos con las cols de la db, entre otras
-      const { title, body, created_by, valoration, game_id, created_at, created_by_name } =
-        this.httpContext.request.body;
       const data = await this.repoPost.insertOne(this.httpContext.request.body);
       this.httpContext.response.status(200).send(data);
     } catch (error) {
@@ -58,8 +58,6 @@ export class PostController extends ApiController {
   @Action({ route: "/:postId", method: HttpMethod.PUT })
   async updatePost(postId: number) {
     try {
-      // agregar validaciones similares a /create
-      // para el front tener en cuenta que presionar "edit post" si o si tengo que tener por default title y body anterior.
       const { title, body, updated_at } = this.httpContext.request.body;
       const mydata: any = {
         id: this.httpContext.request.params.postId,
@@ -80,23 +78,25 @@ export class PostController extends ApiController {
       const getPostById = await this.repoPost.find("game_id = ? AND id = ?", [
         gameId,
         postId,
-      ]); 
-      
-      const { created_by } = this.httpContext.request.body; // este que el id que mando desde el token del front 
-      if ( created_by == getPostById[0].created_by ) {
+      ]);
+
+      const { created_by } = this.httpContext.request.body;
+      if (created_by == getPostById[0].created_by) {
         await this.repoComment.deleteComments(
           parseInt(this.httpContext.request.params.postId)
         );
         await this.repoValoration.deleteValorations(
           parseInt(this.httpContext.request.params.postId)
         );
-  
+
         const data = await this.repoPost.delete(
           parseInt(this.httpContext.request.params.postId)
         );
         this.httpContext.response.status(200).send(data);
       } else {
-        this.httpContext.response.status(403).send("Not authorized to do this action");
+        this.httpContext.response
+          .status(403)
+          .send("Not authorized to do this action");
       }
     } catch (error) {
       console.log(error);
@@ -116,15 +116,20 @@ export class PostController extends ApiController {
       console.log(error);
     }
   }
-  @Action({ route: "/:postId/valoration/valorationexist", method: HttpMethod.POST })
+  @Action({
+    route: "/:postId/valoration/valorationexist",
+    method: HttpMethod.POST,
+  })
   async getValorationStateByUser(postId: number) {
-    // obtener true o false según sea para manejar el estado de la valoración del front de un usuario en particular
     try {
       const mydata: any = {
         user_id: this.httpContext.request.body.user_id,
         post_id: this.httpContext.request.params.postId,
       };
-      const valorationExists = await this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id])
+      const valorationExists = await this.repoValoration.find(
+        "user_id = ? and post_id = ?",
+        [mydata.user_id, mydata.post_id]
+      );
       if (valorationExists.length > 0) {
         this.httpContext.response.status(200).send(true);
         return;
@@ -143,7 +148,10 @@ export class PostController extends ApiController {
         user_id: this.httpContext.request.body.user_id,
         post_id: this.httpContext.request.params.postId,
       };
-      const valorationExists = await this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id])
+      const valorationExists = await this.repoValoration.find(
+        "user_id = ? and post_id = ?",
+        [mydata.user_id, mydata.post_id]
+      );
       if (valorationExists.length === 0) {
         const data = await this.repoValoration.insertOne(mydata);
         this.httpContext.response.status(200).send(data);
@@ -163,10 +171,15 @@ export class PostController extends ApiController {
         user_id: this.httpContext.request.body.user_id,
         post_id: this.httpContext.request.params.postId,
       };
-      const valorationExists = await this.repoValoration.find('user_id = ? and post_id = ?', [mydata.user_id, mydata.post_id])
+      const valorationExists = await this.repoValoration.find(
+        "user_id = ? and post_id = ?",
+        [mydata.user_id, mydata.post_id]
+      );
       if (valorationExists.length > 0) {
-        const data = await this.repoValoration.delete(valorationExists[0].id); 
-        this.httpContext.response.status(200).send("valoration deleted succesfully");
+        const data = await this.repoValoration.delete(valorationExists[0].id);
+        this.httpContext.response
+          .status(200)
+          .send("valoration deleted succesfully");
         return;
       } else {
         this.httpContext.response.status(404).send("valoration wasn't found");
@@ -179,7 +192,9 @@ export class PostController extends ApiController {
   @Action({ route: "/:postId/comments", method: HttpMethod.GET })
   async getCommentsByPostid(postId: number) {
     try {
-      const data = await this.repoComment.find("post_id = ?", [this.httpContext.request.params.postId]);
+      const data = await this.repoComment.find("post_id = ?", [
+        this.httpContext.request.params.postId,
+      ]);
       this.httpContext.response.status(200).send(data);
       return;
     } catch (error) {
@@ -194,7 +209,7 @@ export class PostController extends ApiController {
         created_at: this.httpContext.request.body.created_at,
         created_by: this.httpContext.request.body.created_by,
         post_id: this.httpContext.request.params.postId,
-        created_by_name: this.httpContext.request.body.created_by_name
+        created_by_name: this.httpContext.request.body.created_by_name,
       };
 
       const data = await this.repoComment.insertOne(mydata);

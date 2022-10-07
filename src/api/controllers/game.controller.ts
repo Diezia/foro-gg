@@ -14,7 +14,7 @@ export class GameController extends ApiController {
   @Action({ route: "/" })
   async get() {
     try {
-      const data = await this.repoGame.getAll()
+      const data = await this.repoGame.getAll();
       this.httpContext.response.status(200).send(data);
       return;
     } catch (error) {
@@ -26,9 +26,7 @@ export class GameController extends ApiController {
     try {
       const { gameId } = this.httpContext.request.params;
 
-      const data = await this.repoGame.find("id = ?", [
-        gameId
-      ]);
+      const data = await this.repoGame.find("id = ?", [gameId]);
       this.httpContext.response.status(200).send(JSON.stringify(data[0]));
       return;
     } catch (error) {

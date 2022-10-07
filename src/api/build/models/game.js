@@ -11,8 +11,8 @@ const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
 let Game = class Game {
     constructor() {
         this.id = 0;
-        this.name = '';
-        this.image_url = '';
+        this.name = "";
+        this.image_url = "";
     }
 };
 Game = __decorate([

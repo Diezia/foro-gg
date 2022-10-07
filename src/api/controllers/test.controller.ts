@@ -20,7 +20,7 @@ export class TestController extends ApiController {
   @Action({ route: "/" })
   async get() {
     try {
-      const some = await this.repo.getAll()
+      const some = await this.repo.getAll();
       this.httpContext.response.status(200).send(some);
       return;
     } catch {
@@ -42,8 +42,9 @@ export class TestController extends ApiController {
     try {
       const res = await this.repo.countPostValorations(6);
 
-
-      this.httpContext.response.status(200).send(JSON.stringify(res[0][0]["valoration"]));
+      this.httpContext.response
+        .status(200)
+        .send(JSON.stringify(res[0][0]["valoration"]));
       return;
     } catch {
       this.httpContext.response.sendStatus(500);
@@ -61,5 +62,4 @@ export class TestController extends ApiController {
       return;
     }
   }
-  
 }

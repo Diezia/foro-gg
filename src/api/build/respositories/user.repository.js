@@ -16,11 +16,12 @@ const edit_repository_1 = require("../core/repositories/edit.repository");
 const user_1 = require("../models/user");
 let UserRepository = class UserRepository extends edit_repository_1.EditRepositoryBase {
     constructor(dependencyContainer, connection) {
-        super(dependencyContainer, connection, user_1.User, 'users');
+        super(dependencyContainer, connection, user_1.User, "users");
     }
 };
 UserRepository = __decorate([
     (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
-    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer, mysql_connection_1.MySqlConnection])
+    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer,
+        mysql_connection_1.MySqlConnection])
 ], UserRepository);
 exports.UserRepository = UserRepository;

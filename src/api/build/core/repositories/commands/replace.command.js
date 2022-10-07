@@ -14,7 +14,7 @@ class ReplaceDbCommand extends db_command_1.DbCommand {
         this._parameters = this.getValueArray(entities);
     }
     getColumnNames(entities) {
-        const keys = Object.keys(entities[0]).map(x => `\`${x}\``);
+        const keys = Object.keys(entities[0]).map((x) => `\`${x}\``);
         return keys.join(",");
     }
     getValues(entities) {

@@ -16,11 +16,12 @@ const edit_repository_1 = require("../core/repositories/edit.repository");
 const test_1 = require("../models/test");
 let TestRepository = class TestRepository extends edit_repository_1.EditRepositoryBase {
     constructor(dependencyContainer, connection) {
-        super(dependencyContainer, connection, test_1.Test, 'users');
+        super(dependencyContainer, connection, test_1.Test, "users");
     }
 };
 TestRepository = __decorate([
     (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
-    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer, mysql_connection_1.MySqlConnection])
+    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer,
+        mysql_connection_1.MySqlConnection])
 ], TestRepository);
 exports.TestRepository = TestRepository;

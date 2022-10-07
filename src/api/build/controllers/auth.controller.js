@@ -27,7 +27,6 @@ const user_repository_1 = require("../respositories/user.repository");
 const auth_service_1 = require("../services/auth.service");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const auth_filter_1 = require("../filters/auth.filter");
 let AuthController = class AuthController extends paradigm_express_webapi_1.ApiController {
     constructor(repoUser, authService) {
         super();
@@ -68,13 +67,13 @@ let AuthController = class AuthController extends paradigm_express_webapi_1.ApiC
                 if (match) {
                     const token = jsonwebtoken_1.default.sign({
                         id: user[0].id,
-                        name: user[0].name
-                    }, "my secret", { expiresIn: '3h' });
-                    this.httpContext.response.setHeader('Authorization', JSON.stringify(token));
-                    this.httpContext.response.cookie('jwt', JSON.stringify(token));
+                        name: user[0].name,
+                    }, "my secret", { expiresIn: "3h" });
+                    this.httpContext.response.setHeader("Authorization", JSON.stringify(token));
+                    this.httpContext.response.cookie("jwt", JSON.stringify(token));
                     const res = {
                         token,
-                        name: user[0].name
+                        name: user[0].name,
                     };
                     this.httpContext.response.status(200).send(JSON.stringify(res));
                     return;
@@ -87,11 +86,6 @@ let AuthController = class AuthController extends paradigm_express_webapi_1.ApiC
                 return;
             }
         });
-    }
-    logout() { }
-    exampleGetWithToken() {
-        // this.httpContext.response.setHeader('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6ImxvY28iLCJpYXQiOjE2NjQ3Nzc0NTgsImV4cCI6MTY2NDc4MTA1OH0.eLArZr8N056Vj9SA-89-ImiIVMEqPgCv_YyX-ByWvoY');
-        // this.authService.authEndpoint();
     }
 };
 __decorate([
@@ -106,18 +100,6 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
-__decorate([
-    (0, paradigm_express_webapi_1.Action)({ route: "/logout" }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AuthController.prototype, "logout", null);
-__decorate([
-    (0, paradigm_express_webapi_1.Action)({ route: "/example", method: paradigm_express_webapi_1.HttpMethod.GET, filters: [auth_filter_1.AuthFilter] }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AuthController.prototype, "exampleGetWithToken", null);
 AuthController = __decorate([
     (0, paradigm_express_webapi_1.Controller)({ route: "/api/auth" }),
     __metadata("design:paramtypes", [user_repository_1.UserRepository,

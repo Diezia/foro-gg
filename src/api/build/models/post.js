@@ -11,14 +11,14 @@ const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
 let Post = class Post {
     constructor() {
         this.id = 0;
-        this.title = '';
-        this.body = '';
+        this.title = "";
+        this.body = "";
         this.valoration = 0;
         this.created_at = new Date();
         this.updated_at = new Date();
         this.created_by = 0;
         this.game_id = 0;
-        this.created_by_name = '';
+        this.created_by_name = "";
     }
 };
 Post = __decorate([

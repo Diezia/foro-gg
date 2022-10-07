@@ -10,7 +10,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { AuthFilter } from "../filters/auth.filter";
 
-
 @Controller({ route: "/api/auth" })
 export class AuthController extends ApiController {
   constructor(
@@ -57,16 +56,23 @@ export class AuthController extends ApiController {
         user[0].password
       );
       if (match) {
-        const token: string = jwt.sign({
-          id: user[0].id,
-          name: user[0].name
-        }, "my secret", { expiresIn: '3h' });
-        this.httpContext.response.setHeader('Authorization', JSON.stringify(token));
-        this.httpContext.response.cookie('jwt', JSON.stringify(token));
+        const token: string = jwt.sign(
+          {
+            id: user[0].id,
+            name: user[0].name,
+          },
+          "my secret",
+          { expiresIn: "3h" }
+        );
+        this.httpContext.response.setHeader(
+          "Authorization",
+          JSON.stringify(token)
+        );
+        this.httpContext.response.cookie("jwt", JSON.stringify(token));
         const res = {
           token,
-          name: user[0].name
-        }
+          name: user[0].name,
+        };
         this.httpContext.response.status(200).send(JSON.stringify(res));
         return;
       }
@@ -76,13 +82,5 @@ export class AuthController extends ApiController {
       this.httpContext.response.sendStatus(500);
       return;
     }
-  }
-  @Action({ route: "/logout" })
-  logout() {}
-  @Action({ route: "/example", method: HttpMethod.GET, filters: [AuthFilter] })
-  exampleGetWithToken() {
-    // this.httpContext.response.setHeader('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwibmFtZSI6ImxvY28iLCJpYXQiOjE2NjQ3Nzc0NTgsImV4cCI6MTY2NDc4MTA1OH0.eLArZr8N056Vj9SA-89-ImiIVMEqPgCv_YyX-ByWvoY');
-
-    // this.authService.authEndpoint();
   }
 }

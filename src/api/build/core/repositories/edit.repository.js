@@ -25,7 +25,9 @@ class EditRepositoryBase extends readonly_repository_1.ReadonlyRepositoryBase {
         });
     }
     insert(entity) {
-        const insertCommand = new insert_command_1.InsertDbCommand(this.connection, this.tableName, [entity]);
+        const insertCommand = new insert_command_1.InsertDbCommand(this.connection, this.tableName, [
+            entity,
+        ]);
         this.batch.addCommand(insertCommand, (x) => (entity[this.idColumn] = x.insertId));
     }
     replace(entity) {

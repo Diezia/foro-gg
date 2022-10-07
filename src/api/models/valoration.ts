@@ -6,7 +6,7 @@ interface IValoration {
   post_id: number;
 }
 
-@Injectable({ lifeTime: DependencyLifeTime.Transient})
+@Injectable({ lifeTime: DependencyLifeTime.Transient })
 export class Valoration implements IValoration {
   id: number = 0;
   user_id: number = 0;

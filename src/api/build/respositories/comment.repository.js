@@ -25,7 +25,7 @@ const edit_repository_1 = require("../core/repositories/edit.repository");
 const comment_1 = require("../models/comment");
 let CommentRepository = class CommentRepository extends edit_repository_1.EditRepositoryBase {
     constructor(dependencyContainer, connection) {
-        super(dependencyContainer, connection, comment_1.Comment, 'comments');
+        super(dependencyContainer, connection, comment_1.Comment, "comments");
     }
     deleteComments(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -35,6 +35,7 @@ let CommentRepository = class CommentRepository extends edit_repository_1.EditRe
 };
 CommentRepository = __decorate([
     (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
-    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer, mysql_connection_1.MySqlConnection])
+    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer,
+        mysql_connection_1.MySqlConnection])
 ], CommentRepository);
 exports.CommentRepository = CommentRepository;

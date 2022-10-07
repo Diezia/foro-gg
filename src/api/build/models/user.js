@@ -11,10 +11,10 @@ const paradigm_web_di_1 = require("@miracledevs/paradigm-web-di");
 let User = class User {
     constructor() {
         this.id = 0;
-        this.name = '';
-        this.email = '';
-        this.password = '';
-        this.role = '';
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.role = "";
     }
 };
 User = __decorate([

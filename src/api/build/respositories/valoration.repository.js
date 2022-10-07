@@ -25,14 +25,12 @@ const edit_repository_1 = require("../core/repositories/edit.repository");
 const valoration_1 = require("../models/valoration");
 let ValorationRepository = class ValorationRepository extends edit_repository_1.EditRepositoryBase {
     constructor(dependencyContainer, connection) {
-        super(dependencyContainer, connection, valoration_1.Valoration, 'valorations');
+        super(dependencyContainer, connection, valoration_1.Valoration, "valorations");
     }
-    // Agregar metodo para hacer el count en db basado en readonly.repository
     countPostValorations(postId) {
         return __awaiter(this, void 0, void 0, function* () {
             const res = yield this.connection.connection.query(`SELECT COUNT(*) AS valoration FROM ${this.tableName} WHERE post_id = ${postId}`);
             return res;
-            // ver como carajo hacer para que retorne un numero -> ver como trae la data con un fetch desde el front
         });
     }
     deleteValorations(id) {
@@ -43,6 +41,7 @@ let ValorationRepository = class ValorationRepository extends edit_repository_1.
 };
 ValorationRepository = __decorate([
     (0, paradigm_web_di_1.Injectable)({ lifeTime: paradigm_web_di_1.DependencyLifeTime.Scoped }),
-    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer, mysql_connection_1.MySqlConnection])
+    __metadata("design:paramtypes", [paradigm_web_di_1.DependencyContainer,
+        mysql_connection_1.MySqlConnection])
 ], ValorationRepository);
 exports.ValorationRepository = ValorationRepository;

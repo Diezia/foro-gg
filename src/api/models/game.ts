@@ -6,9 +6,9 @@ interface IGame {
   image_url: string;
 }
 
-@Injectable({ lifeTime: DependencyLifeTime.Transient})
+@Injectable({ lifeTime: DependencyLifeTime.Transient })
 export class Game implements IGame {
   id: number = 0;
-  name: string = '';
-  image_url: string = '';
+  name: string = "";
+  image_url: string = "";
 }
